@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sagol.dto.compVO;
-import com.sagol.dto.userVO;
 
 @Repository
 public class compDaoImple implements compDao {
