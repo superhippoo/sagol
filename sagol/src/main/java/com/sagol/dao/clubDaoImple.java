@@ -18,8 +18,10 @@ public class clubDaoImple implements clubDao {
 	@Override
 	public List<clubVO> selectClubList(clubVO clubvo) {
 
-		String q = "select * from sg_club where club_type = 'C'";
-		return jdbdtemplate.query(q, new BeanPropertyRowMapper<clubVO>(clubVO.class));
+		String q = "select * from sg_club " 
+				    + "where club_type = ?" ;
+	    Object[] args = {clubvo.getClub_type()};
+	    return jdbdtemplate.query(q, args, new BeanPropertyRowMapper<clubVO>(clubVO.class));
 
 	}
 	
@@ -27,15 +29,15 @@ public class clubDaoImple implements clubDao {
 	public List<clubVO> selectClubListByCcId(clubVO clubvo) {
 
 		String q = "select * from sg_club " 
-					+ "where cc_id = ? and club_type = 'C'" ;
-		Object[] args = { clubvo.getCc_id()};
+					+ "where cc_id = ? and club_type = ?" ;
+		Object[] args = { clubvo.getCc_id(),clubvo.getClub_type()};
 		return jdbdtemplate.query(q, args, new BeanPropertyRowMapper<clubVO>(clubVO.class));
 	}
 
 	@Override
 	public clubVO selectClub(clubVO clubvo) {
-		String q = "select * from sg_club where club_id = ? and club_type = 'C'";
-		Object[] args = { clubvo.getClub_id()};
+		String q = "select * from sg_club where club_id = ? and club_type = ?";
+		Object[] args = { clubvo.getClub_id(),clubvo.getClub_type()};
 		try {
 			return jdbdtemplate.queryForObject(q, args, new BeanPropertyRowMapper<clubVO>(clubVO.class));
 		} catch (Exception e) {
