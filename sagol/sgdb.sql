@@ -7,6 +7,8 @@ DROP table sg_cc;
 DROP table sg_club;
 DROP table sg_clubmem;
 DROP table sg_qna;
+DROP table sg_request;
+
 
 CREATE TABLE sg_user (
     uid VARCHAR(20) PRIMARY KEY,
@@ -98,9 +100,27 @@ CREATE TABLE sg_qna (
 insert into sg_qna values ('1','1','1','1','1','1','1','20200910','20200910');
 select * from sg_qna;
 
+
+CREATE TABLE sg_request (
+  req_id	VARCHAR(20) PRIMARY KEY,
+  req_cd VARCHAR(2),
+  title	VARCHAR(50),
+  body	longtext,
+  uid	VARCHAR(20),
+  complete_yn	VARCHAR(2),
+  reg_dt	timestamp,
+  mdfy_dt	timestamp
+)  ENGINE=INNODB;
+
+insert into sg_request values ('1','1','1','1','1','1','20200910','20200910');
+select * from sg_request;
+
+
+
 DESC sg_user;
 DESC sg_comp;
 DESC sg_cc;
 DESC sg_club;
 DESC sg_clubmem;
 DESC sg_qna;
+DESC sg_request;
