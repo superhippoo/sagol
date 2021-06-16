@@ -36,6 +36,7 @@ public class clubSvcImpl implements clubSvc {
 	@Override
 	public int insertClub(clubVO clubvo) {
 		clubvo.setClub_id(uidUtil.generateUid("C"));
+		clubvo.setClub_type("C");
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		clubvo.setReg_dt(time);
 		clubvo.setMdfy_dt(time);

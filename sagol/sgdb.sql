@@ -65,11 +65,12 @@ CREATE TABLE sg_club (
     hit INT(11),
     comp_year INT(11),
     cc_id VARCHAR(20),
+    club_type VARCHAR(2),
     reg_dt TIMESTAMP,
     mdfy_dt TIMESTAMP
 )  ENGINE=INNODB;
 
-insert into sg_club values ('1','1',1,'1',1,1,'1','20200910','20200910');
+insert into sg_club values ('2','1',1,'1',1,1,'1','C','20200910','20200910');
 select * from sg_club;
 
 CREATE TABLE sg_clubmem (

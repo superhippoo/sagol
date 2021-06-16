@@ -18,7 +18,7 @@ public class clubDaoImple implements clubDao {
 	@Override
 	public List<clubVO> selectClubList(clubVO clubvo) {
 
-		String q = "select * from sg_club";
+		String q = "select * from sg_club where club_type = 'C'";
 		return jdbdtemplate.query(q, new BeanPropertyRowMapper<clubVO>(clubVO.class));
 
 	}
@@ -27,14 +27,14 @@ public class clubDaoImple implements clubDao {
 	public List<clubVO> selectClubListByCcId(clubVO clubvo) {
 
 		String q = "select * from sg_club " 
-					+ "where cc_id = ?" ;
+					+ "where cc_id = ? and club_type = 'C'" ;
 		Object[] args = { clubvo.getCc_id()};
 		return jdbdtemplate.query(q, args, new BeanPropertyRowMapper<clubVO>(clubVO.class));
 	}
 
 	@Override
 	public clubVO selectClub(clubVO clubvo) {
-		String q = "select * from sg_club where club_id = ?";
+		String q = "select * from sg_club where club_id = ? and club_type = 'C'";
 		Object[] args = { clubvo.getClub_id()};
 		try {
 			return jdbdtemplate.queryForObject(q, args, new BeanPropertyRowMapper<clubVO>(clubVO.class));
@@ -45,9 +45,9 @@ public class clubDaoImple implements clubDao {
 
 	@Override
 	public int insertClub(clubVO clubvo) {
-		String q = "  INSERT INTO sg_club VALUES(?,?,?,?,?,?,?,?,?)";
+		String q = "  INSERT INTO sg_club VALUES(?,?,?,?,?,?,?,?,?,?)";
 		Object[] args = { clubvo.getClub_id(), clubvo.getClub_nm(), clubvo.getClub_mem_num(), clubvo.getGender(),
-				clubvo.getHit(), clubvo.getComp_year(), clubvo.getCc_id(), clubvo.getReg_dt(), clubvo.getMdfy_dt() };
+				clubvo.getHit(), clubvo.getComp_year(), clubvo.getCc_id(),clubvo.getClub_type(), clubvo.getReg_dt(), clubvo.getMdfy_dt() };
 		return jdbdtemplate.update(q, args);
 	}
 

@@ -10,6 +10,7 @@ public class clubVO {
 	private int hit;
 	private int comp_year;
 	private String cc_id;
+	private String club_type;
 	private Timestamp reg_dt;
 	private Timestamp mdfy_dt;
 	
@@ -54,6 +55,12 @@ public class clubVO {
 	}
 	public void setCc_id(String cc_id) {
 		this.cc_id = cc_id;
+	}
+	public String getClub_type() {
+		return club_type;
+	}
+	public void setClub_type(String club_type) {
+		this.club_type = club_type;
 	}
 	public Timestamp getReg_dt() {
 		return reg_dt;
