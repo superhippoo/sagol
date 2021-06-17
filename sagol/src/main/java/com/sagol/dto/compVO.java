@@ -6,6 +6,7 @@ public class compVO {
 	
 	private String comp_cd;
 	private String comp_nm;
+	private String comp_domain;
 	private String comp_stat;
 	private int comp_user_num;
 	private Timestamp reg_dt;
@@ -22,6 +23,12 @@ public class compVO {
 	}
 	public void setComp_nm(String comp_nm) {
 		this.comp_nm = comp_nm;
+	}
+	public String getComp_domain() {
+		return comp_domain;
+	}
+	public void setComp_domain(String comp_domain) {
+		this.comp_domain = comp_domain;
 	}
 	public String getComp_stat() {
 		return comp_stat;

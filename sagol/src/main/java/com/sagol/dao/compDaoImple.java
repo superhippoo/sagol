@@ -36,21 +36,23 @@ public class compDaoImple implements compDao {
 
 	@Override
 	public int insertComp(compVO compvo) {
-		String q = "  INSERT INTO sg_comp VALUES(?,?,?,?,?,?)";
-		Object[] args = { compvo.getComp_cd(), compvo.getComp_nm(), compvo.getComp_stat(), compvo.getComp_user_num(),
-				compvo.getReg_dt(), compvo.getMdfy_dt() };
+		String q = "  INSERT INTO sg_comp VALUES(?,?,?,?,?,?,?)";
+		Object[] args = { compvo.getComp_cd(), compvo.getComp_nm(),compvo.getComp_domain(), compvo.getComp_stat(), 
+				compvo.getComp_user_num(),compvo.getReg_dt(), compvo.getMdfy_dt() };
 		return jdbdtemplate.update(q, args);
 	}
 
 	@Override
 	public int updateComp(compVO compvo) {
 		String q = "update sg_comp set " 
-				+ "comp_nm = ? , " 
+				+ "comp_nm = ? , "
+				+ "comp_domain = ? , " 
 				+ "comp_stat = ? , " 
 				+ "comp_user_num = ? , " 
 			    + "mdfy_dt = ?"
 			+ "where comp_cd = ?";
-	Object[] args = { compvo.getComp_nm(),compvo.getComp_stat(),compvo.getComp_user_num() ,compvo.getMdfy_dt(),compvo.getComp_cd()};
+	Object[] args = { compvo.getComp_nm(),compvo.getComp_domain(),compvo.getComp_stat(),compvo.getComp_user_num(),
+			compvo.getMdfy_dt(),compvo.getComp_cd()};
 	return jdbdtemplate.update(q, args);
 	}
 

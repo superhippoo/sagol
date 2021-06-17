@@ -29,20 +29,26 @@ CREATE TABLE sg_user (
     mdfy_dt TIMESTAMP
 )  ENGINE=INNODB;
 
+create index idx_nikname on sg_user(nikname);
+
+show index from sg_user;
+
 insert into sg_user values ('1','1','1','1','1','1',1,'1',1,1,1,'1','1','1','20200910','20200910');
 select * from sg_user;
 
 CREATE TABLE sg_comp (
     comp_cd VARCHAR(4) PRIMARY KEY,
     comp_nm VARCHAR(50),
+    comp_domain VARCHAR(50),
     comp_stat VARCHAR(2),
     comp_user_num INT(11),
     reg_dt TIMESTAMP,
     mdfy_dt TIMESTAMP
 )  ENGINE=INNODB;
 
-insert into sg_comp values ('1','1','1',1,'20200910','20200910');
+insert into sg_comp values ('1','1','1','1',1,'20200910','20200910');
 select * from sg_comp;
+
 
 CREATE TABLE sg_cc (
     cc_id VARCHAR(20) PRIMARY KEY,
@@ -123,4 +129,4 @@ DESC sg_cc;
 DESC sg_club;
 DESC sg_clubmem;
 DESC sg_qna;
-DESC sg_request;
+
