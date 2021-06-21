@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.ccDao;
 import com.sagol.dto.ccVO;
+import com.sagol.util.uidUtil;
 
 @Service("ccSvc")
 @Transactional
@@ -36,6 +37,7 @@ public class ccSvcImpl implements ccSvc {
 
 	@Override
 	public int insertCc(ccVO ccvo) {
+		ccvo.setCc_id(uidUtil.generateUid("D"));
 		ccvo.setCc_stat("Y");
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		ccvo.setReg_dt(time);
