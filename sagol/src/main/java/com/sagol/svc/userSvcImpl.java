@@ -6,12 +6,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.userDao;
 import com.sagol.dto.userVO;
 import com.sagol.util.uidUtil;
 
 @Service("userSvc")
+@Transactional
 public class userSvcImpl implements userSvc {
 	@Autowired
 	private userDao userdao;

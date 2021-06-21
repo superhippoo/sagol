@@ -6,12 +6,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.clubDao;
 import com.sagol.dto.clubVO;
 import com.sagol.util.uidUtil;
 
 @Service("clubSvc")
+@Transactional
 public class clubSvcImpl implements clubSvc {
 	@Autowired
 	private clubDao clubdao;

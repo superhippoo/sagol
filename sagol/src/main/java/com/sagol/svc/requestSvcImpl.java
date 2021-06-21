@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.requestDao;
 import com.sagol.dto.requestVO;
 import com.sagol.util.uidUtil;
 
 @Service("requestSvc")
+@Transactional
 public class requestSvcImpl implements requestSvc {
 	@Autowired
 	private requestDao requestdao;

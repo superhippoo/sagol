@@ -6,11 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.ccDao;
 import com.sagol.dto.ccVO;
 
 @Service("ccSvc")
+@Transactional
 public class ccSvcImpl implements ccSvc {
 	@Autowired
 	private ccDao ccdao;

@@ -51,22 +51,30 @@ select * from sg_comp;
 
 
 CREATE TABLE sg_cc (
-    cc_id VARCHAR(20) PRIMARY KEY,
+    cc_id VARCHAR(20) ,
     cc_nm VARCHAR(50),
     comp_cd VARCHAR(4),
     cc_stat VARCHAR(2),
     uid VARCHAR(20),
     cc_user_num INT(11),
     reg_dt TIMESTAMP,
-    mdfy_dt TIMESTAMP
+    mdfy_dt TIMESTAMP,
+    PRIMARY KEY(cc_id,comp_cd),
+    constraint FK_SG_COMP_COMP_CD FOREIGN KEY(comp_cd) references sg_comp(comp_cd)
 )  ENGINE=INNODB;
+
+create index FK_SG_COMP_COMP_CD on sg_cc (comp_cd);
+
+show index from sg_cc;
 
 
 insert into sg_cc values ('1','1','1','1','1',1,'20200910','20200910');
 select * from sg_cc;
 
+select * from information_schema.TABLE_CONSTRAINTS where TABLE_NAME  = 'sg_cc';
+
 CREATE TABLE sg_club (
-    club_id VARCHAR(20) PRIMARY KEY,
+    club_id VARCHAR(20),
     club_nm VARCHAR(20),
     club_mem_num INT(11),
     gender VARCHAR(2),
@@ -75,21 +83,35 @@ CREATE TABLE sg_club (
     cc_id VARCHAR(20),
     club_type VARCHAR(2),
     reg_dt TIMESTAMP,
-    mdfy_dt TIMESTAMP
+    mdfy_dt TIMESTAMP,
+    PRIMARY KEY(club_id,cc_id),
+    constraint FK_SG_CC_CC_ID FOREIGN KEY(cc_id) references sg_cc(cc_id)
 )  ENGINE=INNODB;
 
-insert into sg_club values ('2','1',1,'1',1,1,'1','C','20200910','20200910');
+create index FK_SG_CC_CC_ID on sg_club (cc_id);
+
+show index from sg_club;
+
+insert into sg_club values ('1','1',1,'1',1,1,'1','C','20200910','20200910');
 select * from sg_club;
+select * from information_schema.TABLE_CONSTRAINTS where TABLE_NAME  = 'sg_club';
 
 CREATE TABLE sg_clubmem (
-    club_id VARCHAR(20) PRIMARY KEY,
     uid VARCHAR(20),
+    club_id VARCHAR(20),   
     owner_yn VARCHAR(2),
-    reg_dt TIMESTAMP
+    reg_dt TIMESTAMP,
+    PRIMARY KEY(uid,club_id),
+    constraint FK_SG_CLUB_CLUB_ID FOREIGN KEY(club_id) references sg_club(club_id)
 )  ENGINE=INNODB;
+
+create index FK_SG_CLUB_CLUB_ID on sg_clubmem (club_id);
+
+show index from sg_clubmem;
 
 insert into sg_clubmem values ('1','1','1','20200910');
 select * from sg_clubmem;
+select * from information_schema.TABLE_CONSTRAINTS where TABLE_NAME  = 'sg_clubmem';
 
 CREATE TABLE sg_qna (
     qna_id VARCHAR(20) PRIMARY KEY,
