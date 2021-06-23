@@ -20,6 +20,7 @@ public class userVO {
 	private String admin_yn;
 	private Timestamp reg_dt;
 	private Timestamp mdfy_dt;
+	private String message;
 	
 	
 	public String getUid() {
@@ -117,6 +118,12 @@ public class userVO {
 	}
 	public void setMdfy_dt(Timestamp mdfy_dt) {
 		this.mdfy_dt = mdfy_dt;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 //	{
