@@ -2,6 +2,8 @@ package com.sagol.ctl;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,9 @@ import com.sagol.svc.loginSvc;
 @RestController
 @RequestMapping("/login")
 public class loginController {
-	
+
+	private Logger logger = LoggerFactory.getLogger(loginController.class);
+
 	@Autowired
 	private loginSvc loginsvc;
 
@@ -28,10 +32,9 @@ public class loginController {
     	
     	if ("Login ok".equals(resultvo.getMessage())) {
 			request.getSession().setAttribute("userVO", resultvo);
-		}
-    	userVO temp =new userVO(); 
-    	temp = (userVO) request.getSession().getAttribute("userVO");
-    	System.out.println(temp.getUid());
+			logger.info(resultvo.getNikname()+"/"+resultvo.getUid());
+		}    	
+
         return loginsvc.login(uservo);
     }
  
