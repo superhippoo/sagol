@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.userDao;
+import com.sagol.dto.emailVO;
 import com.sagol.dto.userVO;
+import com.sagol.util.authcdUtil;
+import com.sagol.util.emailUtil;
 import com.sagol.util.uidUtil;
 
 @Service("userSvc")
@@ -17,6 +20,9 @@ import com.sagol.util.uidUtil;
 public class userSvcImpl implements userSvc {
 	@Autowired
 	private userDao userdao;
+	
+	@Autowired
+	private emailUtil emailutil;
 
 	@Override
 	public List<userVO> selectUserList(userVO uservo) {
@@ -55,4 +61,39 @@ public class userSvcImpl implements userSvc {
 		uservo.setAct_yn("N");
 		return userdao.deleteUser(uservo);	
 	}
+
+	@Override
+	public int sendAuthMail(userVO uservo) {
+
+		try {
+			uservo.setAuth_cd(authcdUtil.generateAuthcd());
+			userdao.saveauthcd(uservo);
+			emailVO emailvo = new emailVO();
+			emailvo.setToAddress(uservo.getComp_email());
+			emailvo.setSubject("사골동 서비스 인증 요청");
+			emailvo.setBody(uservo.getAuth_cd());
+			emailutil.sendEmail(emailvo);
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public boolean checkAuthCd(userVO uservo) {
+		
+		String authCd = userdao.selectUser(uservo).getAuth_cd();
+		
+		if (uservo.getAuth_cd().equals(authCd)) {
+			uservo.setAuth_yn("Y");
+			userdao.auth(uservo);
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+
+	
+
 }

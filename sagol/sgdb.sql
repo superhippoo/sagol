@@ -24,6 +24,7 @@ CREATE TABLE sg_user (
     report_num INT(11),
     act_yn VARCHAR(2),
     auth_yn VARCHAR(2),
+    auth_cd INT(11),
     admin_yn VARCHAR(2),
     reg_dt TIMESTAMP,
     mdfy_dt TIMESTAMP
@@ -33,7 +34,7 @@ create index idx_nikname on sg_user(nikname);
 
 show index from sg_user;
 
-insert into sg_user values ('1','1','1','1','1','1',1,'1',1,1,1,'1','1','1','20200910','20200910');
+insert into sg_user values ('1','1','1','1','1','1',1,'1',1,1,1,'1','1',1,'1','20200910','20200910');
 select * from sg_user;
 
 CREATE TABLE sg_comp (

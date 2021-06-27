@@ -15,4 +15,9 @@ public interface userDao {
 	public int updateUser(userVO uservo);
 
 	public int deleteUser(userVO uservo);
+	
+	public int saveauthcd(userVO uservo);
+	
+	public int auth(userVO uservo);
+	
 }

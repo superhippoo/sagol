@@ -49,4 +49,17 @@ public class userController {
     public int deleteUser(@RequestBody userVO uservo){
         return usersvc.deleteUser(uservo);
     }
+    
+    @RequestMapping(value = "/sendauthmail",method = RequestMethod.POST)
+    @ResponseBody
+    public int sendAuthMail(@RequestBody userVO uservo){
+        return usersvc.sendAuthMail(uservo);
+    }
+    
+    @RequestMapping(value = "/checkauthcd",method = RequestMethod.POST)
+    @ResponseBody
+    public boolean checkAuthCd(@RequestBody userVO uservo){
+        return usersvc.checkAuthCd(uservo);
+    }
+    
 }

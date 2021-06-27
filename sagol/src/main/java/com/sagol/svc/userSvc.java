@@ -16,4 +16,8 @@ public interface  userSvc {
 	
 	public int deleteUser(userVO uservo);
 	
+	public int sendAuthMail(userVO uservo);
+	
+	public boolean checkAuthCd(userVO uservo);
+	
 }

@@ -17,6 +17,7 @@ public class userVO {
 	private int report_num;
 	private String act_yn;
 	private String auth_yn;
+	private String auth_cd;
 	private String admin_yn;
 	private Timestamp reg_dt;
 	private Timestamp mdfy_dt;
@@ -100,6 +101,12 @@ public class userVO {
 	}
 	public void setAuth_yn(String auth_yn) {
 		this.auth_yn = auth_yn;
+	}
+	public String getAuth_cd() {
+		return auth_cd;
+	}
+	public void setAuth_cd(String auth_cd) {
+		this.auth_cd = auth_cd;
 	}
 	public String getAdmin_yn() {
 		return admin_yn;

@@ -39,11 +39,11 @@ public class userDaoImple implements userDao {
 	@Override
 	public int insertUser(userVO uservo) {
 
-		String q = "  INSERT INTO sg_user VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String q = "  INSERT INTO sg_user VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] args = { uservo.getUid(), uservo.getNikname(), uservo.getKakao_email(), uservo.getComp_email(),
 				uservo.getComp_cd(), uservo.getDft_cc_id(), uservo.getJoin_club_num(), uservo.getGender(),
 				uservo.getHit(), uservo.getComp_year(), uservo.getReport_num(), uservo.getAct_yn(), uservo.getAuth_yn(),
-				uservo.getAdmin_yn(),uservo.getReg_dt(), uservo.getMdfy_dt() };
+				uservo.getAuth_cd(),uservo.getAdmin_yn(),uservo.getReg_dt(), uservo.getMdfy_dt() };
 		return jdbdtemplate.update(q, args);
 
 	}
@@ -61,12 +61,13 @@ public class userDaoImple implements userDao {
 				    + "comp_year = ? ," 
 				    + "act_yn = ? ," 
 				    + "auth_yn = ? ," 
+				    + "auth_cd = ? ," 
 				    + "admin_yn = ? ," 
 				    + "mdfy_dt = ?"
 				+ "where uid = ?";
 		Object[] args = { uservo.getNikname(), uservo.getKakao_email(), uservo.getComp_email(), uservo.getComp_cd(),
 				uservo.getDft_cc_id(), uservo.getGender(), uservo.getHit(), uservo.getComp_year(), uservo.getAct_yn(),
-				uservo.getAuth_yn(),uservo.getAdmin_yn(),uservo.getMdfy_dt(), uservo.getUid() };
+				uservo.getAuth_yn(),uservo.getAuth_cd(),uservo.getAdmin_yn(),uservo.getMdfy_dt(), uservo.getUid() };
 		return jdbdtemplate.update(q, args);
 	}
 
@@ -77,6 +78,24 @@ public class userDaoImple implements userDao {
 				  + "mdfy_dt = ? "
 	              + "where uid = ?";
 		Object[] args = { uservo.getAct_yn(),uservo.getMdfy_dt(),uservo.getUid() };
+		return jdbdtemplate.update(q, args);
+	}
+
+	@Override
+	public int saveauthcd(userVO uservo) {
+		String q = "update sg_user set " 
+					+ "auth_cd = ? " 
+					+ "where uid = ?";
+		Object[] args = { uservo.getAuth_cd(), uservo.getUid() };
+		return jdbdtemplate.update(q, args);
+	}
+
+	@Override
+	public int auth(userVO uservo) {
+		String q = "update sg_user set " 
+				+ "auth_yn = ? " 
+				+ "where uid = ?";
+		Object[] args = { uservo.getAuth_yn(), uservo.getUid() };
 		return jdbdtemplate.update(q, args);
 	}
 
