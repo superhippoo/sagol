@@ -21,13 +21,11 @@ public class compController {
 
 
     @RequestMapping(value = "/selectcomplist",method = RequestMethod.POST)
-    @ResponseBody
     public List<compVO> selectuserlist(@RequestBody compVO compvo){
         return compsvc.selectCompList(compvo);
     }
 
     @RequestMapping(value = "/selectcomp",method = RequestMethod.POST)
-    @ResponseBody
     public compVO selectComp(@RequestBody compVO compvo){
         return compsvc.selectComp(compvo);
     }
@@ -39,13 +37,11 @@ public class compController {
     }
     
     @RequestMapping(value = "/updatecomp",method = RequestMethod.POST)
-    @ResponseBody
     public int updateComp(@RequestBody compVO compvo){
         return compsvc.updateComp(compvo);
     }
     
     @RequestMapping(value = "/deletecomp",method = RequestMethod.POST)
-    @ResponseBody
     public int deleteComp(@RequestBody compVO compvo){
         return compsvc.deleteComp(compvo);
     }

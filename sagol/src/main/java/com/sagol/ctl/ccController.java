@@ -21,37 +21,31 @@ public class ccController {
 
 
     @RequestMapping(value = "/selectcclist",method = RequestMethod.POST)
-    @ResponseBody
     public List<ccVO> selectCclist(@RequestBody ccVO ccvo){
         return ccsvc.selectCcList(ccvo);
     }
     
     @RequestMapping(value = "/selectcclistbycompcd",method = RequestMethod.POST)
-    @ResponseBody
     public List<ccVO> selectCclistbycompcd(@RequestBody ccVO ccvo){
         return ccsvc.selectCcListByCompCd(ccvo);
     }
 
     @RequestMapping(value = "/selectcc",method = RequestMethod.POST)
-    @ResponseBody
     public ccVO selectCc(@RequestBody ccVO ccvo){
         return ccsvc.selectCc(ccvo);
     }
     
     @RequestMapping(value = "/insertcc",method = RequestMethod.POST)
-    @ResponseBody
     public int insertCc(@RequestBody ccVO ccvo){
         return ccsvc.insertCc(ccvo);
     }
     
     @RequestMapping(value = "/updatecc",method = RequestMethod.POST)
-    @ResponseBody
     public int updateCc(@RequestBody ccVO ccvo){
         return ccsvc.updateCc(ccvo);
     }
     
     @RequestMapping(value = "/deletecc",method = RequestMethod.POST)
-    @ResponseBody
     public int deleteCc(@RequestBody ccVO ccvo){
         return ccsvc.deleteCc(ccvo);
     }

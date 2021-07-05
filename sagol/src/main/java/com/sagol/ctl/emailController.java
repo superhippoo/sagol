@@ -21,7 +21,6 @@ public class emailController {
 	emailUtil emailutil;
 
 	@RequestMapping(value = "/sendmail", method = RequestMethod.POST)
-    @ResponseBody
 	public boolean saveLocation(@RequestBody emailVO emailvo) {
 		logger.info("address : "+emailvo.getToAddress()+"  subject : "+emailvo.getSubject()+"   body : "+emailvo.getBody() );
 		emailutil.sendEmail(emailvo);

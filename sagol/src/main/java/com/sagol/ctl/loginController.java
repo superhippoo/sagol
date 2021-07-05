@@ -24,7 +24,6 @@ public class loginController {
 	private loginSvc loginsvc;
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    @ResponseBody
     public userVO login(@RequestBody userVO uservo,HttpServletRequest request){
     	
     	userVO resultvo = new userVO();
@@ -35,7 +34,7 @@ public class loginController {
 			logger.info(resultvo.getNikname()+"/"+resultvo.getUid());
 		}    	
 
-        return loginsvc.login(uservo);
+        return resultvo;
     }
  
 }
