@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sagol.dto.message;
 import com.sagol.dto.userVO;
 import com.sagol.enums.statusEnum;
+import com.sagol.exception.BadRequestException;
 import com.sagol.svc.userSvc;
 
 @RestController
@@ -38,6 +39,11 @@ public class userController {
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);
 //        return usersvc.selectUserList(uservo);
+    }
+    
+    @RequestMapping(value = "/selectuserlist2",method = RequestMethod.POST)
+    public String selectUserList2(@RequestBody userVO uservo){
+    	throw new BadRequestException("잘못된 이름입니다.");
     }
     
     @RequestMapping(value = "/selectuser",method = RequestMethod.POST)

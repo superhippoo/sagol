@@ -23,7 +23,5 @@ public class CommonControllerExceptionHandler extends DefaultErrorAttributes {
 
         return totalresult;
     }
-    
-
  
 }
