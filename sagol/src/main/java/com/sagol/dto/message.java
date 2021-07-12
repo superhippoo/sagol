@@ -5,26 +5,26 @@ import com.sagol.enums.statusEnum;
 public class message {
 	
 
-	private statusEnum status;
-    private String message;
+	private int status;
+	private String returnmessage;
     private Object data;
 
 	
-	public statusEnum getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(statusEnum status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
-
-	public String getMessage() {
-		return message;
+    public String getReturnmessage() {
+		return returnmessage;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setReturnmessage(String returnmessage) {
+		this.returnmessage = returnmessage;
 	}
+	
 
 	public Object getData() {
 		return data;
@@ -35,8 +35,8 @@ public class message {
 	}
 
     public message() {
-        this.status = statusEnum.BAD_REQUEST;
-        this.message = null;
+        this.status = statusEnum.BAD_REQUEST.getStatusCode();
+        this.returnmessage = null;
         this.data = null;
     }
 	

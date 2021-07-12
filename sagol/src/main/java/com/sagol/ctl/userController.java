@@ -1,5 +1,6 @@
 package com.sagol.ctl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sagol.dto.message;
@@ -25,20 +25,31 @@ public class userController {
 
 
     @RequestMapping(value = "/selectuserlist",method = RequestMethod.POST)
-    public List<userVO> selectUserList(@RequestBody userVO uservo){
-        return usersvc.selectUserList(uservo);
+    public ResponseEntity<message> selectUserList(@RequestBody userVO uservo){
+    	message ms = new message();
+    	List<userVO> resultvo = new ArrayList<userVO>();
+    	resultvo = usersvc.selectUserList(uservo);
+    	ms.setStatus(statusEnum.OK.getStatusCode());
+    	ms.setData(resultvo);
+    	ms.setReturnmessage("success");
+    	if (resultvo == null) {
+        	ms.setReturnmessage("no data");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
+//        return usersvc.selectUserList(uservo);
     }
     
     @RequestMapping(value = "/selectuser",method = RequestMethod.POST)
-    public ResponseEntity<?> selectUser(@RequestBody userVO uservo){
+    public ResponseEntity<message> selectUser(@RequestBody userVO uservo){
     	message ms = new message();
     	userVO resultvo = new userVO();
     	resultvo = usersvc.selectUser(uservo);
-    	ms.setStatus(statusEnum.OK);
+    	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
-    	ms.setMessage("success");
+    	ms.setReturnmessage("success");
     	if (resultvo == null) {
-        	ms.setMessage("no data");
+        	ms.setReturnmessage("no data");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);
