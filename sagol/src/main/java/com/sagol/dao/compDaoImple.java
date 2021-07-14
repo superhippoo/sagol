@@ -66,5 +66,16 @@ public class compDaoImple implements compDao {
 		return jdbdtemplate.update(q, args);
 	}
 
+	@Override
+	public int isExistByCompCd(compVO compvo) {
+		String q = "select count(*) from sg_comp where comp_cd = ?";
+		Object[] args = { compvo.getComp_cd() };
+		try {
+			return jdbdtemplate.queryForObject(q, args, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 
 }

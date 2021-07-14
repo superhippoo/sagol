@@ -76,5 +76,16 @@ public class ccDaoImple implements ccDao {
 		return jdbdtemplate.update(q, args);
 	}
 
+	@Override
+	public int isExistByCcId(ccVO ccvo) {
+		String q = "select count(*) from sg_cc where cc_id = ?";
+		Object[] args = { ccvo.getCc_id() };
+		try {
+			return jdbdtemplate.queryForObject(q, args, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 
 }

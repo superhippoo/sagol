@@ -17,5 +17,7 @@ public interface ccDao {
 	public int updateCc(ccVO ccvo);
 
 	public int deleteCc(ccVO ccvo);
+	
+	public int isExistByCcId(ccVO ccvo);
 
 }

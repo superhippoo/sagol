@@ -37,7 +37,13 @@ public class ccSvcImpl implements ccSvc {
 
 	@Override
 	public int insertCc(ccVO ccvo) {
+		// code definition
+		// return 1 = success ,  2 = existcc, 0 = fail		
+
 		ccvo.setCc_id(uidUtil.generateUid("D"));
+		if (ccdao.isExistByCcId(ccvo) != 0) {
+			return 2;
+		}
 		ccvo.setCc_stat("Y");
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		ccvo.setReg_dt(time);
@@ -47,6 +53,9 @@ public class ccSvcImpl implements ccSvc {
 
 	@Override
 	public int updateCc(ccVO ccvo) {
+		if (ccdao.isExistByCcId(ccvo) == 0) {
+			return 2;
+		}
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		ccvo.setMdfy_dt(time);
 		return ccdao.updateCc(ccvo);
@@ -54,6 +63,9 @@ public class ccSvcImpl implements ccSvc {
 
 	@Override
 	public int deleteCc(ccVO ccvo) {
+		if (ccdao.isExistByCcId(ccvo) == 0) {
+			return 2;
+		}
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		ccvo.setMdfy_dt(time);		
 		ccvo.setCc_stat("N");
