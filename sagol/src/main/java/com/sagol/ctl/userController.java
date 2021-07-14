@@ -32,58 +32,143 @@ public class userController {
     	resultvo = usersvc.selectUserList(uservo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
-    	ms.setReturnmessage("success");
+    	ms.setReturnmessage("Success");
     	if (resultvo == null) {
-        	ms.setReturnmessage("no data");
+        	ms.setReturnmessage("Data Not Found");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);
-//        return usersvc.selectUserList(uservo);
     }
-    
-    @RequestMapping(value = "/selectuserlist2",method = RequestMethod.POST)
-    public String selectUserList2(@RequestBody userVO uservo){
-    	throw new BadRequestException("잘못된 이름입니다.");
-    }
+
     
     @RequestMapping(value = "/selectuser",method = RequestMethod.POST)
     public ResponseEntity<message> selectUser(@RequestBody userVO uservo){
+    	if (uservo.getUid() == null || uservo.getUid() == "") {
+    		throw new BadRequestException("Uid Required");
+		}
     	message ms = new message();
     	userVO resultvo = new userVO();
     	resultvo = usersvc.selectUser(uservo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
-    	ms.setReturnmessage("success");
+    	ms.setReturnmessage("Success");
     	if (resultvo == null) {
-        	ms.setReturnmessage("no data");
+        	ms.setReturnmessage("Data Not Found");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
     
     @RequestMapping(value = "/insertuser",method = RequestMethod.POST)
-    public int insertUser(@RequestBody userVO uservo){
-        return usersvc.insertUser(uservo);
-    }
+    public ResponseEntity<message> insertUser(@RequestBody userVO uservo){
+    	
+    	message ms = new message();
+    	
+    	int result = usersvc.insertUser(uservo);
+    	ms.setData(null);
+    	if (result == 1) {
+        	ms.setStatus(statusEnum.OK.getStatusCode());
+        	ms.setReturnmessage("Success");
+		}else if(result == 2){
+        	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
+        	ms.setReturnmessage("Already Resist Email");
+		}else {
+        	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
+			ms.setReturnmessage("Insert User Fail");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
+     }
     
     @RequestMapping(value = "/updateuser",method = RequestMethod.POST)
-    public int updateUser(@RequestBody userVO uservo){
-        return usersvc.updateUser(uservo);
+    public ResponseEntity<message> updateUser(@RequestBody userVO uservo){
+    	if (uservo.getUid() == null || uservo.getUid() == "") {
+    		throw new BadRequestException("Uid Required");
+		}
+    	message ms = new message();
+    	
+    	int result = usersvc.updateUser(uservo);
+    	ms.setData(null);
+    	if (result == 1) {
+        	ms.setStatus(statusEnum.OK.getStatusCode());
+        	ms.setReturnmessage("Success");
+		}else if(result == 2){
+        	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
+        	ms.setReturnmessage("User not found");
+		}else {
+        	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
+			ms.setReturnmessage("Update User Fail");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
     
+
+    
     @RequestMapping(value = "/deleteuser",method = RequestMethod.POST)
-    public int deleteUser(@RequestBody userVO uservo){
-        return usersvc.deleteUser(uservo);
+    public ResponseEntity<message> deleteUser(@RequestBody userVO uservo){
+    	if (uservo.getUid() == null || uservo.getUid() == "") {
+    		throw new BadRequestException("Uid Required");
+		}
+    	int result = usersvc.deleteUser(uservo);
+
+    	message ms = new message();
+
+    	ms.setData(null);
+    	if (result == 1) {
+        	ms.setStatus(statusEnum.OK.getStatusCode());
+        	ms.setReturnmessage("Success");
+		}else if(result == 2){
+        	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
+        	ms.setReturnmessage("User not found");
+		}else {
+        	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
+			ms.setReturnmessage("Delete User Fail");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
     
     @RequestMapping(value = "/sendauthmail",method = RequestMethod.POST)
-    public int sendAuthMail(@RequestBody userVO uservo){
-        return usersvc.sendAuthMail(uservo);
+    public ResponseEntity<message> sendAuthMail(@RequestBody userVO uservo){
+    	if (uservo.getComp_email() == null || uservo.getComp_email() == "") {
+    		throw new BadRequestException("Comp_email Required");
+		}
+    	int result = usersvc.sendAuthMail(uservo);
+
+    	message ms = new message();
+
+    	ms.setData(null);
+    	if (result == 1) {
+        	ms.setStatus(statusEnum.OK.getStatusCode());
+        	ms.setReturnmessage("Success");
+		}else {
+        	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
+			ms.setReturnmessage("Send mail Fail");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
     
     @RequestMapping(value = "/checkauthcd",method = RequestMethod.POST)
-    public boolean checkAuthCd(@RequestBody userVO uservo){
-        return usersvc.checkAuthCd(uservo);
+    public ResponseEntity<message> checkAuthCd(@RequestBody userVO uservo){
+    	if (uservo.getUid() == null || uservo.getUid() == "") {
+    		throw new BadRequestException("Uid Required");
+		}    	
+    	
+    	boolean result = usersvc.checkAuthCd(uservo);
+    	message ms = new message();
+
+    	ms.setData(null);
+    	if (result) {
+        	ms.setStatus(statusEnum.OK.getStatusCode());
+        	ms.setReturnmessage("Success");
+		}else {
+        	ms.setStatus(statusEnum.OK.getStatusCode());
+			ms.setReturnmessage("Fail");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
-    
+
 }

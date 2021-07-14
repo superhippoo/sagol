@@ -20,4 +20,8 @@ public interface userDao {
 	
 	public int auth(userVO uservo);
 	
+	public int isExistByKakaoEmail(userVO uservo);
+
+	public int isExistByUid(userVO uservo);
+	
 }

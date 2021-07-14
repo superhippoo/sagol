@@ -38,6 +38,12 @@ public class userSvcImpl implements userSvc {
 	
 	@Override
 	public int insertUser(userVO uservo) {
+		// code definition
+		// return 1 = success ,  2 = existuser, 0 = fail		
+		if (userdao.isExistByKakaoEmail(uservo) != 0) {
+			return 2;
+		}
+		
 		uservo.setUid(uidUtil.generateUid("U"));
 		uservo.setAct_yn("Y");
 		Timestamp time = new Timestamp(System.currentTimeMillis());
@@ -48,6 +54,11 @@ public class userSvcImpl implements userSvc {
 	
 	@Override
 	public int updateUser(userVO uservo) {
+		
+		if (userdao.isExistByUid(uservo) == 0) {
+			return 2;
+		}
+		
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		uservo.setMdfy_dt(time);
 		return userdao.updateUser(uservo);
@@ -56,6 +67,9 @@ public class userSvcImpl implements userSvc {
 
 	@Override
 	public int deleteUser(userVO uservo) {
+		if (userdao.isExistByUid(uservo) == 0) {
+			return 2;
+		}
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		uservo.setMdfy_dt(time);
 		uservo.setAct_yn("N");

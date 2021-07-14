@@ -99,4 +99,27 @@ public class userDaoImple implements userDao {
 		return jdbdtemplate.update(q, args);
 	}
 
+	@Override
+	public int isExistByKakaoEmail(userVO uservo) {
+		String q = "select count(*) from sg_user where kakao_email = ?";
+		Object[] args = { uservo.getKakao_email() };
+		try {
+			return jdbdtemplate.queryForObject(q, args, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	@Override
+	public int isExistByUid(userVO uservo) {
+		String q = "select count(*) from sg_user where uid = ?";
+		Object[] args = { uservo.getUid() };
+		try {
+			return jdbdtemplate.queryForObject(q, args, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+
 }
