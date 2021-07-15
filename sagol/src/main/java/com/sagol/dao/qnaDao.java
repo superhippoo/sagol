@@ -17,6 +17,7 @@ public interface qnaDao {
 	public int updateQna(qnaVO qnavo);
 	
 	public int deleteQna(qnaVO qnavo);
-
+	
+	public int isExistByQnaId(qnaVO qnavo);
 
 }

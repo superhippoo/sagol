@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sagol.dto.ccVO;
-import com.sagol.dto.compVO;
 import com.sagol.dto.message;
 import com.sagol.enums.statusEnum;
 import com.sagol.exception.BadRequestException;
@@ -34,7 +33,7 @@ public class ccController {
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
 		ms.setReturnmessage("Success");
-		if (resultvo == null) {
+		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
 		}
 
@@ -53,7 +52,7 @@ public class ccController {
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
 		ms.setReturnmessage("Success");
-		if (resultvo == null) {
+		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
 		}
 
@@ -139,7 +138,7 @@ public class ccController {
         	ms.setReturnmessage("CC not found");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-			ms.setReturnmessage("Update CC Fail");
+			ms.setReturnmessage("Delete CC Fail");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);

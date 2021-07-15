@@ -46,7 +46,7 @@ public class clubmemDaoImple implements clubmemDao {
 	@Override
 	public int insertClubmem(clubmemVO clubmemvo) {
 		String q = "  INSERT INTO sg_clubmem VALUES(?,?,?,?)";
-		Object[] args = {clubmemvo.getClub_id(),clubmemvo.getUid(),clubmemvo.getOwner_yn(),clubmemvo.getReg_dt()};
+		Object[] args = {clubmemvo.getUid(),clubmemvo.getClub_id(),clubmemvo.getOwner_yn(),clubmemvo.getReg_dt()};
 		return jdbdtemplate.update(q, args);
 	}
 
@@ -66,6 +66,24 @@ public class clubmemDaoImple implements clubmemDao {
 		Object[] args = {clubmemvo.getClub_id(),clubmemvo.getUid()};
 		return jdbdtemplate.update(q,args);
 		//fuid 하위 일정들 일괄 삭제 기능 구현해야됨
+	}
+
+	@Override
+	public int deleteClubmemsByClubid(clubmemVO clubmemvo) {
+		String q = "delete from sg_clubmem where club_id = ?" ;
+		Object[] args = {clubmemvo.getClub_id()};
+		return jdbdtemplate.update(q,args);
+	}
+
+	@Override
+	public int isExistMemberInClubByUid(clubmemVO clubmemvo) {
+		String q = "select count(*) from sg_clubmem where club_id = ? and uid = ?" ;
+		Object[] args = { clubmemvo.getClub_id(),clubmemvo.getUid() };
+		try {
+			return jdbdtemplate.queryForObject(q, args, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 

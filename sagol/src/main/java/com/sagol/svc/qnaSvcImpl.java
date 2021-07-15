@@ -36,8 +36,12 @@ public class qnaSvcImpl implements qnaSvc {
 
 	@Override
 	public int insertQna(qnaVO qnavo) {
-		Timestamp time = new Timestamp(System.currentTimeMillis());
 		qnavo.setQna_id(uidUtil.generateUid("Q"));
+		
+		if (qnadao.isExistByQnaId(qnavo) != 0) {
+			return 2;
+		}
+		Timestamp time = new Timestamp(System.currentTimeMillis());
 		qnavo.setAnswer_yn("N");
 		qnavo.setReg_dt(time);
 		qnavo.setMdfy_dt(time);
@@ -46,6 +50,10 @@ public class qnaSvcImpl implements qnaSvc {
 
 	@Override
 	public int updateQna(qnaVO qnavo) {
+		
+		if (qnadao.isExistByQnaId(qnavo) == 0) {
+			return 2;
+		}
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		qnavo.setMdfy_dt(time);
 		return qnadao.updateQna(qnavo);
@@ -53,6 +61,9 @@ public class qnaSvcImpl implements qnaSvc {
 
 	@Override
 	public int deleteQna(qnaVO qnavo) {
+		if (qnadao.isExistByQnaId(qnavo) == 0) {
+			return 2;
+		}
 		return qnadao.deleteQna(qnavo);
 	}
 

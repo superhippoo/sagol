@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sagol.dao.clubDao;
 import com.sagol.dao.clubmemDao;
+import com.sagol.dto.clubVO;
 import com.sagol.dto.clubmemVO;
 
 @Service("clubmemSvc")
@@ -16,6 +18,9 @@ import com.sagol.dto.clubmemVO;
 public class clubmemSvcImpl implements clubmemSvc {
 	@Autowired
 	private clubmemDao clubmemdao;
+	
+	@Autowired
+	private clubDao clubdao;
 
 	@Override
 	public List<clubmemVO> selectClubmemList(clubmemVO clubmemvo) {
@@ -36,19 +41,40 @@ public class clubmemSvcImpl implements clubmemSvc {
 
 	@Override
 	public int insertClubmem(clubmemVO clubmemvo) {
+		if (clubmemdao.isExistMemberInClubByUid(clubmemvo) != 0) {
+			return 2;
+		}
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		clubmemvo.setReg_dt(time);
-		return clubmemdao.insertClubmem(clubmemvo);
+		int result = clubmemdao.insertClubmem(clubmemvo);
+		if (result == 1) {//Club 멤버 추가 성공시 클럽의 멤버수 컬럼을 1증가한다.
+			clubVO clubvo = new clubVO();
+			clubvo.setClub_id(clubmemvo.getClub_id());
+			clubdao.addClubMemNum(clubvo);
+		}
+		return result;
 	}
 
 	@Override
 	public int updateClubmem(clubmemVO clubmemvo) {
+		if (clubmemdao.isExistMemberInClubByUid(clubmemvo) == 0) {
+			return 2;
+		}
 		return clubmemdao.updateClubmem(clubmemvo);
 	}
 
 	@Override
 	public int deleteClubmem(clubmemVO clubmemvo) {
-		return clubmemdao.deleteClubmem(clubmemvo);
+		if (clubmemdao.isExistMemberInClubByUid(clubmemvo) == 0) {
+			return 2;
+		}
+		int result = clubmemdao.deleteClubmem(clubmemvo);
+		if (result == 1) {//Club 멤버 삭제 성공시 클럽의 멤버수 컬럼을 1감소한다.
+			clubVO clubvo = new clubVO();
+			clubvo.setClub_id(clubmemvo.getClub_id());
+			clubdao.minusClubMemNum(clubvo);
+		}
+		return result;
 	}
 
 

@@ -17,6 +17,10 @@ public interface clubmemDao {
 	public int updateClubmem(clubmemVO clubmemvo);
 	
 	public int deleteClubmem(clubmemVO clubmemvo);
+	
+	public int deleteClubmemsByClubid(clubmemVO clubmemvo);
+	
+	public int isExistMemberInClubByUid(clubmemVO clubmemvo);
 
 
 }

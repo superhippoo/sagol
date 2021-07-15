@@ -21,6 +21,7 @@ public interface requestDao {
 	public int updateRequest(requestVO requestvo);
 	
 	public int deleteRequest(requestVO requestvo);
-
+	
+	public int isExistByReqId(requestVO requestvo);
 
 }

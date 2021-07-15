@@ -33,7 +33,7 @@ public class userController {
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
     	ms.setReturnmessage("Success");
-    	if (resultvo == null) {
+    	if (resultvo.isEmpty()) {
         	ms.setReturnmessage("Data Not Found");
 		}
 

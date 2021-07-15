@@ -87,6 +87,17 @@ public class requestDaoImple implements requestDao {
 		return jdbdtemplate.update(q,args);
 	}
 
+	@Override
+	public int isExistByReqId(requestVO requestvo) {
+		String q = "select count(*) from sg_request where req_id = ?";
+		Object[] args = { requestvo.getReq_id() };
+		try {
+			return jdbdtemplate.queryForObject(q, args, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 
 
 

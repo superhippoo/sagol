@@ -73,6 +73,17 @@ public class qnaDaoImple implements qnaDao {
 		return jdbdtemplate.update(q,args);
 	}
 
+	@Override
+	public int isExistByQnaId(qnaVO qnavo) {
+		String q = "select count(*) from sg_qna where qna_id = ?";
+		Object[] args = { qnavo.getQna_id() };
+		try {
+			return jdbdtemplate.queryForObject(q, args, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 
 
 

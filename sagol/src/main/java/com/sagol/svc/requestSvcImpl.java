@@ -49,8 +49,13 @@ public class requestSvcImpl implements requestSvc {
 
 	@Override
 	public int insertRequest(requestVO requestvo) {
-		Timestamp time = new Timestamp(System.currentTimeMillis());
 		requestvo.setReq_id(uidUtil.generateUid("R"));
+
+		if (requestdao.isExistByReqId(requestvo) != 0) {
+			return 2;
+		}
+		
+		Timestamp time = new Timestamp(System.currentTimeMillis());
 		requestvo.setComplete_yn("N");
 		requestvo.setReg_dt(time);
 		requestvo.setMdfy_dt(time);
@@ -59,6 +64,9 @@ public class requestSvcImpl implements requestSvc {
 
 	@Override
 	public int updateRequest(requestVO requestvo) {
+		if (requestdao.isExistByReqId(requestvo) == 0) {
+			return 2;
+		}
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		requestvo.setMdfy_dt(time);
 		return requestdao.updateRequest(requestvo);
@@ -66,6 +74,9 @@ public class requestSvcImpl implements requestSvc {
 
 	@Override
 	public int deleteRequest(requestVO requestvo) {
+		if (requestdao.isExistByReqId(requestvo) == 0) {
+			return 2;
+		}
 		return requestdao.deleteRequest(requestvo);
 	}
 

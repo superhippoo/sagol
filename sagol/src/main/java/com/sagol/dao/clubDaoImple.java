@@ -77,5 +77,34 @@ public class clubDaoImple implements clubDao {
 		//fuid 하위 일정들 일괄 삭제 기능 구현해야됨
 	}
 
+	@Override
+	public int isExistByClubId(clubVO clubvo) {
+		String q = "select count(*) from sg_club where club_id = ?";
+		Object[] args = { clubvo.getClub_id() };
+		try {
+			return jdbdtemplate.queryForObject(q, args, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public int addClubMemNum(clubVO clubvo) {
+		String q = "update sg_club set " 
+				+ "club_mem_num = club_mem_num + 1  " 				
+				+ "where club_id = ?";
+		Object[] args = { clubvo.getClub_id() };
+		return jdbdtemplate.update(q, args);
+	}
+
+	@Override
+	public int minusClubMemNum(clubVO clubvo) {
+		String q = "update sg_club set " 
+				+ "club_mem_num = club_mem_num - 1  " 				
+				+ "where club_id = ?";
+		Object[] args = { clubvo.getClub_id() };
+		return jdbdtemplate.update(q, args);
+	}
+
 
 }
