@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sagol.dto.message;
-import com.sagol.dto.qnaVO;
 import com.sagol.dto.requestVO;
 import com.sagol.enums.statusEnum;
 import com.sagol.exception.BadRequestException;

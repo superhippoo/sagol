@@ -12,7 +12,7 @@ DROP table sg_request;
 
 CREATE TABLE sg_user (
     uid VARCHAR(20) PRIMARY KEY,
-    nikname VARCHAR(50),
+    nickname VARCHAR(50),
     kakao_email VARCHAR(50),
     comp_email VARCHAR(50),
     comp_cd VARCHAR(4),

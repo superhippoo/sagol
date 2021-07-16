@@ -40,7 +40,7 @@ public class userDaoImple implements userDao {
 	public int insertUser(userVO uservo) {
 
 		String q = "  INSERT INTO sg_user VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object[] args = { uservo.getUid(), uservo.getNikname(), uservo.getKakao_email(), uservo.getComp_email(),
+		Object[] args = { uservo.getUid(), uservo.getNickname(), uservo.getKakao_email(), uservo.getComp_email(),
 				uservo.getComp_cd(), uservo.getDft_cc_id(), uservo.getJoin_club_num(), uservo.getGender(),
 				uservo.getHit(), uservo.getComp_year(), uservo.getReport_num(), uservo.getAct_yn(), uservo.getAuth_yn(),
 				uservo.getAuth_cd(),uservo.getAdmin_yn(),uservo.getReg_dt(), uservo.getMdfy_dt() };
@@ -65,7 +65,7 @@ public class userDaoImple implements userDao {
 				    + "admin_yn = ? ," 
 				    + "mdfy_dt = ?"
 				+ "where uid = ?";
-		Object[] args = { uservo.getNikname(), uservo.getKakao_email(), uservo.getComp_email(), uservo.getComp_cd(),
+		Object[] args = { uservo.getNickname(), uservo.getKakao_email(), uservo.getComp_email(), uservo.getComp_cd(),
 				uservo.getDft_cc_id(), uservo.getGender(), uservo.getHit(), uservo.getComp_year(), uservo.getAct_yn(),
 				uservo.getAuth_yn(),uservo.getAuth_cd(),uservo.getAdmin_yn(),uservo.getMdfy_dt(), uservo.getUid() };
 		return jdbdtemplate.update(q, args);

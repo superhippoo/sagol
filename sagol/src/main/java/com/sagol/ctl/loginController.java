@@ -30,7 +30,7 @@ public class loginController {
     	
     	if ("Login ok".equals(resultvo.getMessage())) {
 			request.getSession().setAttribute("userVO", resultvo);
-			logger.info(resultvo.getNikname()+"/"+resultvo.getUid());
+			logger.info(resultvo.getNickname()+"/"+resultvo.getUid());
 		}    	
 
         return resultvo;

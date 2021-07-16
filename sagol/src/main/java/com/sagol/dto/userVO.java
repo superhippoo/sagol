@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class userVO {
 	
 	private String uid;
-	private String nikname;
+	private String nickname;
 	private String kakao_email;
 	private String comp_email;
 	private String comp_cd;
@@ -30,11 +30,11 @@ public class userVO {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public String getNikname() {
-		return nikname;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setNikname(String nikname) {
-		this.nikname = nikname;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getKakao_email() {
 		return kakao_email;
