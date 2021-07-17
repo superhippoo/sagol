@@ -23,7 +23,7 @@ public class loginSvcImpl implements loginSvc {
 			if ("Y".equals(tempvo.getAct_yn())) {//활성화 계정이라면
 				tempvo.setMessage("Login ok");
 			}else {//활성화 계정이 아니라면(신고)
-				tempvo.setMessage("Inactive user");
+				tempvo.setMessage("In Active user");
 			}
 		}else {//사용자 계정이 없다면
 			tempvo.setMessage("Sign up required");
