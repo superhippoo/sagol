@@ -30,7 +30,7 @@ CREATE TABLE sg_user (
     mdfy_dt TIMESTAMP
 )  ENGINE=INNODB;
 
-create index idx_nikname on sg_user(nikname);
+create index idx_nickname on sg_user(nickname);
 
 show index from sg_user;
 

@@ -51,7 +51,7 @@ public class userDaoImple implements userDao {
 	@Override
 	public int updateUser(userVO uservo) {
 		String q = "update sg_user set " 
-					+ "nikname = ? , " 
+					+ "nickname = ? , " 
 				    + "kakao_email = ? , " 
 					+ "comp_email = ? , " 
 				    + "comp_cd = ? , "

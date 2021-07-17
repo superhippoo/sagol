@@ -133,22 +133,6 @@ public class userVO {
 		this.message = message;
 	}
 	
-//	{
-//    "uid": "",
-//	  "nikname" : "",
-//	  "kakao_email" : "",
-//	  "comp_email" : "",
-//	  "comp_cd" : "",
-//	  "dft_cc_id" : "",
-//	  "join_club_num" : "",
-//	  "gender" : "",
-//	  "hit" : "",
-//	  "comp_year" : "", 
-//	  "report_num" : "",
-//	  "act_yn" : "",
-//	  "auth_yn" : "",
-//	  "reg_dt" : "",
-//	  "mdfy_dt" : ""
-//}
+
 	
 }
