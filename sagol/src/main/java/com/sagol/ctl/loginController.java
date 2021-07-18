@@ -1,8 +1,5 @@
 package com.sagol.ctl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sagol.dto.compVO;
 import com.sagol.dto.message;
 import com.sagol.dto.userVO;
 import com.sagol.enums.statusEnum;
