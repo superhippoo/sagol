@@ -89,13 +89,10 @@ public class clubSvcImpl implements clubSvc {
 		}
 		clubmemVO clubmemvo = new clubmemVO();
 		clubmemvo.setClub_id(clubvo.getClub_id());
-		int result = clubmemdao.deleteClubmemsByClubid(clubmemvo);
+		clubmemdao.deleteClubmemsByClubid(clubmemvo);
 		//외래키 제약으로 인해 Club 하위 멤버들 먼저 삭제 후 Club삭제 진행
-		if (result == 1) {
-			return clubdao.deleteClub(clubvo);
-		}else {
-			return 0;
-		}
+		return clubdao.deleteClub(clubvo);
+
 	}
 
 }

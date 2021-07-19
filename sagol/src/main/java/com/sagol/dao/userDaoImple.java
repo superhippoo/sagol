@@ -1,12 +1,10 @@
 package com.sagol.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+//import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,8 +15,8 @@ import com.sagol.dto.userVO;
 @Repository
 public class userDaoImple implements userDao {
 
-	@Autowired
-	private JdbcTemplate jdbdtemplate;
+//	@Autowired
+//	private JdbcTemplate jdbdtemplate;
 	
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate; 
@@ -62,9 +60,12 @@ public class userDaoImple implements userDao {
 //		Map<String, Object> param = new HashMap<String, Object>();
 //		param.put("uid",uservo.getUid());
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
-
 		RowMapper<userVO> mapper = new BeanPropertyRowMapper<userVO>(userVO.class);
-		return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, mapper);
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, mapper);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -174,8 +175,11 @@ public class userDaoImple implements userDao {
 		sql.append("\n").append("where kakao_email = :kakao_email");
 
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
-
-		return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, Integer.class);
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	
 	@Override
@@ -196,8 +200,11 @@ public class userDaoImple implements userDao {
 		sql.append("\n").append("where uid = :uid");
 
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
-
-		return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, Integer.class);
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 
