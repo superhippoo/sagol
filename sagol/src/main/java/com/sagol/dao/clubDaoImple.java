@@ -35,7 +35,16 @@ public class clubDaoImple implements clubDao {
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_club ");
-		sql.append("\n").append("where club_type = :club_type");
+		sql.append("\n").append("where club_type = :club_type ");
+		if (clubvo.getOrderby_key() != null && clubvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(clubvo.getOrderby_key());	
+			if (clubvo.getOrderby_rule() != null && clubvo.getOrderby_rule() != "") {
+				sql.append(" ").append(clubvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubvo);
 
 		RowMapper<clubVO> mapper = new BeanPropertyRowMapper<clubVO>(clubVO.class);
@@ -58,6 +67,14 @@ public class clubDaoImple implements clubDao {
 		sql.append("\n").append("from sg_club ");
 		sql.append("\n").append("where cc_id = :cc_id");
 		sql.append("\n").append("and club_type = :club_type");
+		if (clubvo.getOrderby_key() != null && clubvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(clubvo.getOrderby_key());	
+			if (clubvo.getOrderby_rule() != null && clubvo.getOrderby_rule() != "") {
+				sql.append(" ").append(clubvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubvo);
 
 		RowMapper<clubVO> mapper = new BeanPropertyRowMapper<clubVO>(clubVO.class);
@@ -81,6 +98,7 @@ public class clubDaoImple implements clubDao {
 		sql.append("\n").append("from sg_club");
 		sql.append("\n").append("where club_id = :club_id");
 		sql.append("\n").append("and club_type = :club_type");
+		
 
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubvo);
 		RowMapper<clubVO> mapper = new BeanPropertyRowMapper<clubVO>(clubVO.class);
@@ -258,6 +276,14 @@ public class clubDaoImple implements clubDao {
 		}
 		if (searchvo.getClub_type() != null && searchvo.getClub_type() != "") {
 			sql.append("\n").append("and club_type = :club_type");
+		}
+		if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(searchvo.getOrderby_key());	
+			if (searchvo.getOrderby_rule() != null && searchvo.getOrderby_rule() != "") {
+				sql.append(" ").append(searchvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
 		}
 		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);

@@ -31,8 +31,10 @@ public class clubmemDaoImple implements clubmemDao {
 		StringBuffer sql = new StringBuffer();
 		
 		sql.append("\n").append("select ");
-		sql.append("\n").append("* ");
-		sql.append("\n").append("from sg_clubmem ");
+		sql.append("\n").append("a.*,b.nickname,b.gender,b.hit,b.comp_year ");
+		sql.append("\n").append("from sg_clubmem a, sg_user b ");
+		sql.append("\n").append("where a.uid = b.uid ");
+
 
 		RowMapper<clubmemVO> mapper = new BeanPropertyRowMapper<clubmemVO>(clubmemVO.class);
 		return namedParameterJdbcTemplate.query(sql.toString(), mapper);
@@ -50,9 +52,10 @@ public class clubmemDaoImple implements clubmemDao {
 	    StringBuffer sql = new StringBuffer();
 		
 		sql.append("\n").append("select ");
-		sql.append("\n").append("* ");
-		sql.append("\n").append("from sg_clubmem ");
-		sql.append("\n").append("where club_id = :club_id");
+		sql.append("\n").append("a.*,b.nickname,b.gender,b.hit,b.comp_year ");
+		sql.append("\n").append("from sg_clubmem a, sg_user b ");
+		sql.append("\n").append("where a.uid = b.uid ");
+		sql.append("\n").append("and a.club_id = :club_id");
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubmemvo);
 
 		RowMapper<clubmemVO> mapper = new BeanPropertyRowMapper<clubmemVO>(clubmemVO.class);

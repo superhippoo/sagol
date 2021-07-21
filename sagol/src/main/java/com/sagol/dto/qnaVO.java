@@ -14,6 +14,9 @@ public class qnaVO {
 	private Timestamp reg_dt;
 	private Timestamp mdfy_dt;
 	
+	private String orderby_key;
+	private String orderby_rule;
+	
 	public String getQna_id() {
 		return qna_id;
 	}
@@ -68,7 +71,18 @@ public class qnaVO {
 	public void setMdfy_dt(Timestamp mdfy_dt) {
 		this.mdfy_dt = mdfy_dt;
 	}
-
+	public String getOrderby_key() {
+		return orderby_key;
+	}
+	public void setOrderby_key(String orderby_key) {
+		this.orderby_key = orderby_key;
+	}
+	public String getOrderby_rule() {
+		return orderby_rule;
+	}
+	public void setOrderby_rule(String orderby_rule) {
+		this.orderby_rule = orderby_rule;
+	}
 	
 
 

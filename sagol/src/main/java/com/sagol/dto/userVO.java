@@ -23,6 +23,8 @@ public class userVO {
 	private Timestamp mdfy_dt;
 	private String message;
 	
+	private String orderby_key;
+	private String orderby_rule;
 	
 	public String getUid() {
 		return uid;
@@ -132,7 +134,18 @@ public class userVO {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+	public String getOrderby_key() {
+		return orderby_key;
+	}
+	public void setOrderby_key(String orderby_key) {
+		this.orderby_key = orderby_key;
+	}
+	public String getOrderby_rule() {
+		return orderby_rule;
+	}
+	public void setOrderby_rule(String orderby_rule) {
+		this.orderby_rule = orderby_rule;
+	}
 
 	
 }

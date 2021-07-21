@@ -54,7 +54,9 @@ public class searchVO {
 	private String complete_yn;
 	//°øÅë Search Type 1. match 2. like
 	private String type;
-
+	
+	private String orderby_key;
+	private String orderby_rule;
 	
 	
 	public String getUid() {
@@ -329,5 +331,16 @@ public class searchVO {
 		this.type = type;
 	}
 
-	
+	public String getOrderby_key() {
+		return orderby_key;
+	}
+	public void setOrderby_key(String orderby_key) {
+		this.orderby_key = orderby_key;
+	}
+	public String getOrderby_rule() {
+		return orderby_rule;
+	}
+	public void setOrderby_rule(String orderby_rule) {
+		this.orderby_rule = orderby_rule;
+	}
 }
