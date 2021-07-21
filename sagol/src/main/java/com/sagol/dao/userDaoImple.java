@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 
 @Repository
@@ -205,6 +206,81 @@ public class userDaoImple implements userDao {
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_user");
+		sql.append("\n").append("where 1=1");
+    	if (searchvo.getUid() != null && searchvo.getUid() != "") {
+    		sql.append("\n").append("and uid = :uid");
+    	}
+    	if (searchvo.getNickname() !=null && searchvo.getNickname() != "") {
+    		if ("like".equals(searchvo.getType())) {    			
+        		sql.append("\n").append("and nickname like '%").append(searchvo.getNickname()).append("%'");
+			}else {
+	    		sql.append("\n").append("and nickname = :nickname");
+			}
+		}
+    	if (searchvo.getKakao_email() !=null && searchvo.getKakao_email() != "") {
+    		if ("like".equals(searchvo.getType())) {    			
+        		sql.append("\n").append("and kakao_email like '%").append(searchvo.getKakao_email()).append("%'");
+			}else {
+	    		sql.append("\n").append("and kakao_email = :kakao_email");    		
+			}
+		}
+    	if (searchvo.getComp_email() !=null && searchvo.getComp_email() != "") {
+    		if ("like".equals(searchvo.getType())) {    			
+        		sql.append("\n").append("and comp_email like '%").append(searchvo.getComp_email()).append("%'");
+			}else {
+	    		sql.append("\n").append("and comp_email = :comp_email");    		
+			}
+		}
+    	if (searchvo.getComp_cd() !=null && searchvo.getComp_cd() != "") {
+    		sql.append("\n").append("and comp_cd = :comp_cd");    		
+		}
+    	if (searchvo.getDft_cc_id() !=null && searchvo.getDft_cc_id() != "") {
+    		sql.append("\n").append("and dft_cc_id = :dft_cc_id");    		
+		}
+    	if (searchvo.getJoin_club_num() != null && searchvo.getJoin_club_num() != "") {
+    		sql.append("\n").append("and join_club_num = :join_club_num");    		
+		}
+    	if (searchvo.getGender() !=null && searchvo.getGender() != "") {
+    		sql.append("\n").append("and gender = :gender");		
+		}
+    	if (searchvo.getHit() !=null && searchvo.getHit() != "") {
+    		sql.append("\n").append("and hit = :hit");    		
+		}
+    	if (searchvo.getComp_year() !=null && searchvo.getComp_year() != "") {
+    		sql.append("\n").append("and comp_year = :comp_year");    	
+		}
+    	if (searchvo.getReport_num() !=null && searchvo.getReport_num() != "") {
+    		sql.append("\n").append("and report_num = :report_num");
+		}
+    	if (searchvo.getAct_yn() !=null && searchvo.getAct_yn() != "") {
+    		sql.append("\n").append("and act_yn = :act_yn");
+		}
+    	if (searchvo.getAuth_yn() !=null && searchvo.getAuth_yn() != "") {
+    		sql.append("\n").append("and auth_yn = :auth_yn");
+		}
+    	if (searchvo.getAuth_cd() !=null && searchvo.getAuth_cd() != "") {
+    		sql.append("\n").append("and auth_cd = :auth_cd");
+		}
+    	if (searchvo.getAdmin_yn() !=null && searchvo.getAdmin_yn() != "") {
+    		sql.append("\n").append("and admin_yn = :admin_yn");
+		}
+
+
+
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
+
+		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(),paramSource, mapper);
 	}
 
 

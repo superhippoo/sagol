@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sagol.dto.clubVO;
+import com.sagol.dto.searchVO;
 
 @Repository
 public class clubDaoImple implements clubDao {
@@ -219,6 +220,50 @@ public class clubDaoImple implements clubDao {
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubvo);
 		
 		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_club");
+		sql.append("\n").append("where 1=1");
+
+		if (searchvo.getClub_id() != null && searchvo.getClub_id() != "") {
+			sql.append("\n").append("and club_id = :club_id");			
+		}
+		if (searchvo.getClub_nm() != null && searchvo.getClub_nm() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and club_nm like '%").append(searchvo.getClub_nm()).append("%'");
+			} else {
+				sql.append("\n").append("and club_nm = :club_nm");
+			}
+		}
+		if (searchvo.getClub_mem_num() != null && searchvo.getClub_mem_num() != "") {
+			sql.append("\n").append("and club_mem_num = :club_mem_num");	
+		}
+		if (searchvo.getGender() != null && searchvo.getGender() != "") {
+			sql.append("\n").append("and gender = :gender");
+		}
+		if (searchvo.getHit() != null && searchvo.getHit() != "") {
+			sql.append("\n").append("and hit = :hit");
+		}
+		if (searchvo.getComp_year() != null && searchvo.getComp_year() != "") {
+			sql.append("\n").append("and comp_year = :comp_year");
+		}
+		if (searchvo.getCc_id() != null && searchvo.getCc_id() != "") {
+			sql.append("\n").append("and cc_id = :cc_id");
+		}
+		if (searchvo.getClub_type() != null && searchvo.getClub_type() != "") {
+			sql.append("\n").append("and club_type = :club_type");
+		}
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
+
+		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
 
 

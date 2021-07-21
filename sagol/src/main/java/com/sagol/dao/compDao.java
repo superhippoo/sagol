@@ -3,6 +3,7 @@ package com.sagol.dao;
 import java.util.List;
 
 import com.sagol.dto.compVO;
+import com.sagol.dto.searchVO;
 
 public interface compDao {
 	
@@ -17,5 +18,7 @@ public interface compDao {
 	public int deleteComp(compVO compvo);
 	
 	public int isExistByCompCd(compVO compvo);
+	
+	public List<searchVO> search(searchVO searchvo);
 
 }

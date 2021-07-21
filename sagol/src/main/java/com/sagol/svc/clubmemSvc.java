@@ -3,6 +3,7 @@ package com.sagol.svc;
 import java.util.List;
 
 import com.sagol.dto.clubmemVO;
+import com.sagol.dto.searchVO;
 
 public interface  clubmemSvc {
 	
@@ -17,4 +18,7 @@ public interface  clubmemSvc {
 	public int updateClubmem(clubmemVO clubmemvo);
 	
 	public int deleteClubmem(clubmemVO clubmemvo);
+	
+	public List<searchVO> search(searchVO searchvo);
+
 }

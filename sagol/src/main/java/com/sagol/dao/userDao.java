@@ -2,6 +2,7 @@ package com.sagol.dao;
 
 import java.util.List;
 
+import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 
 public interface userDao {
@@ -23,5 +24,7 @@ public interface userDao {
 	public int isExistByKakaoEmail(userVO uservo);
 
 	public int isExistByUid(userVO uservo);
+	
+	public List<searchVO> search(searchVO searchvo);
 	
 }

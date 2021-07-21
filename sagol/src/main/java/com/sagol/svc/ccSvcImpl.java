@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.ccDao;
 import com.sagol.dto.ccVO;
+import com.sagol.dto.searchVO;
 import com.sagol.util.uidUtil;
 
 @Service("ccSvc")
@@ -70,6 +71,12 @@ public class ccSvcImpl implements ccSvc {
 		ccvo.setMdfy_dt(time);		
 		ccvo.setCc_stat("N");
 		return ccdao.deleteCc(ccvo);
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		// TODO Auto-generated method stub
+		return ccdao.search(searchvo);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.sagol.dao;
 import java.util.List;
 
 import com.sagol.dto.qnaVO;
+import com.sagol.dto.searchVO;
 
 public interface qnaDao {
 	
@@ -19,5 +20,7 @@ public interface qnaDao {
 	public int deleteQna(qnaVO qnavo);
 	
 	public int isExistByQnaId(qnaVO qnavo);
+	
+	public List<searchVO> search(searchVO searchvo);
 
 }

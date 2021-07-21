@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.compDao;
 import com.sagol.dto.compVO;
+import com.sagol.dto.searchVO;
 
 @Service("compSvc")
 @Transactional
@@ -67,6 +68,12 @@ public class compSvcImpl implements compSvc {
 		compvo.setMdfy_dt(time);		
 		compvo.setComp_stat("N");
 		return compdao.deleteComp(compvo);
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		// TODO Auto-generated method stub
+		return compdao.search(searchvo);
 	}
 
 }

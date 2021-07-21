@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sagol.dto.qnaVO;
+import com.sagol.dto.searchVO;
 
 @Repository
 public class qnaDaoImple implements qnaDao {
@@ -171,6 +172,59 @@ public class qnaDaoImple implements qnaDao {
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_qna");
+		sql.append("\n").append("where 1=1");
+
+		if (searchvo.getQna_id() != null && searchvo.getQna_id() != "") {
+			sql.append("\n").append("and qna_id = :qna_id");			
+		}
+		if (searchvo.getQ_title() != null && searchvo.getQ_title() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and q_title like '%").append(searchvo.getQ_title()).append("%'");
+			} else {
+				sql.append("\n").append("and q_title = :q_title");
+			}
+		}
+		if (searchvo.getQ_body() != null && searchvo.getQ_body() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and q_body like '%").append(searchvo.getQ_body()).append("%'");
+			} else {
+				sql.append("\n").append("and q_body = :q_body");
+			}
+		}
+		if (searchvo.getUid() != null && searchvo.getUid() != "") {
+			sql.append("\n").append("and uid = :uid");
+		}
+		if (searchvo.getAnswer_yn() != null && searchvo.getAnswer_yn() != "") {
+			sql.append("\n").append("and answer_yn = :answer_yn");
+		}
+		if (searchvo.getA_title() != null && searchvo.getA_title() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and a_title like '%").append(searchvo.getA_title()).append("%'");
+			} else {
+				sql.append("\n").append("and a_title = :a_title");
+			}
+		}
+		if (searchvo.getA_body() != null && searchvo.getA_body() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and a_body like '%").append(searchvo.getA_body()).append("%'");
+			} else {
+				sql.append("\n").append("and a_body = :a_body");
+			}
+		}
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
+
+		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
 
 

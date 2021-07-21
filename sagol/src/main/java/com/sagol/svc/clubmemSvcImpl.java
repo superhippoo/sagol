@@ -12,6 +12,7 @@ import com.sagol.dao.clubDao;
 import com.sagol.dao.clubmemDao;
 import com.sagol.dto.clubVO;
 import com.sagol.dto.clubmemVO;
+import com.sagol.dto.searchVO;
 
 @Service("clubmemSvc")
 @Transactional
@@ -75,6 +76,12 @@ public class clubmemSvcImpl implements clubmemSvc {
 			clubdao.minusClubMemNum(clubvo);
 		}
 		return result;
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		// TODO Auto-generated method stub
+		return clubdao.search(searchvo);
 	}
 
 

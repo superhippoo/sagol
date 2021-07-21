@@ -3,6 +3,7 @@ package com.sagol.dao;
 import java.util.List;
 
 import com.sagol.dto.requestVO;
+import com.sagol.dto.searchVO;
 
 public interface requestDao {
 	
@@ -23,5 +24,7 @@ public interface requestDao {
 	public int deleteRequest(requestVO requestvo);
 	
 	public int isExistByReqId(requestVO requestvo);
+	
+	public List<searchVO> search(searchVO searchvo);
 
 }

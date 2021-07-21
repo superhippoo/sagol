@@ -3,6 +3,7 @@ package com.sagol.dao;
 import java.util.List;
 
 import com.sagol.dto.ccVO;
+import com.sagol.dto.searchVO;
 
 public interface ccDao {
 	
@@ -20,4 +21,5 @@ public interface ccDao {
 	
 	public int isExistByCcId(ccVO ccvo);
 
+	public List<searchVO> search(searchVO searchvo);
 }

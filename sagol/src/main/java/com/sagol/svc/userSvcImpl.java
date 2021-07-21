@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.userDao;
 import com.sagol.dto.emailVO;
+import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 import com.sagol.util.authcdUtil;
 import com.sagol.util.emailUtil;
@@ -106,6 +107,12 @@ public class userSvcImpl implements userSvc {
 			return false;
 		}
 		
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		// TODO Auto-generated method stub
+		return userdao.search(searchvo);
 	}
 
 	

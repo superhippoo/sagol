@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sagol.dto.compVO;
+import com.sagol.dto.searchVO;
 
 @Repository
 public class compDaoImple implements compDao {
@@ -159,6 +160,45 @@ public class compDaoImple implements compDao {
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_comp");
+		sql.append("\n").append("where 1=1");
+
+		if (searchvo.getComp_cd() != null && searchvo.getComp_cd() != "") {
+			sql.append("\n").append("and comp_cd = :comp_cd");			
+		}
+		if (searchvo.getComp_nm() != null && searchvo.getComp_nm() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and comp_nm like '%").append(searchvo.getComp_nm()).append("%'");
+			} else {
+				sql.append("\n").append("and comp_nm = :comp_nm");
+			}
+		}
+		if (searchvo.getComp_domain() != null && searchvo.getComp_domain() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and comp_domain like '%").append(searchvo.getComp_domain()).append("%'");
+			} else {
+				sql.append("\n").append("and comp_domain = :comp_domain");
+			}
+		}
+		if (searchvo.getComp_stat() != null && searchvo.getComp_stat() != "") {
+			sql.append("\n").append("and comp_stat = :comp_stat");
+		}
+		if (searchvo.getComp_user_num() != null && searchvo.getComp_user_num() != "") {
+			sql.append("\n").append("and comp_user_num = :comp_user_num");
+		}
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
+
+		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
 
 

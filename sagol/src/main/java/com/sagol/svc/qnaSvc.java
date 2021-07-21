@@ -3,6 +3,7 @@ package com.sagol.svc;
 import java.util.List;
 
 import com.sagol.dto.qnaVO;
+import com.sagol.dto.searchVO;
 
 public interface  qnaSvc {
 	
@@ -17,4 +18,7 @@ public interface  qnaSvc {
 	public int updateQna(qnaVO qnavo);
 	
 	public int deleteQna(qnaVO qnavo);
+	
+	public List<searchVO> search(searchVO searchvo);
+
 }

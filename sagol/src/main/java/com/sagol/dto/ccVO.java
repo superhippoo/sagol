@@ -9,7 +9,7 @@ public class ccVO {
 	private String comp_cd;
 	private String cc_stat;
 	private String uid;
-	private int cc_user_num;
+	private String cc_user_num;
 	private Timestamp reg_dt;
 	private Timestamp mdfy_dt;
 	
@@ -43,10 +43,10 @@ public class ccVO {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public int getCc_user_num() {
+	public String getCc_user_num() {
 		return cc_user_num;
 	}
-	public void setCc_user_num(int cc_user_num) {
+	public void setCc_user_num(String cc_user_num) {
 		this.cc_user_num = cc_user_num;
 	}
 	public Timestamp getReg_dt() {

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.sagol.dto.clubVO;
+import com.sagol.dto.searchVO;
 
 public interface  clubSvc {
 	
@@ -19,4 +20,7 @@ public interface  clubSvc {
 	public int updateClub(clubVO clubvo);
 	
 	public int deleteClub(clubVO clubvo);
+	
+	public List<searchVO> search(searchVO searchvo);
+
 }

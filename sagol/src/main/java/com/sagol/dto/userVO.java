@@ -10,11 +10,11 @@ public class userVO {
 	private String comp_email;
 	private String comp_cd;
 	private String dft_cc_id;
-	private int join_club_num;
+	private String join_club_num;
 	private String gender;
-	private int hit;
-	private int comp_year;
-	private int report_num;
+	private String hit;
+	private String comp_year;
+	private String report_num;
 	private String act_yn;
 	private String auth_yn;
 	private String auth_cd;
@@ -60,10 +60,10 @@ public class userVO {
 	public void setDft_cc_id(String dft_cc_id) {
 		this.dft_cc_id = dft_cc_id;
 	}
-	public int getJoin_club_num() {
+	public String getJoin_club_num() {
 		return join_club_num;
 	}
-	public void setJoin_club_num(int join_club_num) {
+	public void setJoin_club_num(String join_club_num) {
 		this.join_club_num = join_club_num;
 	}
 	public String getGender() {
@@ -72,22 +72,22 @@ public class userVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getHit() {
+	public String getHit() {
 		return hit;
 	}
-	public void setHit(int hit) {
+	public void setHit(String hit) {
 		this.hit = hit;
 	}
-	public int getComp_year() {
+	public String getComp_year() {
 		return comp_year;
 	}
-	public void setComp_year(int comp_year) {
+	public void setComp_year(String comp_year) {
 		this.comp_year = comp_year;
 	}
-	public int getReport_num() {
+	public String getReport_num() {
 		return report_num;
 	}
-	public void setReport_num(int report_num) {
+	public void setReport_num(String report_num) {
 		this.report_num = report_num;
 	}
 	public String getAct_yn() {

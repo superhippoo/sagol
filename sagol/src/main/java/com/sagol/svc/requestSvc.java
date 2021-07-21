@@ -3,6 +3,7 @@ package com.sagol.svc;
 import java.util.List;
 
 import com.sagol.dto.requestVO;
+import com.sagol.dto.searchVO;
 
 public interface  requestSvc {
 	
@@ -21,4 +22,7 @@ public interface  requestSvc {
 	public int updateRequest(requestVO requestvo);
 	
 	public int deleteRequest(requestVO requestvo);
+	
+	public List<searchVO> search(searchVO searchvo);
+
 }

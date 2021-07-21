@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sagol.dto.ccVO;
 import com.sagol.dto.message;
+import com.sagol.dto.searchVO;
 import com.sagol.enums.statusEnum;
 import com.sagol.exception.BadRequestException;
 import com.sagol.svc.ccSvc;
@@ -139,6 +140,21 @@ public class ccController {
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
 			ms.setReturnmessage("Delete CC Fail");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/search",method = RequestMethod.POST)
+    public ResponseEntity<message> search(@RequestBody searchVO searchvo){
+    	message ms = new message();
+    	List<searchVO> resultvo = new ArrayList<searchVO>();
+    	resultvo = ccsvc.search(searchvo);
+    	ms.setStatus(statusEnum.OK.getStatusCode());
+    	ms.setData(resultvo);
+    	ms.setReturnmessage("Success");
+    	if (resultvo.isEmpty()) {
+        	ms.setReturnmessage("Data Not Found");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);

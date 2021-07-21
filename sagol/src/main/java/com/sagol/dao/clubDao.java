@@ -3,6 +3,7 @@ package com.sagol.dao;
 import java.util.List;
 
 import com.sagol.dto.clubVO;
+import com.sagol.dto.searchVO;
 
 public interface clubDao {
 	
@@ -23,5 +24,7 @@ public interface clubDao {
 	public int addClubMemNum(clubVO clubvo);
 	
 	public int minusClubMemNum(clubVO clubvo);
+	
+	public List<searchVO> search(searchVO searchvo);
 
 }

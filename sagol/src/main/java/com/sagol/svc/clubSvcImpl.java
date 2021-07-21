@@ -14,6 +14,7 @@ import com.sagol.dao.clubDao;
 import com.sagol.dao.clubmemDao;
 import com.sagol.dto.clubVO;
 import com.sagol.dto.clubmemVO;
+import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 import com.sagol.util.sessionUtil;
 import com.sagol.util.uidUtil;
@@ -53,7 +54,7 @@ public class clubSvcImpl implements clubSvc {
 		}//기존에 존재하는 클럽id 일경우 
 		
 		Timestamp time = new Timestamp(System.currentTimeMillis());
-		clubvo.setClub_mem_num(1);
+		clubvo.setClub_mem_num("1");
 		clubvo.setReg_dt(time);
 		clubvo.setMdfy_dt(time);
 		int result = clubdao.insertClub(clubvo);
@@ -94,5 +95,13 @@ public class clubSvcImpl implements clubSvc {
 		return clubdao.deleteClub(clubvo);
 
 	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		// TODO Auto-generated method stub
+		return clubdao.search(searchvo);
+	}
+
+
 
 }

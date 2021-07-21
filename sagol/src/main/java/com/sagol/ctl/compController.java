@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sagol.dto.compVO;
 import com.sagol.dto.message;
+import com.sagol.dto.searchVO;
 import com.sagol.enums.statusEnum;
 import com.sagol.exception.BadRequestException;
 import com.sagol.svc.compSvc;
@@ -122,6 +123,21 @@ public class compController {
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
 			ms.setReturnmessage("Delete Comp Fail");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/search",method = RequestMethod.POST)
+    public ResponseEntity<message> search(@RequestBody searchVO searchvo){
+    	message ms = new message();
+    	List<searchVO> resultvo = new ArrayList<searchVO>();
+    	resultvo = compsvc.search(searchvo);
+    	ms.setStatus(statusEnum.OK.getStatusCode());
+    	ms.setData(resultvo);
+    	ms.setReturnmessage("Success");
+    	if (resultvo.isEmpty()) {
+        	ms.setReturnmessage("Data Not Found");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);

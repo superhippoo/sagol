@@ -2,6 +2,7 @@ package com.sagol.svc;
 
 import java.util.List;
 
+import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 
 public interface  userSvc {
@@ -20,4 +21,6 @@ public interface  userSvc {
 	
 	public boolean checkAuthCd(userVO uservo);
 	
+	public List<searchVO> search(searchVO searchvo);
+
 }

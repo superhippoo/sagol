@@ -3,6 +3,7 @@ package com.sagol.svc;
 import java.util.List;
 
 import com.sagol.dto.compVO;
+import com.sagol.dto.searchVO;
 
 public interface  compSvc {
 	
@@ -15,4 +16,7 @@ public interface  compSvc {
 	public int updateComp(compVO compvo);
 	
 	public int deleteComp(compVO compvo);
+	
+	public List<searchVO> search(searchVO searchvo);
+
 }

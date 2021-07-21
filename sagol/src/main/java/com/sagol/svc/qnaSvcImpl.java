@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.qnaDao;
 import com.sagol.dto.qnaVO;
+import com.sagol.dto.searchVO;
 import com.sagol.util.uidUtil;
 
 @Service("qnaSvc")
@@ -65,6 +66,12 @@ public class qnaSvcImpl implements qnaSvc {
 			return 2;
 		}
 		return qnadao.deleteQna(qnavo);
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		// TODO Auto-generated method stub
+		return qnadao.search(searchvo);
 	}
 
 

@@ -8,7 +8,7 @@ public class compVO {
 	private String comp_nm;
 	private String comp_domain;
 	private String comp_stat;
-	private int comp_user_num;
+	private String comp_user_num;
 	private Timestamp reg_dt;
 	private Timestamp mdfy_dt;
 	
@@ -36,10 +36,10 @@ public class compVO {
 	public void setComp_stat(String comp_stat) {
 		this.comp_stat = comp_stat;
 	}
-	public int getComp_user_num() {
+	public String getComp_user_num() {
 		return comp_user_num;
 	}
-	public void setComp_user_num(int comp_user_num) {
+	public void setComp_user_num(String comp_user_num) {
 		this.comp_user_num = comp_user_num;
 	}
 	public Timestamp getReg_dt() {

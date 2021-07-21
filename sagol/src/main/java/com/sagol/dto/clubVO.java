@@ -5,10 +5,10 @@ import java.sql.Timestamp;
 public class clubVO {
 	private String club_id;
 	private String club_nm;
-	private int club_mem_num;
+	private String club_mem_num;
 	private String gender;
-	private int hit;
-	private int comp_year;
+	private String hit;
+	private String comp_year;
 	private String cc_id;
 	private String club_type;
 	private Timestamp reg_dt;
@@ -26,10 +26,10 @@ public class clubVO {
 	public void setClub_nm(String club_nm) {
 		this.club_nm = club_nm;
 	}
-	public int getClub_mem_num() {
+	public String getClub_mem_num() {
 		return club_mem_num;
 	}
-	public void setClub_mem_num(int club_mem_num) {
+	public void setClub_mem_num(String club_mem_num) {
 		this.club_mem_num = club_mem_num;
 	}
 	public String getGender() {
@@ -38,16 +38,16 @@ public class clubVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getHit() {
+	public String getHit() {
 		return hit;
 	}
-	public void setHit(int hit) {
+	public void setHit(String hit) {
 		this.hit = hit;
 	}
-	public int getComp_year() {
+	public String getComp_year() {
 		return comp_year;
 	}
-	public void setComp_year(int comp_year) {
+	public void setComp_year(String comp_year) {
 		this.comp_year = comp_year;
 	}
 	public String getCc_id() {

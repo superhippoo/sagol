@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sagol.dto.clubmemVO;
+import com.sagol.dto.searchVO;
 
 @Repository
 public class clubmemDaoImple implements clubmemDao {
@@ -181,6 +182,31 @@ public class clubmemDaoImple implements clubmemDao {
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_clubmem");
+		sql.append("\n").append("where 1=1");
+
+		if (searchvo.getUid() != null && searchvo.getUid() != "") {
+			sql.append("\n").append("and uid = :uid");			
+		}
+		if (searchvo.getClub_id() != null && searchvo.getClub_id() != "") {
+			sql.append("\n").append("and club_id = :club_id");
+		}
+		if (searchvo.getOwner_yn() != null && searchvo.getOwner_yn() != "") {
+			sql.append("\n").append("and owner_yn = :owner_yn");
+		}
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
+
+		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
 
 

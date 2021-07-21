@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.requestDao;
 import com.sagol.dto.requestVO;
+import com.sagol.dto.searchVO;
 import com.sagol.util.uidUtil;
 
 @Service("requestSvc")
@@ -78,6 +79,12 @@ public class requestSvcImpl implements requestSvc {
 			return 2;
 		}
 		return requestdao.deleteRequest(requestvo);
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		// TODO Auto-generated method stub
+		return requestdao.search(searchvo);
 	}
 
 

@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.sagol.dto.requestVO;
+import com.sagol.dto.searchVO;
 
 @Repository
 public class requestDaoImple implements requestDao {
@@ -203,6 +204,48 @@ public class requestDaoImple implements requestDao {
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+
+	@Override
+	public List<searchVO> search(searchVO searchvo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_request");
+		sql.append("\n").append("where 1=1");
+
+		if (searchvo.getReq_id() != null && searchvo.getReq_id() != "") {
+			sql.append("\n").append("and req_id = :req_id");			
+		}
+		if (searchvo.getReq_cd() != null && searchvo.getReq_cd() != "") {
+			sql.append("\n").append("and req_cd = :req_cd");
+		}
+		if (searchvo.getTitle() != null && searchvo.getTitle() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and title like '%").append(searchvo.getTitle()).append("%'");
+			} else {
+				sql.append("\n").append("and title = :title");
+			}
+		}
+		if (searchvo.getBody() != null && searchvo.getBody() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and body like '%").append(searchvo.getBody()).append("%'");
+			} else {
+				sql.append("\n").append("and body = :body");
+			}		}
+		if (searchvo.getUid() != null && searchvo.getUid() != "") {
+			sql.append("\n").append("and uid = :uid");
+		}
+		if (searchvo.getComplete_yn() != null && searchvo.getComplete_yn() != "") {
+			sql.append("\n").append("and complete_yn = :complete_yn");
+		}
+		
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
+
+		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
 
 
