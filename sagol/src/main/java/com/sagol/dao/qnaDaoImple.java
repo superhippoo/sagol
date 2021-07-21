@@ -20,7 +20,7 @@ public class qnaDaoImple implements qnaDao {
 //	private JdbcTemplate jdbdtemplate;
 
 	@Autowired
-	private NamedParameterJdbcTemplate namedParameterJdbcTemplate; 
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Override
 	public List<qnaVO> selectQnaList(qnaVO qnavo) {
@@ -28,10 +28,19 @@ public class qnaDaoImple implements qnaDao {
 //		String q = "select * from sg_qna";
 //		return jdbdtemplate.query(q, new BeanPropertyRowMapper<qnaVO>(qnaVO.class));
 		StringBuffer sql = new StringBuffer();
-		
+
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_qna ");
+		
+		if (qnavo.getOrderby_key() != null && qnavo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(qnavo.getOrderby_key());	
+			if (qnavo.getOrderby_rule() != null && qnavo.getOrderby_rule() != "") {
+				sql.append(" ").append(qnavo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
 
 		RowMapper<qnaVO> mapper = new BeanPropertyRowMapper<qnaVO>(qnaVO.class);
 		return namedParameterJdbcTemplate.query(sql.toString(), mapper);
@@ -43,20 +52,30 @@ public class qnaDaoImple implements qnaDao {
 //				+ "where uid = ?" ;
 //		Object[] args = { qnavo.getUid()};
 //		return jdbdtemplate.query(q, args, new BeanPropertyRowMapper<qnaVO>(qnaVO.class));
-		
+
 		StringBuffer sql = new StringBuffer();
-		
+
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_qna ");
 		sql.append("\n").append("where uid = :uid");
+		
+		if (qnavo.getOrderby_key() != null && qnavo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(qnavo.getOrderby_key());	
+			if (qnavo.getOrderby_rule() != null && qnavo.getOrderby_rule() != "") {
+				sql.append(" ").append(qnavo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+
+		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(qnavo);
 
 		RowMapper<qnaVO> mapper = new BeanPropertyRowMapper<qnaVO>(qnaVO.class);
-		return namedParameterJdbcTemplate.query(sql.toString(),paramSource, mapper);
+		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 
 	}
-	
 
 	@Override
 	public qnaVO selectQna(qnaVO qnavo) {
@@ -68,7 +87,7 @@ public class qnaDaoImple implements qnaDao {
 //			return null;
 //		}
 		StringBuffer sql = new StringBuffer();
-		
+
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_qna");
@@ -90,17 +109,17 @@ public class qnaDaoImple implements qnaDao {
 //				qnavo.getAnswer_yn(), qnavo.getA_title(), qnavo.getA_body(), qnavo.getReg_dt(), qnavo.getMdfy_dt() };
 //		return jdbdtemplate.update(q, args);
 		StringBuffer sql = new StringBuffer();
-		
+
 		sql.append("\n").append("INSERT INTO sg_qna ");
 		sql.append("\n").append("(qna_id,q_title,q_body,uid,answer_yn,a_title,a_body,reg_dt,mdfy_dt");
 		sql.append("\n").append(") ");
 		sql.append("\n").append("VALUES (:qna_id,:q_title,:q_body,:uid,:answer_yn,:a_title,:a_body,:reg_dt,:mdfy_dt");
 		sql.append("\n").append(")");
-		
+
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(qnavo);
-		
+
 		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
-	
+
 	}
 
 	@Override
@@ -116,7 +135,7 @@ public class qnaDaoImple implements qnaDao {
 //		Object[] args = { qnavo.getQ_title(), qnavo.getQ_body(), qnavo.getAnswer_yn(), qnavo.getA_title(),
 //				qnavo.getA_body(), qnavo.getMdfy_dt(), qnavo.getQna_id() };
 //		return jdbdtemplate.update(q, args);
-		
+
 		StringBuffer sql = new StringBuffer();
 
 		sql.append("\n").append("update sg_qna set ");
@@ -127,9 +146,9 @@ public class qnaDaoImple implements qnaDao {
 		sql.append("\n").append("a_body = :a_body, ");
 		sql.append("\n").append("mdfy_dt = :mdfy_dt");
 		sql.append("\n").append("where qna_id = :qna_id");
-		
+
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(qnavo);
-		
+
 		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
 	}
 
@@ -138,7 +157,7 @@ public class qnaDaoImple implements qnaDao {
 //		String q = "delete from sg_qna where qna_id = ?" ;
 //		Object[] args = {qnavo.getQna_id()};
 //		return jdbdtemplate.update(q,args);
-		
+
 		StringBuffer sql = new StringBuffer();
 
 		sql.append("\n").append("delete from sg_qna ");
@@ -159,7 +178,7 @@ public class qnaDaoImple implements qnaDao {
 //			return 0;
 //		}
 		StringBuffer sql = new StringBuffer();
-		
+
 		sql.append("\n").append("select ");
 		sql.append("\n").append("count(*) ");
 		sql.append("\n").append("from sg_qna");
@@ -184,7 +203,7 @@ public class qnaDaoImple implements qnaDao {
 		sql.append("\n").append("where 1=1");
 
 		if (searchvo.getQna_id() != null && searchvo.getQna_id() != "") {
-			sql.append("\n").append("and qna_id = :qna_id");			
+			sql.append("\n").append("and qna_id = :qna_id");
 		}
 		if (searchvo.getQ_title() != null && searchvo.getQ_title() != "") {
 			if ("like".equals(searchvo.getType())) {
@@ -220,15 +239,19 @@ public class qnaDaoImple implements qnaDao {
 				sql.append("\n").append("and a_body = :a_body");
 			}
 		}
-		
+		if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(searchvo.getOrderby_key());
+			if (searchvo.getOrderby_rule() != null && searchvo.getOrderby_rule() != "") {
+				sql.append(" ").append(searchvo.getOrderby_rule());
+			}
+		} else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
 
 		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
 		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
-
-
-
-
 
 }

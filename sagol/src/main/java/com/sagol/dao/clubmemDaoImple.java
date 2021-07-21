@@ -34,6 +34,15 @@ public class clubmemDaoImple implements clubmemDao {
 		sql.append("\n").append("a.*,b.nickname,b.gender,b.hit,b.comp_year ");
 		sql.append("\n").append("from sg_clubmem a, sg_user b ");
 		sql.append("\n").append("where a.uid = b.uid ");
+		
+		if (clubmemvo.getOrderby_key() != null && clubmemvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(clubmemvo.getOrderby_key());	
+			if (clubmemvo.getOrderby_rule() != null && clubmemvo.getOrderby_rule() != "") {
+				sql.append(" ").append(clubmemvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by a.reg_dt");
+		}
 
 
 		RowMapper<clubmemVO> mapper = new BeanPropertyRowMapper<clubmemVO>(clubmemVO.class);
@@ -56,6 +65,16 @@ public class clubmemDaoImple implements clubmemDao {
 		sql.append("\n").append("from sg_clubmem a, sg_user b ");
 		sql.append("\n").append("where a.uid = b.uid ");
 		sql.append("\n").append("and a.club_id = :club_id");
+		
+		if (clubmemvo.getOrderby_key() != null && clubmemvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(clubmemvo.getOrderby_key());	
+			if (clubmemvo.getOrderby_rule() != null && clubmemvo.getOrderby_rule() != "") {
+				sql.append(" ").append(clubmemvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by a.reg_dt");
+		}
+		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubmemvo);
 
 		RowMapper<clubmemVO> mapper = new BeanPropertyRowMapper<clubmemVO>(clubmemVO.class);
@@ -204,6 +223,15 @@ public class clubmemDaoImple implements clubmemDao {
 		}
 		if (searchvo.getOwner_yn() != null && searchvo.getOwner_yn() != "") {
 			sql.append("\n").append("and owner_yn = :owner_yn");
+		}
+		
+		if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(searchvo.getOrderby_key());	
+			if (searchvo.getOrderby_rule() != null && searchvo.getOrderby_rule() != "") {
+				sql.append(" ").append(searchvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by reg_dt");
 		}
 		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);

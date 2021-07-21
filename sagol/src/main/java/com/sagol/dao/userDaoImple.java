@@ -33,6 +33,15 @@ public class userDaoImple implements userDao {
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_user");
+		
+		if (uservo.getOrderby_key() != null && uservo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(uservo.getOrderby_key());
+			if (uservo.getOrderby_rule() != null && uservo.getOrderby_rule() != "") {
+				sql.append(" ").append(uservo.getOrderby_rule());
+			}
+		} else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
 
 		
 		RowMapper<userVO> mapper = new BeanPropertyRowMapper<userVO>(userVO.class);
@@ -274,7 +283,15 @@ public class userDaoImple implements userDao {
     	if (searchvo.getAdmin_yn() !=null && searchvo.getAdmin_yn() != "") {
     		sql.append("\n").append("and admin_yn = :admin_yn");
 		}
-
+    	
+    	if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(searchvo.getOrderby_key());
+			if (searchvo.getOrderby_rule() != null && searchvo.getOrderby_rule() != "") {
+				sql.append(" ").append(searchvo.getOrderby_rule());
+			}
+		} else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
 
 
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);

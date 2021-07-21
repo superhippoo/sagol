@@ -32,6 +32,15 @@ public class requestDaoImple implements requestDao {
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_request ");
+		
+		if (requestvo.getOrderby_key() != null && requestvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(requestvo.getOrderby_key());
+			if (requestvo.getOrderby_rule() != null && requestvo.getOrderby_rule() != "") {
+				sql.append(" ").append(requestvo.getOrderby_rule());
+			}
+		} else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
 
 		RowMapper<requestVO> mapper = new BeanPropertyRowMapper<requestVO>(requestVO.class);
 		return namedParameterJdbcTemplate.query(sql.toString(), mapper);
@@ -50,6 +59,16 @@ public class requestDaoImple implements requestDao {
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_request ");
 		sql.append("\n").append("where uid = :uid");
+		
+		if (requestvo.getOrderby_key() != null && requestvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(requestvo.getOrderby_key());
+			if (requestvo.getOrderby_rule() != null && requestvo.getOrderby_rule() != "") {
+				sql.append(" ").append(requestvo.getOrderby_rule());
+			}
+		} else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(requestvo);
 
 		RowMapper<requestVO> mapper = new BeanPropertyRowMapper<requestVO>(requestVO.class);
@@ -69,6 +88,16 @@ public class requestDaoImple implements requestDao {
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_request ");
 		sql.append("\n").append("where complete_yn = :complete_yn");
+		
+		if (requestvo.getOrderby_key() != null && requestvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(requestvo.getOrderby_key());
+			if (requestvo.getOrderby_rule() != null && requestvo.getOrderby_rule() != "") {
+				sql.append(" ").append(requestvo.getOrderby_rule());
+			}
+		} else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(requestvo);
 
 		RowMapper<requestVO> mapper = new BeanPropertyRowMapper<requestVO>(requestVO.class);
@@ -88,6 +117,16 @@ public class requestDaoImple implements requestDao {
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_request ");
 		sql.append("\n").append("where req_cd = :req_cd");
+		
+		if (requestvo.getOrderby_key() != null && requestvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(requestvo.getOrderby_key());
+			if (requestvo.getOrderby_rule() != null && requestvo.getOrderby_rule() != "") {
+				sql.append(" ").append(requestvo.getOrderby_rule());
+			}
+		} else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(requestvo);
 
 		RowMapper<requestVO> mapper = new BeanPropertyRowMapper<requestVO>(requestVO.class);
@@ -239,6 +278,15 @@ public class requestDaoImple implements requestDao {
 		}
 		if (searchvo.getComplete_yn() != null && searchvo.getComplete_yn() != "") {
 			sql.append("\n").append("and complete_yn = :complete_yn");
+		}
+		
+		if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(searchvo.getOrderby_key());
+			if (searchvo.getOrderby_rule() != null && searchvo.getOrderby_rule() != "") {
+				sql.append(" ").append(searchvo.getOrderby_rule());
+			}
+		} else {
+			sql.append("\n").append("order by mdfy_dt");
 		}
 		
 		

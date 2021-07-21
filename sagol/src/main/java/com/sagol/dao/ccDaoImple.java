@@ -32,6 +32,15 @@ public class ccDaoImple implements ccDao {
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_cc");
+		
+		if (ccvo.getOrderby_key() != null && ccvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(ccvo.getOrderby_key());	
+			if (ccvo.getOrderby_rule() != null && ccvo.getOrderby_rule() != "") {
+				sql.append(" ").append(ccvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
 
 		
 		RowMapper<ccVO> mapper = new BeanPropertyRowMapper<ccVO>(ccVO.class);
@@ -53,6 +62,16 @@ public class ccDaoImple implements ccDao {
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_cc ");
 		sql.append("\n").append("where comp_cd = :comp_cd");
+		
+		if (ccvo.getOrderby_key() != null && ccvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(ccvo.getOrderby_key());	
+			if (ccvo.getOrderby_rule() != null && ccvo.getOrderby_rule() != "") {
+				sql.append(" ").append(ccvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(ccvo);
 
 		RowMapper<ccVO> mapper = new BeanPropertyRowMapper<ccVO>(ccVO.class);
@@ -208,6 +227,15 @@ public class ccDaoImple implements ccDao {
 		}
 		if (searchvo.getCc_user_num() != null && searchvo.getCc_user_num() != "") {
 			sql.append("\n").append("and cc_user_num = :cc_user_num");
+		}
+		
+		if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(searchvo.getOrderby_key());	
+			if (searchvo.getOrderby_rule() != null && searchvo.getOrderby_rule() != "") {
+				sql.append(" ").append(searchvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
 		}
 		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);

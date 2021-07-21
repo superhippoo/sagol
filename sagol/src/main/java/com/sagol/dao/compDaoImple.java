@@ -34,6 +34,14 @@ public class compDaoImple implements compDao {
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_comp");
 
+		if (compvo.getOrderby_key() != null && compvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(compvo.getOrderby_key());	
+			if (compvo.getOrderby_rule() != null && compvo.getOrderby_rule() != "") {
+				sql.append(" ").append(compvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
 		
 		RowMapper<compVO> mapper = new BeanPropertyRowMapper<compVO>(compVO.class);
 		return namedParameterJdbcTemplate.query(sql.toString(), mapper);
@@ -195,6 +203,14 @@ public class compDaoImple implements compDao {
 			sql.append("\n").append("and comp_user_num = :comp_user_num");
 		}
 		
+		if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(searchvo.getOrderby_key());	
+			if (searchvo.getOrderby_rule() != null && searchvo.getOrderby_rule() != "") {
+				sql.append(" ").append(searchvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
 
 		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
