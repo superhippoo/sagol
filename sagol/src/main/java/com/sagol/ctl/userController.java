@@ -3,6 +3,8 @@ package com.sagol.ctl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,7 @@ public class userController {
     	resultvo = usersvc.selectUserList(uservo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
     	ms.setReturnmessage("Success");
     	if (resultvo.isEmpty()) {
         	ms.setReturnmessage("Data Not Found");
@@ -82,13 +85,13 @@ public class userController {
      }
     
     @RequestMapping(value = "/updateuser",method = RequestMethod.POST)
-    public ResponseEntity<message> updateUser(@RequestBody userVO uservo){
+    public ResponseEntity<message> updateUser(@RequestBody userVO uservo,HttpServletRequest request){
     	if (uservo.getUid() == null || uservo.getUid() == "") {
     		throw new BadRequestException("Uid Required");
 		}
     	message ms = new message();
     	
-    	int result = usersvc.updateUser(uservo);
+    	int result = usersvc.updateUser(uservo,request);
     	ms.setData(null);
     	if (result == 1) {
         	ms.setStatus(statusEnum.OK.getStatusCode());
@@ -96,7 +99,11 @@ public class userController {
 		}else if(result == 2){
         	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
         	ms.setReturnmessage("User not found");
-		}else {
+		}else if(result == 3){
+        	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
+        	ms.setReturnmessage("No authority");
+		}
+		else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
 			ms.setReturnmessage("Update User Fail");
 		}
@@ -178,6 +185,7 @@ public class userController {
     	resultvo = usersvc.search(searchvo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
     	ms.setReturnmessage("Success");
     	if (resultvo.isEmpty()) {
         	ms.setReturnmessage("Data Not Found");

@@ -17,7 +17,7 @@ public interface  clubSvc {
 
 	public int insertClub(clubVO clubvo,HttpServletRequest request);
 	
-	public int updateClub(clubVO clubvo);
+	public int updateClub(clubVO clubvo,HttpServletRequest request);
 	
 	public int deleteClub(clubVO clubvo);
 	

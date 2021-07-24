@@ -240,7 +240,68 @@ public class clubmemDaoImple implements clubmemDao {
 		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
 
+	@Override
+	public int isExistOwnerInClubByClubid(clubmemVO clubmemvo) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("count(*) ");
+		sql.append("\n").append("from sg_clubmem ");
+		sql.append("\n").append("where club_id = :club_id ");
+		sql.append("\n").append("and owner_yn = 'Y' ");
 
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubmemvo);
+
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	
+
+
+	@Override
+	public clubmemVO selectOwnerClubmem(clubmemVO clubmemvo) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_clubmem ");
+		sql.append("\n").append("where club_id = :club_id ");
+		sql.append("\n").append("order by reg_dt ");
+		sql.append("\n").append("limit 1");
+
+		System.out.println("sql.toString() : ");
+		System.out.println(sql.toString());
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubmemvo);
+		RowMapper<clubmemVO> mapper = new BeanPropertyRowMapper<clubmemVO>(clubmemVO.class);
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, mapper);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public clubmemVO selectOwnerByClubId(clubmemVO clubmemvo) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_clubmem");
+		sql.append("\n").append("where club_id = :club_id");
+		sql.append("\n").append("and owner_yn = 'Y' ");
+
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubmemvo);
+		RowMapper<clubmemVO> mapper = new BeanPropertyRowMapper<clubmemVO>(clubmemVO.class);
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, mapper);
+		} catch (Exception e) {
+			return null;
+		}
+	} 
 
 
 }

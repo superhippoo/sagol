@@ -8,6 +8,7 @@ public class message {
 	private int status;
 	private String returnmessage;
     private Object data;
+	private String totalcount;
 
 	
 	public int getStatus() {
@@ -33,11 +34,21 @@ public class message {
 	public void setData(Object data) {
 		this.data = data;
 	}
+	
+	public String getTotalcount() {
+		return totalcount;
+	}
+
+	public void setTotalcount(String totalcount) {
+		this.totalcount = totalcount;
+	}
+
 
     public message() {
         this.status = statusEnum.BAD_REQUEST.getStatusCode();
         this.returnmessage = null;
         this.data = null;
+        this.totalcount = null;
     }
 	
 }

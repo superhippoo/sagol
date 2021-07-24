@@ -34,6 +34,7 @@ public class qnaController {
 		resultvo = qnasvc.selectQnaList(qnavo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -54,6 +55,7 @@ public class qnaController {
 		resultvo = qnasvc.selectQnaListByUid(qnavo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -155,6 +157,7 @@ public class qnaController {
     	resultvo = qnasvc.search(searchvo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
     	ms.setReturnmessage("Success");
     	if (resultvo.isEmpty()) {
         	ms.setReturnmessage("Data Not Found");

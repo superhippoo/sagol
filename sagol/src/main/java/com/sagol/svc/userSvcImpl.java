@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 //import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +17,7 @@ import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 import com.sagol.util.authcdUtil;
 import com.sagol.util.emailUtil;
+import com.sagol.util.sessionUtil;
 import com.sagol.util.uidUtil;
 
 @Service("userSvc")
@@ -54,8 +58,17 @@ public class userSvcImpl implements userSvc {
 	}
 	
 	@Override
-	public int updateUser(userVO uservo) {
+	public int updateUser(userVO uservo,HttpServletRequest request) {
 		
+		
+		HttpSession session = request.getSession();
+		userVO sessionUservo = (userVO) session.getAttribute("userVO");		
+
+		if (!(sessionUservo.getUid().equals(uservo.getUid())) && !("Y".equals(sessionUservo.getAdmin_yn()))) {
+			//업데이트 행위자가 본인이 아니거나 어드민이 아닐경우
+			return 3;
+		}
+
 		if (userdao.isExistByUid(uservo) == 0) {
 			return 2;
 		}

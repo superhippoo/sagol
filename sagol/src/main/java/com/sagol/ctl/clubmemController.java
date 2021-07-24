@@ -33,6 +33,7 @@ public class clubmemController {
 		resultvo = clubmemsvc.selectClubmemList(clubmemvo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -51,6 +52,7 @@ public class clubmemController {
 		resultvo = clubmemsvc.selectClubmemListByClubId(clubmemvo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -155,6 +157,7 @@ public class clubmemController {
     	resultvo = clubmemsvc.search(searchvo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
     	ms.setReturnmessage("Success");
     	if (resultvo.isEmpty()) {
         	ms.setReturnmessage("Data Not Found");

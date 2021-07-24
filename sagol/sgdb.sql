@@ -26,8 +26,8 @@ CREATE TABLE sg_user (
     auth_yn VARCHAR(2),
     auth_cd INT(11),
     admin_yn VARCHAR(2),
-    reg_dt TIMESTAMP,
-    mdfy_dt TIMESTAMP
+    reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    mdfy_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )  ENGINE=INNODB;
 
 create index idx_nickname on sg_user(nickname);
@@ -43,8 +43,8 @@ CREATE TABLE sg_comp (
     comp_domain VARCHAR(50),
     comp_stat VARCHAR(2),
     comp_user_num INT(11),
-    reg_dt TIMESTAMP,
-    mdfy_dt TIMESTAMP
+    reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    mdfy_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )  ENGINE=INNODB;
 
 insert into sg_comp values ('1','1','1','1',1,'20200910','20200910');
@@ -57,9 +57,9 @@ CREATE TABLE sg_cc (
     comp_cd VARCHAR(4),
     cc_stat VARCHAR(2),
     uid VARCHAR(20),
-    cc_user_num INT(11),
-    reg_dt TIMESTAMP,
-    mdfy_dt TIMESTAMP,
+    cc_club_num INT(11),
+    reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    mdfy_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(cc_id,comp_cd),
     constraint FK_SG_COMP_COMP_CD FOREIGN KEY(comp_cd) references sg_comp(comp_cd)
 )  ENGINE=INNODB;
@@ -83,8 +83,8 @@ CREATE TABLE sg_club (
     comp_year INT(11),
     cc_id VARCHAR(20),
     club_type VARCHAR(2),
-    reg_dt TIMESTAMP,
-    mdfy_dt TIMESTAMP,
+    reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    mdfy_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(club_id,cc_id),
     constraint FK_SG_CC_CC_ID FOREIGN KEY(cc_id) references sg_cc(cc_id)
 )  ENGINE=INNODB;
@@ -101,7 +101,7 @@ CREATE TABLE sg_clubmem (
     uid VARCHAR(20),
     club_id VARCHAR(20),   
     owner_yn VARCHAR(2),
-    reg_dt TIMESTAMP,
+    reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(uid,club_id),
     constraint FK_SG_CLUB_CLUB_ID FOREIGN KEY(club_id) references sg_club(club_id)
 )  ENGINE=INNODB;
@@ -122,8 +122,8 @@ CREATE TABLE sg_qna (
     answer_yn VARCHAR(2),
     a_title VARCHAR(50),
     a_body LONGTEXT,
-    reg_dt TIMESTAMP,
-    mdfy_dt TIMESTAMP
+    reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    mdfy_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )  ENGINE=INNODB;
 
 insert into sg_qna values ('1','1','1','1','1','1','1','20200910','20200910');
@@ -137,8 +137,8 @@ CREATE TABLE sg_request (
   body	longtext,
   uid	VARCHAR(20),
   complete_yn	VARCHAR(2),
-  reg_dt	timestamp,
-  mdfy_dt	timestamp
+  reg_dt	timestamp DEFAULT CURRENT_TIMESTAMP,
+  mdfy_dt	timestamp DEFAULT CURRENT_TIMESTAMP
 )  ENGINE=INNODB;
 
 insert into sg_request values ('1','1','1','1','1','1','20200910','20200910');

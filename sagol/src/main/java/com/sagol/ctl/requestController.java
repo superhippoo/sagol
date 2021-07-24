@@ -33,6 +33,7 @@ public class requestController {
 		resultvo = requestsvc.selectRequestList(requestvo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -52,6 +53,7 @@ public class requestController {
 		resultvo = requestsvc.selectRequestListByUid(requestvo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -71,6 +73,7 @@ public class requestController {
 		resultvo = requestsvc.selectRequestListByCompleteYn(requestvo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -90,6 +93,7 @@ public class requestController {
 		resultvo = requestsvc.selectRequestListByReqCd(requestvo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -189,6 +193,7 @@ public class requestController {
     	resultvo = requestsvc.search(searchvo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
     	ms.setReturnmessage("Success");
     	if (resultvo.isEmpty()) {
         	ms.setReturnmessage("Data Not Found");

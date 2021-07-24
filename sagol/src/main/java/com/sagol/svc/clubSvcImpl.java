@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,8 +63,9 @@ public class clubSvcImpl implements clubSvc {
 		
 		if (result == 1) {//클럽생성 성공시 생성자의 세션 정보로 클럽멤버 추가
 			clubmemVO clubmemvo = new clubmemVO();
-			userVO session = sessionUtil.getSession(request);
-			clubmemvo.setUid(session.getUid());
+			HttpSession session = request.getSession();
+			userVO uservo = (userVO) session.getAttribute("userVO");
+			clubmemvo.setUid(uservo.getUid());
 			clubmemvo.setClub_id(clubvo.getClub_id());
 			clubmemvo.setOwner_yn("Y");
 			clubmemvo.setReg_dt(time);
@@ -74,7 +76,22 @@ public class clubSvcImpl implements clubSvc {
 	}
 
 	@Override
-	public int updateClub(clubVO clubvo) {
+	public int updateClub(clubVO clubvo,HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		userVO sessionUservo = (userVO) session.getAttribute("userVO");	
+		
+		clubmemVO clubmemvo = new clubmemVO();
+		clubmemvo.setClub_id(clubvo.getClub_id());
+		
+		clubmemVO resultclubmemvo = clubmemdao.selectOwnerByClubId(clubmemvo);
+		System.out.println(!(sessionUservo.getUid().equals(resultclubmemvo.getUid())));
+		System.out.println(!("Y".equals(sessionUservo.getAdmin_yn())));
+		if (!(sessionUservo.getUid().equals(resultclubmemvo.getUid())) && !("Y".equals(sessionUservo.getAdmin_yn()))) {
+			//업데이트 행위자가 owner가 아니거나 어드민이 아닐경우
+			return 3;
+		}
+		
 		if (clubdao.isExistByClubId(clubvo) == 0) {
 			return 2;
 		}

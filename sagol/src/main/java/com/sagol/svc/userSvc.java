@@ -2,6 +2,8 @@ package com.sagol.svc;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 
@@ -13,7 +15,7 @@ public interface  userSvc {
 
 	public int insertUser(userVO uservo);
 	
-	public int updateUser(userVO uservo);
+	public int updateUser(userVO uservo,HttpServletRequest request);
 	
 	public int deleteUser(userVO uservo);
 	

@@ -33,6 +33,7 @@ public class ccController {
 		resultvo = ccsvc.selectCcList(ccvo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -52,6 +53,7 @@ public class ccController {
 		resultvo = ccsvc.selectCcListByCompCd(ccvo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
 		ms.setReturnmessage("Success");
 		if (resultvo.isEmpty()) {
 			ms.setReturnmessage("Data Not Found");
@@ -152,6 +154,7 @@ public class ccController {
     	resultvo = ccsvc.search(searchvo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
     	ms.setReturnmessage("Success");
     	if (resultvo.isEmpty()) {
         	ms.setReturnmessage("Data Not Found");

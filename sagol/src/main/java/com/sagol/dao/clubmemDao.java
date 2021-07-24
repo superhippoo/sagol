@@ -24,5 +24,13 @@ public interface clubmemDao {
 	public int isExistMemberInClubByUid(clubmemVO clubmemvo);
 	
 	public List<searchVO> search(searchVO searchvo);
+	
+	public int isExistOwnerInClubByClubid(clubmemVO clubmemvo);
+
+	public clubmemVO selectOwnerClubmem(clubmemVO clubmemvo);
+	
+	public clubmemVO selectOwnerByClubId(clubmemVO clubmemvo);
+
+
 
 }
