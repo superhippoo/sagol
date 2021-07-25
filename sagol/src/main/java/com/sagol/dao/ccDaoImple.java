@@ -244,5 +244,31 @@ public class ccDaoImple implements ccDao {
 		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
 
+	@Override
+	public int addClubNum(ccVO ccvo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("update sg_cc set ");
+		sql.append("\n").append("cc_club_num = cc_club_num+1  ");
+		sql.append("\n").append("where cc_id = :cc_id");
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(ccvo);
+		
+		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
+	}
+
+	@Override
+	public int minusClubNum(ccVO ccvo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("update sg_cc set ");
+		sql.append("\n").append("cc_club_num = cc_club_num-1  ");
+		sql.append("\n").append("where cc_id = :cc_id");
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(ccvo);
+		
+		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
+	}
+
 
 }

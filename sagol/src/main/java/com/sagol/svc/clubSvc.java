@@ -19,7 +19,7 @@ public interface  clubSvc {
 	
 	public int updateClub(clubVO clubvo,HttpServletRequest request);
 	
-	public int deleteClub(clubVO clubvo);
+	public int deleteClub(clubVO clubvo,HttpServletRequest request);
 	
 	public List<searchVO> search(searchVO searchvo);
 

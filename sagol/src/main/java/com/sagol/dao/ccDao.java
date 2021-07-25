@@ -22,4 +22,8 @@ public interface ccDao {
 	public int isExistByCcId(ccVO ccvo);
 
 	public List<searchVO> search(searchVO searchvo);
+	
+	public int addClubNum(ccVO ccvo);
+	
+	public int minusClubNum(ccVO ccvo);
 }

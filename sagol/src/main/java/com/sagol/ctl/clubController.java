@@ -134,11 +134,11 @@ public class clubController {
     }
     
     @RequestMapping(value = "/deleteclub",method = RequestMethod.POST)
-    public ResponseEntity<message> deleteClub(@RequestBody clubVO clubvo){
+    public ResponseEntity<message> deleteClub(@RequestBody clubVO clubvo,HttpServletRequest request){
     	if (clubvo.getClub_id() == null || clubvo.getClub_id() == "") {
     		throw new BadRequestException("Clubid Required");
 		}
-    	int result = clubsvc.deleteClub(clubvo);
+    	int result = clubsvc.deleteClub(clubvo,request);
     	message ms = new message();
 
     	ms.setData(null);
@@ -148,7 +148,11 @@ public class clubController {
 		}else if(result == 2){
         	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
         	ms.setReturnmessage("Club not found");
-		}else {
+		}else if(result == 3){
+        	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
+        	ms.setReturnmessage("No Authority");
+		}
+		else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
 			ms.setReturnmessage("Delete club Fail");
 		}
