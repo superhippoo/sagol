@@ -52,6 +52,31 @@ public class clubDaoImple implements clubDao {
 
 	}
 	
+
+	@Override
+	public List<clubVO> selectClubListPaging(clubVO clubvo, int pagestart, int pagesize) {
+	    StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_club ");
+		sql.append("\n").append("where club_type = :club_type ");
+		if (clubvo.getOrderby_key() != null && clubvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(clubvo.getOrderby_key());	
+			if (clubvo.getOrderby_rule() != null && clubvo.getOrderby_rule() != "") {
+				sql.append(" ").append(clubvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		sql.append("\n").append("limit ").append(pagestart).append(" , ").append(pagesize);
+
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubvo);
+
+		RowMapper<clubVO> mapper = new BeanPropertyRowMapper<clubVO>(clubVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(),paramSource, mapper);
+	}
+	
 	@Override
 	public List<clubVO> selectClubListByCcId(clubVO clubvo) {
 
@@ -80,6 +105,33 @@ public class clubDaoImple implements clubDao {
 		RowMapper<clubVO> mapper = new BeanPropertyRowMapper<clubVO>(clubVO.class);
 		return namedParameterJdbcTemplate.query(sql.toString(),paramSource, mapper);
 
+	}
+	
+
+	@Override
+	public List<clubVO> selectClubListByCcIdPaging(clubVO clubvo, int pagestart, int pagesize) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_club ");
+		sql.append("\n").append("where cc_id = :cc_id");
+		sql.append("\n").append("and club_type = :club_type");
+		if (clubvo.getOrderby_key() != null && clubvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(clubvo.getOrderby_key());	
+			if (clubvo.getOrderby_rule() != null && clubvo.getOrderby_rule() != "") {
+				sql.append(" ").append(clubvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		
+		sql.append("\n").append("limit ").append(pagestart).append(" , ").append(pagesize);
+
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(clubvo);
+
+		RowMapper<clubVO> mapper = new BeanPropertyRowMapper<clubVO>(clubVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(),paramSource, mapper);
 	}
 
 	@Override
@@ -291,6 +343,64 @@ public class clubDaoImple implements clubDao {
 		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
 		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
+
+
+	@Override
+	public List<searchVO> searchPaging(searchVO searchvo, int pagestart, int pagesize) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_club");
+		sql.append("\n").append("where 1=1");
+
+		if (searchvo.getClub_id() != null && searchvo.getClub_id() != "") {
+			sql.append("\n").append("and club_id = :club_id");			
+		}
+		if (searchvo.getClub_nm() != null && searchvo.getClub_nm() != "") {
+			if ("like".equals(searchvo.getType())) {
+				sql.append("\n").append("and club_nm like '%").append(searchvo.getClub_nm()).append("%'");
+			} else {
+				sql.append("\n").append("and club_nm = :club_nm");
+			}
+		}
+		if (searchvo.getClub_mem_num() != null && searchvo.getClub_mem_num() != "") {
+			sql.append("\n").append("and club_mem_num = :club_mem_num");	
+		}
+		if (searchvo.getGender() != null && searchvo.getGender() != "") {
+			sql.append("\n").append("and gender = :gender");
+		}
+		if (searchvo.getHit() != null && searchvo.getHit() != "") {
+			sql.append("\n").append("and hit = :hit");
+		}
+		if (searchvo.getComp_year() != null && searchvo.getComp_year() != "") {
+			sql.append("\n").append("and comp_year = :comp_year");
+		}
+		if (searchvo.getCc_id() != null && searchvo.getCc_id() != "") {
+			sql.append("\n").append("and cc_id = :cc_id");
+		}
+		if (searchvo.getClub_type() != null && searchvo.getClub_type() != "") {
+			sql.append("\n").append("and club_type = :club_type");
+		}
+		if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(searchvo.getOrderby_key());	
+			if (searchvo.getOrderby_rule() != null && searchvo.getOrderby_rule() != "") {
+				sql.append(" ").append(searchvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		
+		sql.append("\n").append("limit ").append(pagestart).append(" , ").append(pagesize);
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(searchvo);
+
+		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
+	}
+
+
+
 
 
 }

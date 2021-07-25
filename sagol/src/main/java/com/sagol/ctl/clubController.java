@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sagol.dto.clubVO;
 import com.sagol.dto.message;
+import com.sagol.dto.pageVO;
 import com.sagol.dto.searchVO;
 import com.sagol.enums.statusEnum;
 import com.sagol.exception.BadRequestException;
@@ -47,8 +48,27 @@ public class clubController {
 		return new ResponseEntity<message>(ms, HttpStatus.OK);
     }
     
+    @RequestMapping(value = "/selectclublistpaging",method = RequestMethod.POST)
+    public ResponseEntity<message> selectClubListPaging(@RequestBody pageVO pagevo){
+    	if (pagevo.getClubvo().getClub_type() == null || pagevo.getClubvo().getClub_type() == "") {
+    		throw new BadRequestException("Clubtype Required");
+		}
+		message ms = new message();
+		List<clubVO> resultvo = new ArrayList<clubVO>();
+		resultvo = clubsvc.selectClubListPaging(pagevo);
+		ms.setStatus(statusEnum.OK.getStatusCode());
+		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
+		ms.setReturnmessage("Success");
+		if (resultvo.isEmpty()) {
+			ms.setReturnmessage("Data Not Found");
+		}
+
+		return new ResponseEntity<message>(ms, HttpStatus.OK);
+    }
+    
     @RequestMapping(value = "/selectclublistbyccid",method = RequestMethod.POST)
-    public ResponseEntity<message> selectCclistbycompcd(@RequestBody clubVO clubvo){
+    public ResponseEntity<message> selectClubListByCcId(@RequestBody clubVO clubvo){
 		if (clubvo.getClub_type() == null || clubvo.getClub_type() == "" 
 				|| clubvo.getCc_id() == null || clubvo.getCc_id() == "") {
 			throw new BadRequestException("Clubid or CCid Required");
@@ -56,6 +76,26 @@ public class clubController {
 		message ms = new message();
 		List<clubVO> resultvo = new ArrayList<clubVO>();
 		resultvo = clubsvc.selectClubListByCcId(clubvo);
+		ms.setStatus(statusEnum.OK.getStatusCode());
+		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
+		ms.setReturnmessage("Success");
+		if (resultvo.isEmpty()) {
+			ms.setReturnmessage("Data Not Found");
+		}
+
+		return new ResponseEntity<message>(ms, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/selectclublistbyccidpaging",method = RequestMethod.POST)
+    public ResponseEntity<message> selectClubListByCcIdPaging(@RequestBody pageVO pagevo){
+		if (pagevo.getClubvo().getClub_type() == null || pagevo.getClubvo().getClub_type() == "" 
+				|| pagevo.getClubvo().getCc_id() == null || pagevo.getClubvo().getCc_id() == "") {
+			throw new BadRequestException("Clubid or CCid Required");
+		}
+		message ms = new message();
+		List<clubVO> resultvo = new ArrayList<clubVO>();
+		resultvo = clubsvc.selectClubListByCcIdPaging(pagevo);
 		ms.setStatus(statusEnum.OK.getStatusCode());
 		ms.setData(resultvo);
 		ms.setTotalcount(Integer.toString(resultvo.size()));
@@ -169,6 +209,22 @@ public class clubController {
     	message ms = new message();
     	List<searchVO> resultvo = new ArrayList<searchVO>();
     	resultvo = clubsvc.search(searchvo);
+    	ms.setStatus(statusEnum.OK.getStatusCode());
+    	ms.setData(resultvo);
+    	ms.setTotalcount(Integer.toString(resultvo.size()));
+    	ms.setReturnmessage("Success");
+    	if (resultvo.isEmpty()) {
+        	ms.setReturnmessage("Data Not Found");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/searchpaging",method = RequestMethod.POST)
+    public ResponseEntity<message> searchPaging(@RequestBody pageVO pagevo){
+    	message ms = new message();
+    	List<searchVO> resultvo = new ArrayList<searchVO>();
+    	resultvo = clubsvc.searchPaging(pagevo);
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	ms.setData(resultvo);
     	ms.setTotalcount(Integer.toString(resultvo.size()));

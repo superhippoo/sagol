@@ -9,7 +9,11 @@ public interface clubDao {
 	
 	public List<clubVO> selectClubList(clubVO clubvo);
 	
+	public List<clubVO> selectClubListPaging(clubVO clubvo, int pagestart, int pagesize);
+	
 	public List<clubVO> selectClubListByCcId(clubVO clubvo);
+	
+	public List<clubVO> selectClubListByCcIdPaging(clubVO clubvo, int pagestart, int pagesize);
 	
 	public clubVO selectClub(clubVO clubvo);
 
@@ -26,5 +30,7 @@ public interface clubDao {
 	public int minusClubMemNum(clubVO clubvo);
 	
 	public List<searchVO> search(searchVO searchvo);
+	
+	public List<searchVO> searchPaging(searchVO searchvo, int pagestart, int pagesize);
 
 }

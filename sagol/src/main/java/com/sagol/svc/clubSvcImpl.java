@@ -18,6 +18,7 @@ import com.sagol.dao.userDao;
 import com.sagol.dto.ccVO;
 import com.sagol.dto.clubVO;
 import com.sagol.dto.clubmemVO;
+import com.sagol.dto.pageVO;
 import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 import com.sagol.util.uidUtil;
@@ -44,10 +45,20 @@ public class clubSvcImpl implements clubSvc {
 		return clubdao.selectClubList(clubvo);
 	}
 	
+	@Override
+	public List<clubVO> selectClubListPaging(pageVO pagevo) {
+		return clubdao.selectClubListPaging(pagevo.getClubvo(), pagevo.getPageStart(), pagevo.getPagesize());
+	}
+	
 	public List<clubVO> selectClubListByCcId(clubVO clubvo){
 		return clubdao.selectClubListByCcId(clubvo);
 	};
 
+	@Override
+	public List<clubVO> selectClubListByCcIdPaging(pageVO pagevo) {
+		// TODO Auto-generated method stub
+		return clubdao.selectClubListByCcIdPaging(pagevo.getClubvo(), pagevo.getPageStart(), pagevo.getPagesize());
+	}
 
 	@Override
 	public clubVO selectClub(clubVO clubvo) {
@@ -173,6 +184,15 @@ public class clubSvcImpl implements clubSvc {
 		// TODO Auto-generated method stub
 		return clubdao.search(searchvo);
 	}
+
+	@Override
+	public List<searchVO> searchPaging(pageVO pagevo) {
+		// TODO Auto-generated method stub
+		return clubdao.searchPaging(pagevo.getSearchvo(), pagevo.getPageStart(), pagevo.getPagesize());
+	}
+
+
+
 
 
 
