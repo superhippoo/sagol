@@ -300,5 +300,31 @@ public class userDaoImple implements userDao {
 		return namedParameterJdbcTemplate.query(sql.toString(),paramSource, mapper);
 	}
 
+	@Override
+	public int addJoinClubNum(userVO uservo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("update sg_user set ");
+		sql.append("\n").append("join_club_num = join_club_num+1  ");
+		sql.append("\n").append("where uid = :uid");
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
+		
+		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
+	}
+
+	@Override
+	public int minusJoinClubNum(userVO uservo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("update sg_user set ");
+		sql.append("\n").append("join_club_num = join_club_num-1  ");
+		sql.append("\n").append("where uid = :uid");
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
+		
+		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
+	}
+
 
 }

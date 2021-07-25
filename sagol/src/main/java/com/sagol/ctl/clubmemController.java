@@ -92,6 +92,9 @@ public class clubmemController {
 		}else if(result == 2){
         	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
         	ms.setReturnmessage("Already Resist clubmember");
+		}else if(result == 3){
+        	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
+        	ms.setReturnmessage("Join Club Number Over");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
 			ms.setReturnmessage("Insert clubmember Fail");

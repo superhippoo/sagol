@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sagol.dao.clubDao;
 import com.sagol.dao.clubmemDao;
+import com.sagol.dao.userDao;
 import com.sagol.dto.clubVO;
 import com.sagol.dto.clubmemVO;
 import com.sagol.dto.searchVO;
+import com.sagol.dto.userVO;
 
 @Service("clubmemSvc")
 @Transactional
@@ -22,6 +24,9 @@ public class clubmemSvcImpl implements clubmemSvc {
 	
 	@Autowired
 	private clubDao clubdao;
+	
+	@Autowired
+	private userDao userdao;
 
 	@Override
 	public List<clubmemVO> selectClubmemList(clubmemVO clubmemvo) {
@@ -45,15 +50,21 @@ public class clubmemSvcImpl implements clubmemSvc {
 		if (clubmemdao.isExistMemberInClubByUid(clubmemvo) != 0) {
 			return 2;
 		}
+		userVO uservo = new userVO();
+		uservo.setUid(clubmemvo.getUid());
+		if (Integer.parseInt(userdao.selectUser(uservo).getJoin_club_num()) >= 4) {
+			return 3;
+		}
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		clubmemvo.setReg_dt(time);
 		clubmemvo.setOwner_yn("N");
 		// owner Y는 클럽 생성시, 오너가 클럽을 나가면서 새로운 오너가 설정될때 정해지기 때문에 멤버 추가시에는 N으로 고정한다.
 		int result = clubmemdao.insertClubmem(clubmemvo);
-		if (result == 1) {//Club 멤버 추가 성공시 클럽의 멤버수 컬럼을 1증가한다.
+		if (result == 1) {
 			clubVO clubvo = new clubVO();
 			clubvo.setClub_id(clubmemvo.getClub_id());
-			clubdao.addClubMemNum(clubvo);
+			clubdao.addClubMemNum(clubvo);//Club 멤버 추가 성공시 클럽의 멤버수 컬럼을 1증가한다.
+			userdao.addJoinClubNum(uservo);//사용자의 가입 클럽수를 1 증가한다.
 		}
 		return result;
 	}
@@ -78,6 +89,10 @@ public class clubmemSvcImpl implements clubmemSvc {
 			clubvo.setClub_type("C");// Todo 나중에 바꿔야될지도
 			clubdao.minusClubMemNum(clubvo);//3. 멤버를 삭제한 클럽의 멤버수를 1 감소 
 			
+			userVO uservo = new userVO();
+			uservo.setUid(clubmemvo.getUid());
+			userdao.minusJoinClubNum(uservo);//사용자의 가입 클럽수를 1 감소한다.
+
 			clubVO resultclubvo = clubdao.selectClub(clubvo);	
 			if (Integer.parseInt(resultclubvo.getClub_mem_num()) == 0) {//4. 해당 클럽을 조회해서 멤버가 0명일경우
 				clubdao.deleteClub(clubvo);// 5. 해당클럽을 삭제

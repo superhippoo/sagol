@@ -59,7 +59,10 @@ public class userSvcImpl implements userSvc {
 	
 	@Override
 	public int updateUser(userVO uservo,HttpServletRequest request) {
-		
+
+		if (userdao.isExistByUid(uservo) == 0) {
+			return 2;
+		}
 		
 		HttpSession session = request.getSession();
 		userVO sessionUservo = (userVO) session.getAttribute("userVO");		
@@ -69,9 +72,6 @@ public class userSvcImpl implements userSvc {
 			return 3;
 		}
 
-		if (userdao.isExistByUid(uservo) == 0) {
-			return 2;
-		}
 		
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		uservo.setMdfy_dt(time);

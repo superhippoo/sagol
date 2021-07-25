@@ -27,4 +27,8 @@ public interface userDao {
 	
 	public List<searchVO> search(searchVO searchvo);
 	
+	public int addJoinClubNum(userVO uservo);
+	
+	public int minusJoinClubNum(userVO uservo);
+	
 }
