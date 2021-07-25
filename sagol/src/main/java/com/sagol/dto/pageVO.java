@@ -9,6 +9,9 @@ public class pageVO {
 
 
 	public int getPagenum() {
+		if (pagenum < 1) {
+			return 1;
+		}
 		return pagenum;
 	}
 
@@ -17,6 +20,9 @@ public class pageVO {
 	}
 
 	public int getPagesize() {
+		if (pagesize > 100) {
+			return 100;
+		}
 		return pagesize;
 	}
 
@@ -34,6 +40,9 @@ public class pageVO {
 
     
     public int getPageStart() {
+    	if (this.pagenum < 1) {
+			this.pagenum = 1;
+		}
         return (this.pagenum-1)*pagesize;
     }
 	
