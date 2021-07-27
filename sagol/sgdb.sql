@@ -8,6 +8,7 @@ DROP table sg_club;
 DROP table sg_clubmem;
 DROP table sg_qna;
 DROP table sg_request;
+DROP table sg_schedule;
 
 
 CREATE TABLE sg_user (
@@ -145,6 +146,34 @@ insert into sg_request values ('1','1','1','1','1','1','20200910','20200910');
 select * from sg_request;
 
 
+CREATE TABLE sg_schedule (
+    schedule_id VARCHAR(20),
+    club_id VARCHAR(20),
+    description	longtext,
+    act_dt timestamp	DEFAULT CURRENT_TIMESTAMP,
+    reg_dt timestamp	DEFAULT CURRENT_TIMESTAMP,
+ 	mdfy_dt timestamp DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(schedule_id,club_id),
+    constraint FK_SG_SCHEDULE_SG_CLUB_CLUB_ID FOREIGN KEY(club_id) references sg_club(club_id)
+)  ENGINE=INNODB;
+
+create index FK_SG_CLUB_CLUB_ID on sg_schedule (club_id);
+
+show index from sg_schedule;
+
+select * from information_schema.TABLE_CONSTRAINTS where TABLE_NAME  = 'sg_schedule';
+
+insert into sg_schedule values ('1','1','desctiption','20200910','20200910','20200910');
+
+insert into sg_schedule values ('2','1','desctiption','20200910','20200910','20200910');
+
+insert into sg_schedule values ('1','C202161510241999501','desctiption','20200910','20200910','20200910');
+
+insert into sg_schedule values ('2','C202161510241999501','desctiption','20200910','20200910','20200910');
+
+
+
+select * from sg_schedule;
 
 DESC sg_user;
 DESC sg_comp;
@@ -152,4 +181,4 @@ DESC sg_cc;
 DESC sg_club;
 DESC sg_clubmem;
 DESC sg_qna;
-
+DESC sg_schedule;
