@@ -149,7 +149,7 @@ select * from sg_request;
 CREATE TABLE sg_schedule (
     schedule_id VARCHAR(20),
     club_id VARCHAR(20),
-    description	longtext,
+    description	VARCHAR(200),
     act_dt timestamp	DEFAULT CURRENT_TIMESTAMP,
     reg_dt timestamp	DEFAULT CURRENT_TIMESTAMP,
  	mdfy_dt timestamp DEFAULT CURRENT_TIMESTAMP,

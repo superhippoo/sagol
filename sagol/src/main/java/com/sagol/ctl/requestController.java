@@ -177,10 +177,10 @@ public class requestController {
         	ms.setReturnmessage("Success");
 		}else if(result == 2){
         	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
-        	ms.setReturnmessage("Qna not found");
+        	ms.setReturnmessage("Request not found");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-			ms.setReturnmessage("Delete Qna Fail");
+			ms.setReturnmessage("Delete Request Fail");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);

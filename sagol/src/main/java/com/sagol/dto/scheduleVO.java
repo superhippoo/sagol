@@ -8,7 +8,7 @@ public class scheduleVO {
 	private String club_id;
 	private String description;
 
-	private Timestamp atc_dt;
+	private Timestamp act_dt;
 	private Timestamp reg_dt;
 	private Timestamp mdfy_dt;
 
@@ -34,11 +34,11 @@ public class scheduleVO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Timestamp getAtc_dt() {
-		return atc_dt;
+	public Timestamp getAct_dt() {
+		return act_dt;
 	}
-	public void setAtc_dt(Timestamp atc_dt) {
-		this.atc_dt = atc_dt;
+	public void setAct_dt(Timestamp act_dt) {
+		this.act_dt = act_dt;
 	}
 	public Timestamp getReg_dt() {
 		return reg_dt;

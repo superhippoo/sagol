@@ -52,6 +52,11 @@ public class searchVO {
 	private String title;
 	private String body;
 	private String complete_yn;
+	//schedulevo
+	private String schedule_id;
+	private String description;
+	private Timestamp act_dt;
+
 	//°øÅë Search Type 1. match 2. like
 	private String type;
 	
@@ -322,7 +327,24 @@ public class searchVO {
 	public void setComplete_yn(String complete_yn) {
 		this.complete_yn = complete_yn;
 	}
-	
+	public String getSchedule_id() {
+		return schedule_id;
+	}
+	public void setSchedule_id(String schedule_id) {
+		this.schedule_id = schedule_id;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Timestamp getAct_dt() {
+		return act_dt;
+	}
+	public void setAct_dt(Timestamp act_dt) {
+		this.act_dt = act_dt;
+	}
 	
 	public String getType() {
 		return type;
