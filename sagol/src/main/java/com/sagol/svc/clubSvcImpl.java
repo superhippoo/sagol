@@ -14,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sagol.dao.ccDao;
 import com.sagol.dao.clubDao;
 import com.sagol.dao.clubmemDao;
+import com.sagol.dao.scheduleDao;
 import com.sagol.dao.userDao;
 import com.sagol.dto.ccVO;
 import com.sagol.dto.clubVO;
 import com.sagol.dto.clubmemVO;
 import com.sagol.dto.pageVO;
+import com.sagol.dto.scheduleVO;
 import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 import com.sagol.util.uidUtil;
@@ -37,6 +39,9 @@ public class clubSvcImpl implements clubSvc {
 	
 	@Autowired
 	private userDao userdao;
+	
+	@Autowired
+	private scheduleDao scheduledao; 
 
 
 	@Override
@@ -124,6 +129,9 @@ public class clubSvcImpl implements clubSvc {
 		clubmemVO resultclubmemvo = clubmemdao.selectOwnerByClubId(clubmemvo);
 //		System.out.println(!(sessionUservo.getUid().equals(resultclubmemvo.getUid())));
 //		System.out.println(!("Y".equals(sessionUservo.getAdmin_yn())));
+		if (resultclubmemvo ==null) {
+			return 4;
+		}
 
 		
 		if (!(sessionUservo.getUid().equals(resultclubmemvo.getUid())) && !("Y".equals(sessionUservo.getAdmin_yn()))) {
@@ -168,6 +176,11 @@ public class clubSvcImpl implements clubSvc {
 		//사용자의 가입 클럽수를 1씩 다 줄인후에 클럽 하위 멤버 삭제
 		clubmemdao.deleteClubmemsByClubid(clubmemvo);
 		//외래키 제약으로 인해 Club 하위 멤버들 먼저 삭제 후 Club삭제 진행
+		
+		scheduleVO schedulevo = new scheduleVO();
+		schedulevo.setClub_id(clubvo.getClub_id());
+		scheduledao.deleteScheduleByClubId(schedulevo);
+		//외래키 제약으로 인해 Club 하위 일정들 먼저 삭제 후 Club삭제 진행
 		int result = clubdao.deleteClub(clubvo);
 		if (result ==1) {
 			ccVO ccvo = new ccVO();

@@ -75,7 +75,7 @@ public class userController {
         	ms.setReturnmessage("Success");
 		}else if(result == 2){
         	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
-        	ms.setReturnmessage("Already Resist Email");
+        	ms.setReturnmessage("Already Registered Email");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
 			ms.setReturnmessage("Insert User Fail");

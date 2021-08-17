@@ -100,9 +100,12 @@ public class userSvcImpl implements userSvc {
 			emailvo.setToAddress(uservo.getComp_email());
 			emailvo.setSubject("사골동 서비스 인증 요청");
 			emailvo.setBody(uservo.getAuth_cd());
+			System.out.println("here1");
 			emailutil.sendEmail(emailvo);
+			System.out.println("here2");
 			return 1;
 		} catch (Exception e) {
+			System.out.println(e);
 			return 0;
 		}
 	}

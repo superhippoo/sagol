@@ -143,7 +143,7 @@ public class clubController {
 		}
 		else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-			ms.setReturnmessage("Insert club Fail");
+			ms.setReturnmessage("Insert Club Fail");
 		}
     	//to-do
     	//클럽을 만들면서 생성자를 바로 멤버로 넣는것을 서비스단에 같이 녹일지 ??
@@ -171,7 +171,7 @@ public class clubController {
 		}
 		else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-			ms.setReturnmessage("Update club Fail");
+			ms.setReturnmessage("Update Club Fail");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);

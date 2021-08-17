@@ -122,7 +122,7 @@ public class clubmemController {
         	ms.setReturnmessage("Clubmem not found");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-			ms.setReturnmessage("Update clubmem Fail");
+			ms.setReturnmessage("Update Clubmem Fail");
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);

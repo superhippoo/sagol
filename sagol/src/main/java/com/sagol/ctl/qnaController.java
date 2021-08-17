@@ -93,7 +93,7 @@ public class qnaController {
         	ms.setReturnmessage("Success");
 		}else if(result == 2){
         	ms.setStatus(statusEnum.BAD_REQUEST.getStatusCode());
-        	ms.setReturnmessage("Already Resist Comp");
+        	ms.setReturnmessage("Already Resist Qna");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
 			ms.setReturnmessage("Insert Qna Fail");

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.sagol.interceptor.adminInterceptor;
 import com.sagol.interceptor.loginInterceptor;
 import com.sagol.util.HTMLCharacterEscapes;
 
@@ -23,19 +24,32 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Autowired
 	loginInterceptor logininterceptor;
 
+	@Autowired
+	adminInterceptor admininterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(logininterceptor)
-//				.addPathPatterns("/")
-//				.addPathPatterns("/cc/*")
-//				.addPathPatterns("/club/*")
-//				.addPathPatterns("/comp/*")
-//				.addPathPatterns("/qna/*")
-//				.addPathPatterns("/request/*")
-//				.addPathPatterns("/login/*")
-//				.addPathPatterns("/user/*")
-//				.excludePathPatterns("/login/login")
-//				.excludePathPatterns("/user/insertuser");
+		registry.addInterceptor(logininterceptor)
+				.addPathPatterns("/")
+				.addPathPatterns("/cc/*")
+				.addPathPatterns("/club/*")
+				.addPathPatterns("/clubmem/*")
+				.addPathPatterns("/comp/*")
+				.addPathPatterns("/qna/*")
+				.addPathPatterns("/request/*")
+				.addPathPatterns("/login/*")
+				.addPathPatterns("/user/*")
+				.excludePathPatterns("/login/login")
+				.excludePathPatterns("/user/insertuser")
+				.excludePathPatterns("/user/sendauthmail")
+				.excludePathPatterns("/user/checkauthcd");
+		
+		registry.addInterceptor(admininterceptor)
+				.addPathPatterns("/comp/*")
+				.addPathPatterns("/cc/*")
+				.addPathPatterns("/user/selectuserlist");
+
+
 
 	}
 

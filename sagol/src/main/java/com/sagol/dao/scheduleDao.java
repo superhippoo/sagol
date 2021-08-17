@@ -24,5 +24,8 @@ public interface scheduleDao {
 	public int isExistByScheduleId(scheduleVO schedulevo);
 	
 	public List<searchVO> search(searchVO searchvo);
+	
+	public int deleteScheduleByClubId(scheduleVO schedulevo);
+
 
 }

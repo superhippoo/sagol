@@ -31,7 +31,7 @@ public class searchVO {
 	private String cc_id;
 	private String cc_nm;
 	private String cc_stat;
-	private String cc_user_num;
+	private String cc_club_num;
 	//clubsearchvo
 	private String club_id;
 	private String club_nm;
@@ -217,11 +217,11 @@ public class searchVO {
 	public void setCc_stat(String cc_stat) {
 		this.cc_stat = cc_stat;
 	}
-	public String getCc_user_num() {
-		return cc_user_num;
+	public String getCc_club_num() {
+		return cc_club_num;
 	}
-	public void setCc_user_num(String cc_user_num) {
-		this.cc_user_num = cc_user_num;
+	public void setCc_club_num(String cc_club_num) {
+		this.cc_club_num = cc_club_num;
 	}
 	
 	

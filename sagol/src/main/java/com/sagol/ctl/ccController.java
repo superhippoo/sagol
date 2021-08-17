@@ -45,7 +45,7 @@ public class ccController {
     @RequestMapping(value = "/selectcclistbycompcd",method = RequestMethod.POST)
     public ResponseEntity<message> selectCclistbycompcd(@RequestBody ccVO ccvo){
     	if (ccvo.getComp_cd() == null || ccvo.getComp_cd() == "") {
-    		throw new BadRequestException("Uid Required");
+    		throw new BadRequestException("Compcd Required");
 		}
     	
     	message ms = new message();
@@ -65,7 +65,7 @@ public class ccController {
     @RequestMapping(value = "/selectcc",method = RequestMethod.POST)
     public ResponseEntity<message> selectCc(@RequestBody ccVO ccvo){
     	if (ccvo.getCc_id() == null || ccvo.getCc_id() == "") {
-    		throw new BadRequestException("Uid Required");
+    		throw new BadRequestException("CCid Required");
 		}
     	message ms = new message();
     	ccVO resultvo = new ccVO();

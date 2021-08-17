@@ -107,14 +107,14 @@ public class ccDaoImple implements ccDao {
 	public int insertCc(ccVO ccvo) {
 //		String q = "  INSERT INTO sg_cc VALUES(?,?,?,?,?,?,?,?)";
 //		Object[] args = { ccvo.getCc_id(), ccvo.getCc_nm(), ccvo.getComp_cd(), ccvo.getCc_stat(), ccvo.getUid(),
-//				ccvo.getCc_user_num(), ccvo.getReg_dt(), ccvo.getMdfy_dt() };
+//				ccvo.getcc_club_num(), ccvo.getReg_dt(), ccvo.getMdfy_dt() };
 //		return jdbdtemplate.update(q, args);
 		StringBuffer sql = new StringBuffer();
 		
 		sql.append("\n").append("INSERT INTO sg_cc ");
-		sql.append("\n").append("(cc_id,cc_nm,comp_cd,cc_stat,uid,cc_user_num,reg_dt,mdfy_dt");
+		sql.append("\n").append("(cc_id,cc_nm,comp_cd,cc_stat,uid,cc_club_num,reg_dt,mdfy_dt");
 		sql.append("\n").append(") ");
-		sql.append("\n").append("VALUES (:cc_id,:cc_nm,:comp_cd,:cc_stat,:uid,:cc_user_num,:reg_dt,:mdfy_dt");
+		sql.append("\n").append("VALUES (:cc_id,:cc_nm,:comp_cd,:cc_stat,:uid,:cc_club_num,:reg_dt,:mdfy_dt");
 		sql.append("\n").append(")");
 		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(ccvo);
@@ -129,10 +129,10 @@ public class ccDaoImple implements ccDao {
 //				+ "comp_cd = ? , " 
 //				+ "cc_stat = ? , " 
 //				+ "uid = ? , " 
-//				+ "cc_user_num = ? , " 
+//				+ "cc_club_num = ? , " 
 //			    + "mdfy_dt = ?"
 //			+ "where cc_id = ?";
-//		Object[] args = { ccvo.getCc_nm(), ccvo.getComp_cd(), ccvo.getCc_stat(), ccvo.getUid(), ccvo.getCc_user_num(),
+//		Object[] args = { ccvo.getCc_nm(), ccvo.getComp_cd(), ccvo.getCc_stat(), ccvo.getUid(), ccvo.getcc_club_num(),
 //				ccvo.getMdfy_dt(), ccvo.getCc_id() };
 //	return jdbdtemplate.update(q, args);
 	StringBuffer sql = new StringBuffer();
@@ -141,7 +141,7 @@ public class ccDaoImple implements ccDao {
 	sql.append("\n").append("cc_nm = :cc_nm , ");
 	sql.append("\n").append("cc_stat = :cc_stat , ");
 	sql.append("\n").append("uid = :uid , ");
-	sql.append("\n").append("cc_user_num = :cc_user_num , ");
+	sql.append("\n").append("cc_club_num = :cc_club_num , ");
 	sql.append("\n").append("mdfy_dt = :mdfy_dt");
 	sql.append("\n").append("where cc_id = :cc_id");
 	
@@ -225,8 +225,8 @@ public class ccDaoImple implements ccDao {
 		if (searchvo.getUid() != null && searchvo.getUid() != "") {
 			sql.append("\n").append("and uid = :uid");
 		}
-		if (searchvo.getCc_user_num() != null && searchvo.getCc_user_num() != "") {
-			sql.append("\n").append("and cc_user_num = :cc_user_num");
+		if (searchvo.getCc_club_num() != null && searchvo.getCc_club_num() != "") {
+			sql.append("\n").append("and cc_club_num = :cc_club_num");
 		}
 		
 		if (searchvo.getOrderby_key() != null && searchvo.getOrderby_key() != "") {

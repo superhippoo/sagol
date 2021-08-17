@@ -8,12 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.sagol.dto.message;
 import com.sagol.dto.userVO;
-import com.sagol.enums.statusEnum;
 
 @Configuration
-public class loginInterceptor extends HandlerInterceptorAdapter{
+public class adminInterceptor extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -23,18 +21,16 @@ public class loginInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		userVO uservo = (userVO) session.getAttribute("userVO");
 
-        if(uservo == null){
-        	System.out.println("preHandle false");
-
-
-        	response.setContentType("application/json");
-        	response.setCharacterEncoding("UTF-8");
-       	    response.getWriter().write("{\"status\":\"400\",\"returnmessage\":\"Login required\",\"data\":\"\",\"totalcount\":\"\"}");        	 
-            return false;
+        if("Y".equals(uservo.getAdmin_yn()) ){
+        	System.out.println("preHandle true");
+            return true;
         }
 
-		System.out.println("preHandle true");
-        return true;
+		System.out.println("preHandle false");
+		response.setContentType("application/json");
+    	response.setCharacterEncoding("UTF-8");
+   	    response.getWriter().write("{\"status\":\"400\",\"returnmessage\":\"Admin Only\",\"data\":\"\",\"totalcount\":\"\"}");        	 
+        return false;
 	}
 
 	@Override

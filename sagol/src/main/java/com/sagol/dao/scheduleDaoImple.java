@@ -140,14 +140,14 @@ public class scheduleDaoImple implements scheduleDao {
 
 
 	@Override
-	public int deleteSchedule(scheduleVO shedulevo) {
+	public int deleteSchedule(scheduleVO schedulevo) {
 		StringBuffer sql = new StringBuffer();
 
 		sql.append("\n").append("delete from sg_schedule ");
 		sql.append("\n").append("where schedule_id = :schedule_id");
 		sql.append("\n").append("and club_id = :club_id");
 		
-		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(shedulevo);
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(schedulevo);
 
 		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
 	}
@@ -209,6 +209,19 @@ public class scheduleDaoImple implements scheduleDao {
 
 		RowMapper<searchVO> mapper = new BeanPropertyRowMapper<searchVO>(searchVO.class);
 		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
+	}
+
+
+	@Override
+	public int deleteScheduleByClubId(scheduleVO schedulevo) {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("\n").append("delete from sg_schedule ");
+		sql.append("\n").append("where club_id = :club_id");
+		
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(schedulevo);
+
+		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
 	}
 
 }
