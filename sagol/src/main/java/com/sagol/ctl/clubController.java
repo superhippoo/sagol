@@ -146,7 +146,7 @@ public class clubController {
 			ms.setReturnmessage("Insert Club Fail");
 		}
     	//to-do
-    	//Å¬·´À» ¸¸µé¸é¼­ »ı¼ºÀÚ¸¦ ¹Ù·Î ¸â¹ö·Î ³Ö´Â°ÍÀ» ¼­ºñ½º´Ü¿¡ °°ÀÌ ³ìÀÏÁö ??
+    	//í´ëŸ½ì„ ë§Œë“¤ë©´ì„œ ìƒì„±ìë¥¼ ë°”ë¡œ ë©¤ë²„ë¡œ ë„£ëŠ”ê²ƒì„ ì„œë¹„ìŠ¤ë‹¨ì— ê°™ì´ ë…¹ì¼ì§€ ??
         return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
     

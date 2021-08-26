@@ -58,13 +58,13 @@ public class clubmemSvcImpl implements clubmemSvc {
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		clubmemvo.setReg_dt(time);
 		clubmemvo.setOwner_yn("N");
-		// owner Y´Â Å¬·´ »ı¼º½Ã, ¿À³Ê°¡ Å¬·´À» ³ª°¡¸é¼­ »õ·Î¿î ¿À³Ê°¡ ¼³Á¤µÉ¶§ Á¤ÇØÁö±â ¶§¹®¿¡ ¸â¹ö Ãß°¡½Ã¿¡´Â NÀ¸·Î °íÁ¤ÇÑ´Ù.
+		// owner YëŠ” í´ëŸ½ ìƒì„±ì‹œ, ì˜¤ë„ˆê°€ í´ëŸ½ì„ ë‚˜ê°€ë©´ì„œ ìƒˆë¡œìš´ ì˜¤ë„ˆê°€ ì„¤ì •ë ë•Œ ì •í•´ì§€ê¸° ë•Œë¬¸ì— ë©¤ë²„ ì¶”ê°€ì‹œì—ëŠ” Nìœ¼ë¡œ ê³ ì •í•œë‹¤.
 		int result = clubmemdao.insertClubmem(clubmemvo);
 		if (result == 1) {
 			clubVO clubvo = new clubVO();
 			clubvo.setClub_id(clubmemvo.getClub_id());
-			clubdao.addClubMemNum(clubvo);//Club ¸â¹ö Ãß°¡ ¼º°ø½Ã Å¬·´ÀÇ ¸â¹ö¼ö ÄÃ·³À» 1Áõ°¡ÇÑ´Ù.
-			userdao.addJoinClubNum(uservo);//»ç¿ëÀÚÀÇ °¡ÀÔ Å¬·´¼ö¸¦ 1 Áõ°¡ÇÑ´Ù.
+			clubdao.addClubMemNum(clubvo);//Club ë©¤ë²„ ì¶”ê°€ ì„±ê³µì‹œ í´ëŸ½ì˜ ë©¤ë²„ìˆ˜ ì»¬ëŸ¼ì„ 1ì¦ê°€í•œë‹¤.
+			userdao.addJoinClubNum(uservo);//ì‚¬ìš©ìì˜ ê°€ì… í´ëŸ½ìˆ˜ë¥¼ 1 ì¦ê°€í•œë‹¤.
 		}
 		return result;
 	}
@@ -81,27 +81,27 @@ public class clubmemSvcImpl implements clubmemSvc {
 	public int deleteClubmem(clubmemVO clubmemvo) {
 		if (clubmemdao.isExistMemberInClubByUid(clubmemvo) == 0) {
 			return 2;
-		}//1. Á¸ÀçÇÏ´Â ¸â¹öÀÎÁö È®ÀÎ ÈÄ 
-		int result = clubmemdao.deleteClubmem(clubmemvo);//2. Á¸ÀçÇÏ¸é ¸â¹ö¿¡¼­ »èÁ¦ 
-		if (result == 1) {// »èÁ¦°¡ Á¤»óÀûÀ¸·Î µÇ¸é
+		}//1. ì¡´ì¬í•˜ëŠ” ë©¤ë²„ì¸ì§€ í™•ì¸ í›„ 
+		int result = clubmemdao.deleteClubmem(clubmemvo);//2. ì¡´ì¬í•˜ë©´ ë©¤ë²„ì—ì„œ ì‚­ì œ 
+		if (result == 1) {// ì‚­ì œê°€ ì •ìƒì ìœ¼ë¡œ ë˜ë©´
 			clubVO clubvo = new clubVO();
 			clubvo.setClub_id(clubmemvo.getClub_id());
-			clubvo.setClub_type("C");// Todo ³ªÁß¿¡ ¹Ù²ã¾ßµÉÁöµµ
-			clubdao.minusClubMemNum(clubvo);//3. ¸â¹ö¸¦ »èÁ¦ÇÑ Å¬·´ÀÇ ¸â¹ö¼ö¸¦ 1 °¨¼Ò 
+			clubvo.setClub_type("C");// Todo ë‚˜ì¤‘ì— ë°”ê¿”ì•¼ë ì§€ë„
+			clubdao.minusClubMemNum(clubvo);//3. ë©¤ë²„ë¥¼ ì‚­ì œí•œ í´ëŸ½ì˜ ë©¤ë²„ìˆ˜ë¥¼ 1 ê°ì†Œ 
 			
 			userVO uservo = new userVO();
 			uservo.setUid(clubmemvo.getUid());
-			userdao.minusJoinClubNum(uservo);//»ç¿ëÀÚÀÇ °¡ÀÔ Å¬·´¼ö¸¦ 1 °¨¼ÒÇÑ´Ù.
+			userdao.minusJoinClubNum(uservo);//ì‚¬ìš©ìì˜ ê°€ì… í´ëŸ½ìˆ˜ë¥¼ 1 ê°ì†Œí•œë‹¤.
 
 			clubVO resultclubvo = clubdao.selectClub(clubvo);	
-			if (Integer.parseInt(resultclubvo.getClub_mem_num()) == 0) {//4. ÇØ´ç Å¬·´À» Á¶È¸ÇØ¼­ ¸â¹ö°¡ 0¸íÀÏ°æ¿ì
-				clubdao.deleteClub(clubvo);// 5. ÇØ´çÅ¬·´À» »èÁ¦
-			}else {//4. ÇØ´ç Å¬·´ÀÇ ¸â¹ö°¡ ¾ÆÁ÷ ÀÖÀ»°æ¿ì (0¸íÀÌ ¾Æ´Ñ°æ¿ì)				
-				if (clubmemdao.isExistOwnerInClubByClubid(clubmemvo) == 0) {// 5. ÇØ´ç Å¬·´¿¡ ¿À³Ê°¡ Á¸³»ÇÏ´ÂÁö º¸°í ¾øÀ¸¸é(»èÁ¦ÇÑ ¸â¹ö°¡ ¿À³ÊÀÎÁö È®ÀÎÇÏ´Â°Í)
-					clubmemVO newownervo = clubmemdao.selectOwnerClubmem(clubmemvo);//6. µî·ÏÀÏÀÌ °¡Àå ºü¸¥ »ç¿ëÀÚ¸¦ Ã£¾Æ¼­
+			if (Integer.parseInt(resultclubvo.getClub_mem_num()) == 0) {//4. í•´ë‹¹ í´ëŸ½ì„ ì¡°íšŒí•´ì„œ ë©¤ë²„ê°€ 0ëª…ì¼ê²½ìš°
+				clubdao.deleteClub(clubvo);// 5. í•´ë‹¹í´ëŸ½ì„ ì‚­ì œ
+			}else {//4. í•´ë‹¹ í´ëŸ½ì˜ ë©¤ë²„ê°€ ì•„ì§ ìˆì„ê²½ìš° (0ëª…ì´ ì•„ë‹Œê²½ìš°)				
+				if (clubmemdao.isExistOwnerInClubByClubid(clubmemvo) == 0) {// 5. í•´ë‹¹ í´ëŸ½ì— ì˜¤ë„ˆê°€ ì¡´ë‚´í•˜ëŠ”ì§€ ë³´ê³  ì—†ìœ¼ë©´(ì‚­ì œí•œ ë©¤ë²„ê°€ ì˜¤ë„ˆì¸ì§€ í™•ì¸í•˜ëŠ”ê²ƒ)
+					clubmemVO newownervo = clubmemdao.selectOwnerClubmem(clubmemvo);//6. ë“±ë¡ì¼ì´ ê°€ì¥ ë¹ ë¥¸ ì‚¬ìš©ìë¥¼ ì°¾ì•„ì„œ
 //					System.out.println("newownervo.getUid() : "+newownervo.getUid());
 					newownervo.setOwner_yn("Y");
-					clubmemdao.updateClubmem(newownervo);//7. ±× »ç¿ëÀÚ¸¦ ¿À³Ê·Î ¾÷µ¥ÀÌÆ® ÇÑ´Ù.
+					clubmemdao.updateClubmem(newownervo);//7. ê·¸ ì‚¬ìš©ìë¥¼ ì˜¤ë„ˆë¡œ ì—…ë°ì´íŠ¸ í•œë‹¤.
 				}
 			}
 

@@ -17,7 +17,6 @@ import com.sagol.dto.searchVO;
 import com.sagol.dto.userVO;
 import com.sagol.util.authcdUtil;
 import com.sagol.util.emailUtil;
-import com.sagol.util.sessionUtil;
 import com.sagol.util.uidUtil;
 
 @Service("userSvc")
@@ -68,7 +67,7 @@ public class userSvcImpl implements userSvc {
 		userVO sessionUservo = (userVO) session.getAttribute("userVO");		
 
 		if (!(sessionUservo.getUid().equals(uservo.getUid())) && !("Y".equals(sessionUservo.getAdmin_yn()))) {
-			//¾÷µ¥ÀÌÆ® ÇàÀ§ÀÚ°¡ º»ÀÎÀÌ ¾Æ´Ï°Å³ª ¾îµå¹ÎÀÌ ¾Æ´Ò°æ¿ì
+			//ì—…ë°ì´íŠ¸ í–‰ìœ„ìê°€ ë³¸ì¸ì´ ì•„ë‹ˆê±°ë‚˜ ì–´ë“œë¯¼ì´ ì•„ë‹ê²½ìš°
 			return 3;
 		}
 
@@ -98,7 +97,7 @@ public class userSvcImpl implements userSvc {
 			userdao.saveauthcd(uservo);
 			emailVO emailvo = new emailVO();
 			emailvo.setToAddress(uservo.getComp_email());
-			emailvo.setSubject("»ç°ñµ¿ ¼­ºñ½º ÀÎÁõ ¿äÃ»");
+			emailvo.setSubject("ì‚¬ê³¨ë™ ì„œë¹„ìŠ¤ ì¸ì¦ ìš”ì²­");
 			emailvo.setBody(uservo.getAuth_cd());
 			System.out.println("here1");
 			emailutil.sendEmail(emailvo);

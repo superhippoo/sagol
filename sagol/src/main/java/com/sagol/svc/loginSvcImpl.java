@@ -19,13 +19,13 @@ public class loginSvcImpl implements loginSvc {
 		userVO tempvo = new userVO();
 		tempvo = logindao.login(uservo);
 		
-		if(tempvo != null) {//»ç¿ëÀÚ Á¤º¸°¡ ÀÖÀ¸¸é
-			if ("Y".equals(tempvo.getAct_yn())) {//È°¼ºÈ­ °èÁ¤ÀÌ¶ó¸é
+		if(tempvo != null) {//ì‚¬ìš©ì ì •ë³´ê°€ ìˆìœ¼ë©´
+			if ("Y".equals(tempvo.getAct_yn())) {//í™œì„±í™” ê³„ì •ì´ë¼ë©´
 				tempvo.setMessage("Login ok");
-			}else {//È°¼ºÈ­ °èÁ¤ÀÌ ¾Æ´Ï¶ó¸é(½Å°í)
+			}else {//í™œì„±í™” ê³„ì •ì´ ì•„ë‹ˆë¼ë©´(ì‹ ê³ )
 				tempvo.setMessage("In Active user");
 			}
-		}else {//»ç¿ëÀÚ °èÁ¤ÀÌ ¾ø´Ù¸é
+		}else {//ì‚¬ìš©ì ê³„ì •ì´ ì—†ë‹¤ë©´
 			tempvo = new userVO();
 			tempvo.setMessage("Sign up required");
 		}

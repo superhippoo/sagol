@@ -76,7 +76,7 @@ public class clubSvcImpl implements clubSvc {
 		clubvo.setClub_id(uidUtil.generateUid("C"));
 		if (clubdao.isExistByClubId(clubvo) != 0) {
 			return 2;
-		}//±âÁ¸¿¡ Á¸ÀçÇÏ´Â Å¬·´id ÀÏ°æ¿ì 
+		}//ê¸°ì¡´ì— ì¡´ì¬í•˜ëŠ” í´ëŸ½id ì¼ê²½ìš° 
 		
 		HttpSession session = request.getSession();
 		userVO uservo = (userVO) session.getAttribute("userVO");
@@ -90,7 +90,7 @@ public class clubSvcImpl implements clubSvc {
 		clubvo.setReg_dt(time);
 		clubvo.setMdfy_dt(time);
 		int result = clubdao.insertClub(clubvo);
-		// Å¬·´»ı¼º
+		// í´ëŸ½ìƒì„±
 		
 		if (result == 1) {
 			clubmemVO clubmemvo = new clubmemVO();
@@ -101,14 +101,14 @@ public class clubSvcImpl implements clubSvc {
 			clubmemvo.setOwner_yn("Y");
 			clubmemvo.setReg_dt(time);
 			clubmemdao.insertClubmem(clubmemvo);
-			//Å¬·´»ı¼º ¼º°ø½Ã »ı¼ºÀÚÀÇ ¼¼¼Ç Á¤º¸·Î Å¬·´¸â¹ö Ãß°¡
+			//í´ëŸ½ìƒì„± ì„±ê³µì‹œ ìƒì„±ìì˜ ì„¸ì…˜ ì •ë³´ë¡œ í´ëŸ½ë©¤ë²„ ì¶”ê°€
 			userdao.addJoinClubNum(uservo);
-			//»ç¿ëÀÚÀÇ °¡ÀÔ Å¬·´¼ö¸¦ 1 Áõ°¡ÇÑ´Ù.
+			//ì‚¬ìš©ìì˜ ê°€ì… í´ëŸ½ìˆ˜ë¥¼ 1 ì¦ê°€í•œë‹¤.
 			ccVO ccvo = new ccVO();
 			ccvo.setCc_id(clubvo.getCc_id());
 			ccdao.addClubNum(ccvo);
-			//¼Ò¼Ó CCÀÇ Å¬·´¼ö¸¦ 1 Áõ°¡ÇÑ´Ù.
-		}//@Transactional·Î ÀÎÇØ ½ÇÆĞ½Ã ¿Ã ·Ñ¹éµÊ
+			//ì†Œì† CCì˜ í´ëŸ½ìˆ˜ë¥¼ 1 ì¦ê°€í•œë‹¤.
+		}//@Transactionalë¡œ ì¸í•´ ì‹¤íŒ¨ì‹œ ì˜¬ ë¡¤ë°±ë¨
 		
 		return result;
 	}
@@ -135,7 +135,7 @@ public class clubSvcImpl implements clubSvc {
 
 		
 		if (!(sessionUservo.getUid().equals(resultclubmemvo.getUid())) && !("Y".equals(sessionUservo.getAdmin_yn()))) {
-			//¾÷µ¥ÀÌÆ® ÇàÀ§ÀÚ°¡ owner°¡ ¾Æ´Ï°Å³ª ¾îµå¹ÎÀÌ ¾Æ´Ò°æ¿ì
+			//ì—…ë°ì´íŠ¸ í–‰ìœ„ìê°€ ownerê°€ ì•„ë‹ˆê±°ë‚˜ ì–´ë“œë¯¼ì´ ì•„ë‹ê²½ìš°
 			return 3;
 		}
 		
@@ -148,7 +148,7 @@ public class clubSvcImpl implements clubSvc {
 	@Override
 	public int deleteClub(clubVO clubvo,HttpServletRequest request) {
 		
-		if (clubdao.isExistByClubId(clubvo) == 0) {// Á¸ÀçÇÏ´Â Å¬·´ÀÌ ¾Æ´Ï¸é
+		if (clubdao.isExistByClubId(clubvo) == 0) {// ì¡´ì¬í•˜ëŠ” í´ëŸ½ì´ ì•„ë‹ˆë©´
 			return 2;
 		}
 		
@@ -161,32 +161,32 @@ public class clubSvcImpl implements clubSvc {
 		clubmemVO resultclubmemvo = clubmemdao.selectOwnerByClubId(clubmemvo);
 		
 		if (!(sessionUservo.getUid().equals(resultclubmemvo.getUid())) && !("Y".equals(sessionUservo.getAdmin_yn()))) {
-			//¾÷µ¥ÀÌÆ® ÇàÀ§ÀÚ°¡ owner°¡ ¾Æ´Ï°Å³ª ¾îµå¹ÎÀÌ ¾Æ´Ò°æ¿ì
+			//ì—…ë°ì´íŠ¸ í–‰ìœ„ìê°€ ownerê°€ ì•„ë‹ˆê±°ë‚˜ ì–´ë“œë¯¼ì´ ì•„ë‹ê²½ìš°
 			return 3;
 		}
 
-		List<clubmemVO> list = clubmemdao.selectClubmemListByClubId(clubmemvo);//°¡ÀÔµÇ¾îÀÖ´Â ¸â¹öÀÇ ¸ñ·ÏÀ» Á¶È¸ÇØ¼­
+		List<clubmemVO> list = clubmemdao.selectClubmemListByClubId(clubmemvo);//ê°€ì…ë˜ì–´ìˆëŠ” ë©¤ë²„ì˜ ëª©ë¡ì„ ì¡°íšŒí•´ì„œ
 		userVO uservo = new userVO();
-		if (list.size() != 0) {//¸â¹ö°¡ ¾øÁö ¾ÊÀ¸¸é			
+		if (list.size() != 0) {//ë©¤ë²„ê°€ ì—†ì§€ ì•Šìœ¼ë©´			
 			for (int i = 0; i < list.size(); i++) {
 				uservo.setUid(list.get(i).getUid());
-				userdao.minusJoinClubNum(uservo);//»ç¿ëÀÚÀÇ °¡ÀÔ Å¬·´¼ö¸¦ 1 °¨¼ÒÇÑ´Ù.
+				userdao.minusJoinClubNum(uservo);//ì‚¬ìš©ìì˜ ê°€ì… í´ëŸ½ìˆ˜ë¥¼ 1 ê°ì†Œí•œë‹¤.
 			}			
 		}
-		//»ç¿ëÀÚÀÇ °¡ÀÔ Å¬·´¼ö¸¦ 1¾¿ ´Ù ÁÙÀÎÈÄ¿¡ Å¬·´ ÇÏÀ§ ¸â¹ö »èÁ¦
+		//ì‚¬ìš©ìì˜ ê°€ì… í´ëŸ½ìˆ˜ë¥¼ 1ì”© ë‹¤ ì¤„ì¸í›„ì— í´ëŸ½ í•˜ìœ„ ë©¤ë²„ ì‚­ì œ
 		clubmemdao.deleteClubmemsByClubid(clubmemvo);
-		//¿Ü·¡Å° Á¦¾àÀ¸·Î ÀÎÇØ Club ÇÏÀ§ ¸â¹öµé ¸ÕÀú »èÁ¦ ÈÄ Club»èÁ¦ ÁøÇà
+		//ì™¸ë˜í‚¤ ì œì•½ìœ¼ë¡œ ì¸í•´ Club í•˜ìœ„ ë©¤ë²„ë“¤ ë¨¼ì € ì‚­ì œ í›„ Clubì‚­ì œ ì§„í–‰
 		
 		scheduleVO schedulevo = new scheduleVO();
 		schedulevo.setClub_id(clubvo.getClub_id());
 		scheduledao.deleteScheduleByClubId(schedulevo);
-		//¿Ü·¡Å° Á¦¾àÀ¸·Î ÀÎÇØ Club ÇÏÀ§ ÀÏÁ¤µé ¸ÕÀú »èÁ¦ ÈÄ Club»èÁ¦ ÁøÇà
+		//ì™¸ë˜í‚¤ ì œì•½ìœ¼ë¡œ ì¸í•´ Club í•˜ìœ„ ì¼ì •ë“¤ ë¨¼ì € ì‚­ì œ í›„ Clubì‚­ì œ ì§„í–‰
 		int result = clubdao.deleteClub(clubvo);
 		if (result ==1) {
 			ccVO ccvo = new ccVO();
 			ccvo.setCc_id(clubvo.getCc_id());
 			ccdao.minusClubNum(ccvo);
-			//Å¬·´ »èÁ¦°¡ ¼º°øµÇ¸é CCÀÇ Å¬·´¼ö¸¦ 1 ÁÙÀÎ´Ù.
+			//í´ëŸ½ ì‚­ì œê°€ ì„±ê³µë˜ë©´ CCì˜ í´ëŸ½ìˆ˜ë¥¼ 1 ì¤„ì¸ë‹¤.
 		}
 		return result;
 
