@@ -46,8 +46,8 @@ public class scheduleSvcImpl implements scheduleSvc {
 		searchVO searchvo = new searchVO();
 		HttpSession session = request.getSession();
 		userVO uservo = (userVO) session.getAttribute("userVO");
-		searchvo.setUid(uservo.getUid());//¼¼¼ÇÀÇ »ç¿ëÀÚ uid¸¦ ¹Ş¾Æ¿Í¼­
-		List<searchVO> list = clubmemdao.search(searchvo);//uid°¡ ÀÖ´Â Å¬·´ ¸â¹ö Å×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦ Á¶È¸ÇØ¼­ clubid¸¦ °¡Á®¿Â´Ù			
+		searchvo.setUid(uservo.getUid());//ì„¸ì…˜ì˜ ì‚¬ìš©ì uidë¥¼ ë°›ì•„ì™€ì„œ
+		List<searchVO> list = clubmemdao.search(searchvo);//uidê°€ ìˆëŠ” í´ëŸ½ ë©¤ë²„ í…Œì´ë¸”ì˜ ë°ì´í„°ë¥¼ ì¡°íšŒí•´ì„œ clubidë¥¼ ê°€ì ¸ì˜¨ë‹¤			
 		
 		if (!list.isEmpty()) {
 			List<String> clubidlist = new ArrayList<String>();

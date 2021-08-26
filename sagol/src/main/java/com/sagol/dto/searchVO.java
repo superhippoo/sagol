@@ -57,7 +57,7 @@ public class searchVO {
 	private String description;
 	private Timestamp act_dt;
 
-	//°øÅë Search Type 1. match 2. like
+	//ê³µí†µ Search Type 1. match 2. like
 	private String type;
 	
 	private String orderby_key;

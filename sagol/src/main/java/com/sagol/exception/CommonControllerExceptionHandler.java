@@ -12,7 +12,7 @@ import org.springframework.web.context.request.WebRequest;
 public class CommonControllerExceptionHandler extends DefaultErrorAttributes {
 
     @Override
-	@ExceptionHandler(Exception.class)//Àü¿ª ¼³Á¤
+	@ExceptionHandler(Exception.class)//ì „ì—­ ì„¤ì •
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
     	Map<String, Object> totalresult = new HashMap<String, Object>();
         Map<String, Object> result = super.getErrorAttributes(webRequest, includeStackTrace);

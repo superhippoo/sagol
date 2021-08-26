@@ -29,7 +29,7 @@ public class loginController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResponseEntity<message> login(@RequestBody userVO uservo,HttpServletRequest request){
     	
-    	if (request.getAttribute("userVO") != null) {//±âÁ¸¿¡ ·Î±×ÀÎÇÑ »ç¿ëÀÚÀÇ ¼¼¼Ç Á¤º¸ »èÁ¦
+    	if (request.getAttribute("userVO") != null) {//ê¸°ì¡´ì— ë¡œê·¸ì¸í•œ ì‚¬ìš©ìì˜ ì„¸ì…˜ ì •ë³´ ì‚­ì œ
     		logger.info("Already Login user Session Destroy");
 			request.getSession().invalidate();
 		}
@@ -37,12 +37,12 @@ public class loginController {
     	ms.setStatus(statusEnum.OK.getStatusCode());
     	
     	userVO resultvo = new userVO();
-    	resultvo = loginsvc.login(uservo);//·Î±×ÀÎ Ã³¸®
+    	resultvo = loginsvc.login(uservo);//ë¡œê·¸ì¸ ì²˜ë¦¬
     	
     	ms.setData(resultvo);
     	ms.setReturnmessage("Login Fail");
     	
-    	if ("Login ok".equals(resultvo.getMessage())) {// ·Î±×ÀÎ ¼º°øÀÏ °æ¿ì ¼¼¼Ç¿¡ userVO °ª »ı¼º 
+    	if ("Login ok".equals(resultvo.getMessage())) {// ë¡œê·¸ì¸ ì„±ê³µì¼ ê²½ìš° ì„¸ì…˜ì— userVO ê°’ ìƒì„± 
 			request.getSession().setAttribute("userVO", resultvo);
 			logger.info("Login OK"+resultvo.getNickname()+"/"+resultvo.getUid());
 	    	ms.setReturnmessage("Success");

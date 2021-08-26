@@ -53,8 +53,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	}
 
-	// Lucy Xss filter Àû¿ë : formµ¥ÀÌÅÍ¸¸ µÇ°í ResponseBody json Å¸ÀÔÀÇ Àû¿ëÀÌ µÇÁö ¾Ê¾Æ Á¦°Å But ÃßÈÄ »ç¿ë
-	// °¡´É¼º¿¡ ÁÖ¼®Ã³¸®
+	// Lucy Xss filter ì ìš© : formë°ì´í„°ë§Œ ë˜ê³  ResponseBody json íƒ€ì…ì˜ ì ìš©ì´ ë˜ì§€ ì•Šì•„ ì œê±° But ì¶”í›„ ì‚¬ìš©
+	// ê°€ëŠ¥ì„±ì— ì£¼ì„ì²˜ë¦¬
 //	@Bean
 //	public FilterRegistrationBean<XssEscapeServletFilter> getFilterRegistrationBean() {
 //		FilterRegistrationBean<XssEscapeServletFilter> registrationBean = new FilterRegistrationBean<>();
@@ -64,7 +64,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //		return registrationBean;
 //	}
 
-	//ÇÑ±Û ÀÎÄÚµù Filter
+	//í•œê¸€ ì¸ì½”ë”© Filter
 	@Bean
 	public CharacterEncodingFilter characterEncodingFilter() {
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
@@ -75,8 +75,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	}
 
 	/**
-	 * xss Prevention Filter Request µ¥ÀÌÅÍ´Â º¸Á¸ÇÏ´Â°ÍÀÌ ¸Â°Ú´Ù ½Í¾î ¿øº» ±×´ë·Î DB¿¡ º¸°ü Response µ¥ÀÌÅÍ¸¦
-	 * Ã³¸®ÇØ¼­ XSS °ø°İ ¹æ¾î
+	 * xss Prevention Filter Request ë°ì´í„°ëŠ” ë³´ì¡´í•˜ëŠ”ê²ƒì´ ë§ê² ë‹¤ ì‹¶ì–´ ì›ë³¸ ê·¸ëŒ€ë¡œ DBì— ë³´ê´€ Response ë°ì´í„°ë¥¼
+	 * ì²˜ë¦¬í•´ì„œ XSS ê³µê²© ë°©ì–´
 	 */
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
