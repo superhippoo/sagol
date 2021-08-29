@@ -9,7 +9,7 @@ public class HTMLCharacterEscapes extends CharacterEscapes {
     private final int[] asciiEscapes;
 
     public HTMLCharacterEscapes() {
-        // 1. XSS ¹æÁö Ã³¸®ÇÒ Æ¯¼ö ¹®ÀÚ ÁöÁ¤
+        // 1. XSS ë°©ì§€ ì²˜ë¦¬í•  íŠ¹ìˆ˜ ë¬¸ì ì§€ì •
         asciiEscapes = CharacterEscapes.standardAsciiEscapesForJSON();
         asciiEscapes['<'] = CharacterEscapes.ESCAPE_CUSTOM;
         asciiEscapes['>'] = CharacterEscapes.ESCAPE_CUSTOM;
