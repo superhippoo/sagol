@@ -22,6 +22,7 @@ CREATE TABLE sg_user (
     gender VARCHAR(2),
     hit INT(11),
     comp_year INT(11),
+    kakao_agerange VARCHAR(20),
     report_num INT(11),
     act_yn VARCHAR(2),
     auth_yn VARCHAR(2),
@@ -35,8 +36,10 @@ create index idx_nickname on sg_user(nickname);
 
 show index from sg_user;
 
-insert into sg_user values ('1','1','1','1','1','1',1,'1',1,1,1,'1','1',1,'1','20200910','20200910');
+insert into sg_user values ('1','1','1','1','1','1',1,'1',1,1,'1',1,'1','1',1,'1','20200910','20200910');
 select * from sg_user;
+
+
 
 CREATE TABLE sg_comp (
     comp_cd VARCHAR(4) PRIMARY KEY,
@@ -171,7 +174,9 @@ insert into sg_schedule values ('1','C202161510241999501','desctiption','2020091
 
 insert into sg_schedule values ('2','C202161510241999501','desctiption','20200910','20200910','20200910');
 
+select * from sg_user where uid = 'U2021619194052134502';
 
+update sg_user set admin_yn = 'Y' where uid = 'U2021619194052134502';
 
 select * from sg_schedule;
 

@@ -14,6 +14,7 @@ public class searchVO {
 	private String gender;
 	private String hit;
 	private String comp_year;
+	private String kakao_agerange;
 	private String report_num;
 	private String act_yn;
 	private String auth_yn;
@@ -123,6 +124,12 @@ public class searchVO {
 	}
 	public void setComp_year(String comp_year) {
 		this.comp_year = comp_year;
+	}
+	public String getKakao_agerange() {
+		return kakao_agerange;
+	}
+	public void setKakao_agerange(String kakao_agerange) {
+		this.kakao_agerange = kakao_agerange;
 	}
 	public String getReport_num() {
 		return report_num;

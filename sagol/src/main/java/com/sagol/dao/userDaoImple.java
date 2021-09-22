@@ -92,9 +92,9 @@ public class userDaoImple implements userDao {
 		
 		sql.append("\n").append("INSERT INTO sg_user ");
 		sql.append("\n").append("(uid,nickname,kakao_email,comp_email,comp_cd,dft_cc_id,join_club_num,gender,hit,comp_year,");
-		sql.append("\n").append("report_num,act_yn,auth_yn,auth_cd,admin_yn,reg_dt,mdfy_dt) ");
+		sql.append("\n").append("kakao_agerange,report_num,act_yn,auth_yn,auth_cd,admin_yn,reg_dt,mdfy_dt) ");
 		sql.append("\n").append("VALUES (:uid,:nickname,:kakao_email,:comp_email,:comp_cd,:dft_cc_id,:join_club_num,:gender,:hit,:comp_year,");
-		sql.append("\n").append(":report_num,:act_yn,:auth_yn,:auth_cd,:admin_yn,:reg_dt,:mdfy_dt)");
+		sql.append("\n").append(":kakao_agerange,:report_num,:act_yn,:auth_yn,:auth_cd,:admin_yn,:reg_dt,:mdfy_dt)");
 		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
 		
@@ -116,6 +116,7 @@ public class userDaoImple implements userDao {
 		sql.append("\n").append("gender = :gender ,");
 		sql.append("\n").append("hit = :hit ,");
 		sql.append("\n").append("comp_year = :comp_year ,");
+		sql.append("\n").append("kakao_agerange = :kakao_agerange ,");
 		sql.append("\n").append("act_yn = :act_yn ,");
 		sql.append("\n").append("auth_yn = :auth_yn ,");
 		sql.append("\n").append("auth_cd = :auth_cd ,");
@@ -292,6 +293,9 @@ public class userDaoImple implements userDao {
 		}
     	if (searchvo.getComp_year() !=null && searchvo.getComp_year() != "") {
     		sql.append("\n").append("and comp_year = :comp_year");    	
+		}
+    	if (searchvo.getKakao_agerange() !=null && searchvo.getKakao_agerange() != "") {
+    		sql.append("\n").append("and kakao_agerange = :kakao_agerange");    	
 		}
     	if (searchvo.getReport_num() !=null && searchvo.getReport_num() != "") {
     		sql.append("\n").append("and report_num = :report_num");
