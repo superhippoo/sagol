@@ -209,7 +209,11 @@ public class userController {
         	ms.setReturnmessage("Available");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-			ms.setReturnmessage(usersvc.selectUserByKakaoEmail(uservo));//인증여부 리턴
+        	if ("Y".equals(usersvc.selectUserByKakaoEmail(uservo))) {
+    			ms.setReturnmessage("Pro");//인증여부 리턴
+			}else {
+				ms.setReturnmessage("Ama");//인증여부 리턴
+			}
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);
