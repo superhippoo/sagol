@@ -130,6 +130,24 @@ public class userSvcImpl implements userSvc {
 		return userdao.search(searchvo);
 	}
 
+	@Override
+	public int isExistByKakaoEmail(userVO uservo) {
+		if (userdao.isExistByKakaoEmail(uservo) != 0) {
+			return 2;
+		}
+	
+		return 1;		
+	}
+
+	@Override
+	public int isExistByCompEmail(userVO uservo) {
+		if (userdao.isExistByCompEmail(uservo) != 0) {
+			return 2;
+		}
+		
+		return 1;
+	}
+
 	
 
 }

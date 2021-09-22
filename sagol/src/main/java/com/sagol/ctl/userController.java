@@ -194,6 +194,49 @@ public class userController {
         return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
     
+    @RequestMapping(value = "/isexistbykakaoemail",method = RequestMethod.POST)
+    public ResponseEntity<message> isExistByKakaoEmail(@RequestBody userVO uservo){
+    	if (uservo.getKakao_email() == null || uservo.getKakao_email() == "") {
+    		throw new BadRequestException("Kakao_email Required");
+		}
+    	int result = usersvc.isExistByKakaoEmail(uservo);
+
+    	message ms = new message();
+
+    	ms.setData(null);
+    	if (result == 1) {
+        	ms.setStatus(statusEnum.OK.getStatusCode());
+        	ms.setReturnmessage("Available");
+		}else {
+        	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
+			ms.setReturnmessage("Already Registered Email");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
+    }
+    
+    
+    @RequestMapping(value = "/isexistbycompemail",method = RequestMethod.POST)
+    public ResponseEntity<message> isExistByCompEmail(@RequestBody userVO uservo){
+    	if (uservo.getComp_email() == null || uservo.getComp_email() == "") {
+    		throw new BadRequestException("Comp_email Required");
+		}
+    	int result = usersvc.isExistByCompEmail(uservo);
+
+    	message ms = new message();
+
+    	ms.setData(null);
+    	if (result == 1) {
+        	ms.setStatus(statusEnum.OK.getStatusCode());
+        	ms.setReturnmessage("Available");
+		}else {
+        	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
+			ms.setReturnmessage("Already Registered Email");
+		}
+
+        return new ResponseEntity<message>(ms,HttpStatus.OK);
+    }
+    
     
 
 

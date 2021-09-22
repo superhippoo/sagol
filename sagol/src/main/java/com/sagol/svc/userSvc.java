@@ -24,5 +24,9 @@ public interface  userSvc {
 	public boolean checkAuthCd(userVO uservo);
 	
 	public List<searchVO> search(searchVO searchvo);
+	
+	public int isExistByKakaoEmail(userVO uservo);
+	
+	public int isExistByCompEmail(userVO uservo);
 
 }

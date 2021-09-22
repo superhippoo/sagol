@@ -193,6 +193,31 @@ public class userDaoImple implements userDao {
 	}
 	
 	@Override
+	public int isExistByCompEmail(userVO uservo) {
+//		String q = "select count(*) from sg_user where kakao_email = ?";
+//		Object[] args = { uservo.getKakao_email() };
+//		try {
+//			return jdbdtemplate.queryForObject(q, args, Integer.class);
+//		} catch (Exception e) {
+//			return 0;
+//		}
+		
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("count(*) ");
+		sql.append("\n").append("from sg_user");
+		sql.append("\n").append("where comp_email = :comp_email");
+
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, Integer.class);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	@Override
 	public int isExistByUid(userVO uservo) {
 //		String q = "select count(*) from sg_user where uid = ?";
 //		Object[] args = { uservo.getUid() };

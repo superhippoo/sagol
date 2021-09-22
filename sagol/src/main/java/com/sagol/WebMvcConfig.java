@@ -42,7 +42,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.excludePathPatterns("/login/login")
 				.excludePathPatterns("/user/insertuser")
 				.excludePathPatterns("/user/sendauthmail")
-				.excludePathPatterns("/user/checkauthcd");
+				.excludePathPatterns("/user/checkauthcd")
+		        .excludePathPatterns("/user/isexistbykakaoemail")
+		        .excludePathPatterns("/user/isexistbycompemail");
+
 		
 		registry.addInterceptor(admininterceptor)
 				.addPathPatterns("/comp/*")
