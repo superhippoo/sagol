@@ -25,7 +25,7 @@ CREATE TABLE sg_user (
     kakao_agerange VARCHAR(20),
     report_num INT(11),
     act_yn VARCHAR(2),
-    auth_yn VARCHAR(2),
+    auth_yn VARCHAR(2) default 'N',
     auth_cd INT(11),
     admin_yn VARCHAR(2),
     reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

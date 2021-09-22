@@ -355,5 +355,25 @@ public class userDaoImple implements userDao {
 		return namedParameterJdbcTemplate.update(sql.toString(), paramSource);
 	}
 
+	@Override
+	public userVO selectUserByKakaoEmail(userVO uservo) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_user");
+		sql.append("\n").append("where kakao_email = :kakao_email");
+		
+//		Map<String, Object> param = new HashMap<String, Object>();
+//		param.put("uid",uservo.getUid());
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
+		RowMapper<userVO> mapper = new BeanPropertyRowMapper<userVO>(userVO.class);
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, mapper);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 
 }

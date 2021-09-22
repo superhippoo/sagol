@@ -28,5 +28,7 @@ public interface  userSvc {
 	public int isExistByKakaoEmail(userVO uservo);
 	
 	public int isExistByCompEmail(userVO uservo);
+	
+	public String selectUserByKakaoEmail(userVO uservo);
 
 }

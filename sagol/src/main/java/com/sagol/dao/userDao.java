@@ -33,4 +33,7 @@ public interface userDao {
 	
 	public int minusJoinClubNum(userVO uservo);
 	
+	public userVO selectUserByKakaoEmail(userVO uservo);
+
+	
 }
