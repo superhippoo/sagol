@@ -206,7 +206,7 @@ public class userController {
     	ms.setData(null);
     	if (result == 1) {
         	ms.setStatus(statusEnum.OK.getStatusCode());
-        	ms.setReturnmessage("Available");
+        	ms.setReturnmessage("New");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
         	if ("Y".equals(usersvc.selectUserByKakaoEmail(uservo))) {
