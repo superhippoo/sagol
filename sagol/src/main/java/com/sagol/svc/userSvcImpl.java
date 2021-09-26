@@ -7,10 +7,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sagol.ctl.emailController;
 import com.sagol.dao.userDao;
 import com.sagol.dto.emailVO;
 import com.sagol.dto.searchVO;
@@ -22,6 +25,7 @@ import com.sagol.util.uidUtil;
 @Service("userSvc")
 @Transactional
 public class userSvcImpl implements userSvc {
+	private static Logger logger = LoggerFactory.getLogger(userSvcImpl.class);
 	@Autowired
 	private userDao userdao;
 	
@@ -99,12 +103,10 @@ public class userSvcImpl implements userSvc {
 			emailvo.setToAddress(uservo.getComp_email());
 			emailvo.setSubject("사골동 서비스 인증 요청");
 			emailvo.setBody(uservo.getAuth_cd());
-			System.out.println("here1");
 			emailutil.sendEmail(emailvo);
-			System.out.println("here2");
 			return 1;
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.info("error : "+e);
 			return 0;
 		}
 	}
