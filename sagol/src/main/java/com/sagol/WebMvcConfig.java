@@ -29,28 +29,28 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(logininterceptor)
-				.addPathPatterns("/")
-				.addPathPatterns("/cc/*")
-				.addPathPatterns("/club/*")
-				.addPathPatterns("/clubmem/*")
-				.addPathPatterns("/comp/*")
-				.addPathPatterns("/qna/*")
-				.addPathPatterns("/request/*")
-				.addPathPatterns("/login/*")
-				.addPathPatterns("/user/*")
-				.excludePathPatterns("/login/login")
-				.excludePathPatterns("/user/insertuser")
-				.excludePathPatterns("/user/sendauthmail")
-				.excludePathPatterns("/user/checkauthcd")
-		        .excludePathPatterns("/user/isexistbykakaoemail")
-		        .excludePathPatterns("/user/isexistbycompemail");
-
-		
-		registry.addInterceptor(admininterceptor)
-				.addPathPatterns("/comp/*")
-				.addPathPatterns("/cc/*")
-				.addPathPatterns("/user/selectuserlist");
+//		registry.addInterceptor(logininterceptor)
+//				.addPathPatterns("/")
+//				.addPathPatterns("/cc/*")
+//				.addPathPatterns("/club/*")
+//				.addPathPatterns("/clubmem/*")
+//				.addPathPatterns("/comp/*")
+//				.addPathPatterns("/qna/*")
+//				.addPathPatterns("/request/*")
+//				.addPathPatterns("/login/*")
+//				.addPathPatterns("/user/*")
+//				.excludePathPatterns("/login/login")
+//				.excludePathPatterns("/user/insertuser")
+//				.excludePathPatterns("/user/sendauthmail")
+//				.excludePathPatterns("/user/checkauthcd")
+//		        .excludePathPatterns("/user/isexistbykakaoemail")
+//		        .excludePathPatterns("/user/isexistbycompemail");
+//
+//		
+//		registry.addInterceptor(admininterceptor)
+//				.addPathPatterns("/comp/*")
+//				.addPathPatterns("/cc/*")
+//				.addPathPatterns("/user/selectuserlist");
 
 
 
