@@ -18,5 +18,8 @@ public interface  compSvc {
 	public int deleteComp(compVO compvo);
 	
 	public List<searchVO> search(searchVO searchvo);
+	
+	public List<compVO> selectActiveCompList(compVO compvo);
+
 
 }

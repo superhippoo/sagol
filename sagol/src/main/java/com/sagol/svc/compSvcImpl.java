@@ -76,4 +76,10 @@ public class compSvcImpl implements compSvc {
 		return compdao.search(searchvo);
 	}
 
+	@Override
+	public List<compVO> selectActiveCompList(compVO compvo) {
+		// TODO Auto-generated method stub
+		return compdao.selectActiveCompList(compvo);
+	}
+
 }

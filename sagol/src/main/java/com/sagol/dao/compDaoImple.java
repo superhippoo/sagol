@@ -217,5 +217,30 @@ public class compDaoImple implements compDao {
 		return namedParameterJdbcTemplate.query(sql.toString(), paramSource, mapper);
 	}
 
+	@Override
+	public List<compVO> selectActiveCompList(compVO compvo) {
+//		String q = "select * from sg_comp";
+//		return jdbdtemplate.query(q, new BeanPropertyRowMapper<compVO>(compVO.class));
+		
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_comp");
+		sql.append("\n").append("where comp_stat = 'Y' ");
+
+		if (compvo.getOrderby_key() != null && compvo.getOrderby_key() != "") {
+			sql.append("\n").append("order by ").append(compvo.getOrderby_key());	
+			if (compvo.getOrderby_rule() != null && compvo.getOrderby_rule() != "") {
+				sql.append(" ").append(compvo.getOrderby_rule());	
+			}
+		}else {
+			sql.append("\n").append("order by mdfy_dt");
+		}
+		
+		RowMapper<compVO> mapper = new BeanPropertyRowMapper<compVO>(compVO.class);
+		return namedParameterJdbcTemplate.query(sql.toString(), mapper);
+	}
+
 
 }

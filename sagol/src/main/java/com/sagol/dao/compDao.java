@@ -20,5 +20,8 @@ public interface compDao {
 	public int isExistByCompCd(compVO compvo);
 	
 	public List<searchVO> search(searchVO searchvo);
+	
+	public List<compVO> selectActiveCompList(compVO compvo);
+
 
 }

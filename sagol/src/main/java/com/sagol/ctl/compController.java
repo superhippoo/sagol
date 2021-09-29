@@ -144,5 +144,22 @@ public class compController {
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
+    
+    @RequestMapping(value = "/selectactivecomplist", method = RequestMethod.POST)
+	public ResponseEntity<message> selectActiveCompList(@RequestBody compVO compvo) {
+
+		message ms = new message();
+		List<compVO> resultvo = new ArrayList<compVO>();
+		resultvo = compsvc.selectActiveCompList(compvo);
+		ms.setStatus(statusEnum.OK.getStatusCode());
+		ms.setData(resultvo);
+		ms.setTotalcount(Integer.toString(resultvo.size()));
+		ms.setReturnmessage("Success");
+		if (resultvo.isEmpty()) {
+			ms.setReturnmessage("Data Not Found");
+		}
+
+		return new ResponseEntity<message>(ms, HttpStatus.OK);
+	}
    
 }
