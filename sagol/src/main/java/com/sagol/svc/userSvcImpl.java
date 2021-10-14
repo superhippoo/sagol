@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sagol.ctl.emailController;
 import com.sagol.dao.userDao;
 import com.sagol.dto.emailVO;
 import com.sagol.dto.searchVO;
@@ -151,8 +150,14 @@ public class userSvcImpl implements userSvc {
 	}
 
 	@Override
-	public String selectUserByKakaoEmail(userVO uservo) {
+	public String selectUserAuthYnByKakaoEmail(userVO uservo) {
 		userVO result = userdao.selectUserByKakaoEmail(uservo);
+		return result.getAuth_yn();
+	}
+
+	@Override
+	public String selectUserAuthYnByCompEmail(userVO uservo) {
+		userVO result = userdao.selectUserByCompEmail(uservo);
 		return result.getAuth_yn();
 	}
 

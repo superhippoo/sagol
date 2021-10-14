@@ -375,5 +375,23 @@ public class userDaoImple implements userDao {
 		}
 	}
 
+	@Override
+	public userVO selectUserByCompEmail(userVO uservo) {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("\n").append("select ");
+		sql.append("\n").append("* ");
+		sql.append("\n").append("from sg_user");
+		sql.append("\n").append("where comp_email = :comp_email");
+		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
+		RowMapper<userVO> mapper = new BeanPropertyRowMapper<userVO>(userVO.class);
+
+		try {
+			return namedParameterJdbcTemplate.queryForObject(sql.toString(), paramSource, mapper);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 
 }

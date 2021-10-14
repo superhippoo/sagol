@@ -35,5 +35,6 @@ public interface userDao {
 	
 	public userVO selectUserByKakaoEmail(userVO uservo);
 
-	
+	public userVO selectUserByCompEmail(userVO uservo);
+
 }

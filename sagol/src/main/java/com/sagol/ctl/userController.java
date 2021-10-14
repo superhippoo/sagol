@@ -209,7 +209,7 @@ public class userController {
         	ms.setReturnmessage("New");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-        	if ("Y".equals(usersvc.selectUserByKakaoEmail(uservo))) {
+        	if ("Y".equals(usersvc.selectUserAuthYnByKakaoEmail(uservo))) {
     			ms.setReturnmessage("Pro");//인증여부 리턴
 			}else {
 				ms.setReturnmessage("Ama");//인증여부 리턴
@@ -235,7 +235,11 @@ public class userController {
         	ms.setReturnmessage("Available");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-			ms.setReturnmessage("Already Registered Email");
+        	if ("Y".equals(usersvc.selectUserAuthYnByCompEmail(uservo))) {
+    			ms.setReturnmessage("Already Registered Email");//인증여부 리턴
+			}else {
+				ms.setReturnmessage("Progress");//인증여부 리턴
+			}
 		}
 
         return new ResponseEntity<message>(ms,HttpStatus.OK);
