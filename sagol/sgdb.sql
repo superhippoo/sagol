@@ -28,7 +28,7 @@ CREATE TABLE sg_user (
     auth_yn VARCHAR(2) default 'N',
     auth_cd INT(11),
     admin_yn VARCHAR(2),
-    reg_dt TIMESTAMP,
+    mailsend_dt TIMESTAMP,
     reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     mdfy_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )  ENGINE=INNODB;
@@ -37,7 +37,7 @@ create index idx_nickname on sg_user(nickname);
 
 show index from sg_user;
 
-insert into sg_user values ('1','1','1','1','1','1',1,'1',1,1,'1',1,'1','1',1,'1','20200910','20200910');
+insert into sg_user values ('1','1','1','1','1','1',1,'1',1,1,'1',1,'1','1',1,'1','20200910','20200910','20200910');
 select * from sg_user;
 
 

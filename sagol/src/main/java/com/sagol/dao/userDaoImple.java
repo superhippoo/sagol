@@ -150,6 +150,7 @@ public class userDaoImple implements userDao {
 
 		sql.append("\n").append("update sg_user set ");
 		sql.append("\n").append("auth_cd = :auth_cd, ");
+		sql.append("\n").append("comp_email = :comp_email, ");
 		sql.append("\n").append("mailsend_dt = :mailsend_dt ");
 		sql.append("\n").append("where uid = :uid");
 

@@ -97,7 +97,7 @@ public class userSvcImpl implements userSvc {
 
 		try {
 			Timestamp time = new Timestamp(System.currentTimeMillis());
-			uservo.setAuth_cd(authcdUtil.generateAuthcd());
+			uservo.setAuth_cd(authcdUtil.generateAuthcd());			
 			uservo.setMailsend_dt(time);
 			userdao.saveauthcd(uservo);
 			emailVO emailvo = new emailVO();
