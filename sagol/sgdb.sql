@@ -14,7 +14,7 @@ DROP table sg_schedule;
 CREATE TABLE sg_user (
     uid VARCHAR(20) PRIMARY KEY,
     nickname VARCHAR(50),
-    kakao_email VARCHAR(50),
+    kakao_userid VARCHAR(50),
     comp_email VARCHAR(50),
     comp_cd VARCHAR(4),
     dft_cc_id VARCHAR(8),
@@ -28,6 +28,7 @@ CREATE TABLE sg_user (
     auth_yn VARCHAR(2) default 'N',
     auth_cd INT(11),
     admin_yn VARCHAR(2),
+    reg_dt TIMESTAMP,
     reg_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     mdfy_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )  ENGINE=INNODB;

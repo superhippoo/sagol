@@ -35,7 +35,7 @@ public class loginDaoImple implements loginDao {
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_user");
-		sql.append("\n").append("where kakao_email = :kakao_email");
+		sql.append("\n").append("where kakao_userid = :kakao_userid");
 
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
 		RowMapper<userVO> mapper = new BeanPropertyRowMapper<userVO>(userVO.class);

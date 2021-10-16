@@ -91,9 +91,9 @@ public class userDaoImple implements userDao {
 		StringBuffer sql = new StringBuffer();
 		
 		sql.append("\n").append("INSERT INTO sg_user ");
-		sql.append("\n").append("(uid,nickname,kakao_email,comp_email,comp_cd,dft_cc_id,join_club_num,gender,hit,comp_year,");
+		sql.append("\n").append("(uid,nickname,kakao_userid,comp_email,comp_cd,dft_cc_id,join_club_num,gender,hit,comp_year,");
 		sql.append("\n").append("kakao_agerange,report_num,act_yn,auth_yn,auth_cd,admin_yn,reg_dt,mdfy_dt) ");
-		sql.append("\n").append("VALUES (:uid,:nickname,:kakao_email,:comp_email,:comp_cd,:dft_cc_id,:join_club_num,:gender,:hit,:comp_year,");
+		sql.append("\n").append("VALUES (:uid,:nickname,:kakao_userid,:comp_email,:comp_cd,:dft_cc_id,:join_club_num,:gender,:hit,:comp_year,");
 		sql.append("\n").append(":kakao_agerange,:report_num,:act_yn,:auth_yn,:auth_cd,:admin_yn,:reg_dt,:mdfy_dt)");
 		
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
@@ -109,7 +109,7 @@ public class userDaoImple implements userDao {
 
 		sql.append("\n").append("update sg_user set ");
 		sql.append("\n").append("nickname = :nickname , ");
-		sql.append("\n").append("kakao_email = :kakao_email , ");
+		sql.append("\n").append("kakao_userid = :kakao_userid , ");
 		sql.append("\n").append("comp_email = :comp_email , ");
 		sql.append("\n").append("comp_cd = :comp_cd , ");
 		sql.append("\n").append("dft_cc_id = :dft_cc_id , ");
@@ -149,7 +149,8 @@ public class userDaoImple implements userDao {
 		StringBuffer sql = new StringBuffer();
 
 		sql.append("\n").append("update sg_user set ");
-		sql.append("\n").append("auth_cd = :auth_cd ");
+		sql.append("\n").append("auth_cd = :auth_cd, ");
+		sql.append("\n").append("mailsend_dt = :mailsend_dt ");
 		sql.append("\n").append("where uid = :uid");
 
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
@@ -183,7 +184,7 @@ public class userDaoImple implements userDao {
 		sql.append("\n").append("select ");
 		sql.append("\n").append("count(*) ");
 		sql.append("\n").append("from sg_user");
-		sql.append("\n").append("where kakao_email = :kakao_email");
+		sql.append("\n").append("where kakao_userid = :kakao_userid");
 
 		BeanPropertySqlParameterSource paramSource = new BeanPropertySqlParameterSource(uservo);
 		try {
@@ -262,11 +263,11 @@ public class userDaoImple implements userDao {
 	    		sql.append("\n").append("and nickname = :nickname");
 			}
 		}
-    	if (searchvo.getKakao_email() !=null && searchvo.getKakao_email() != "") {
+    	if (searchvo.getKakao_userid() !=null && searchvo.getKakao_userid() != "") {
     		if ("like".equals(searchvo.getType())) {    			
-        		sql.append("\n").append("and kakao_email like '%").append(searchvo.getKakao_email()).append("%'");
+        		sql.append("\n").append("and kakao_userid like '%").append(searchvo.getKakao_userid()).append("%'");
 			}else {
-	    		sql.append("\n").append("and kakao_email = :kakao_email");    		
+	    		sql.append("\n").append("and kakao_userid = :kakao_userid");    		
 			}
 		}
     	if (searchvo.getComp_email() !=null && searchvo.getComp_email() != "") {
@@ -362,7 +363,7 @@ public class userDaoImple implements userDao {
 		sql.append("\n").append("select ");
 		sql.append("\n").append("* ");
 		sql.append("\n").append("from sg_user");
-		sql.append("\n").append("where kakao_email = :kakao_email");
+		sql.append("\n").append("where kakao_userid = :kakao_userid");
 		
 //		Map<String, Object> param = new HashMap<String, Object>();
 //		param.put("uid",uservo.getUid());

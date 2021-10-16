@@ -6,7 +6,7 @@ public class userVO {
 	
 	private String uid;
 	private String nickname;
-	private String kakao_email;
+	private String kakao_userid;
 	private String comp_email;
 	private String comp_cd;
 	private String dft_cc_id;
@@ -20,6 +20,7 @@ public class userVO {
 	private String auth_yn;
 	private String auth_cd;
 	private String admin_yn;
+	private Timestamp mailsend_dt;
 	private Timestamp reg_dt;
 	private Timestamp mdfy_dt;
 	private String message;
@@ -39,11 +40,11 @@ public class userVO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getKakao_email() {
-		return kakao_email;
+	public String getKakao_userid() {
+		return kakao_userid;
 	}
-	public void setKakao_email(String kakao_email) {
-		this.kakao_email = kakao_email;
+	public void setKakao_userid(String kakao_userid) {
+		this.kakao_userid = kakao_userid;
 	}
 	public String getComp_email() {
 		return comp_email;
@@ -122,6 +123,12 @@ public class userVO {
 	}
 	public void setAdmin_yn(String admin_yn) {
 		this.admin_yn = admin_yn;
+	}
+	public Timestamp getMailsend_dt() {
+		return mailsend_dt;
+	}
+	public void setMailsend_dt(Timestamp mailsend_dt) {
+		this.mailsend_dt = mailsend_dt;
 	}
 	public Timestamp getReg_dt() {
 		return reg_dt;

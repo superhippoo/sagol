@@ -196,8 +196,8 @@ public class userController {
     
     @RequestMapping(value = "/isexistbykakaoemail",method = RequestMethod.POST)
     public ResponseEntity<message> isExistByKakaoEmail(@RequestBody userVO uservo){
-    	if (uservo.getKakao_email() == null || uservo.getKakao_email() == "") {
-    		throw new BadRequestException("Kakao_email Required");
+    	if (uservo.getKakao_userid() == null || uservo.getKakao_userid() == "") {
+    		throw new BadRequestException("kakao_userid Required");
 		}
     	int result = usersvc.isExistByKakaoEmail(uservo);
 
