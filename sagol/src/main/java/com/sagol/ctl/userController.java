@@ -71,6 +71,7 @@ public class userController {
     	int result = usersvc.insertUser(uservo);
     	ms.setData(null);
     	if (result == 1) {
+    		ms.setData(uservo);
         	ms.setStatus(statusEnum.OK.getStatusCode());
         	ms.setReturnmessage("Success");
 		}else if(result == 2){
@@ -209,9 +210,11 @@ public class userController {
         	ms.setReturnmessage("New");
 		}else {
         	ms.setStatus(statusEnum.INTERNAL_SERER_ERROR.getStatusCode());
-        	if ("Y".equals(usersvc.selectUserAuthYnByKakaoEmail(uservo))) {
+        	userVO user = usersvc.selectUserAuthYnByKakaoEmail(uservo);
+        	if ("Y".equals(user.getAuth_yn())) {
     			ms.setReturnmessage("Pro");//인증여부 리턴
 			}else {
+				ms.setData(user);
 				ms.setReturnmessage("Ama");//인증여부 리턴
 			}
 		}

@@ -152,9 +152,8 @@ public class userSvcImpl implements userSvc {
 	}
 
 	@Override
-	public String selectUserAuthYnByKakaoEmail(userVO uservo) {
-		userVO result = userdao.selectUserByKakaoEmail(uservo);
-		return result.getAuth_yn();
+	public userVO selectUserAuthYnByKakaoEmail(userVO uservo) {		 
+		return userdao.selectUserByKakaoEmail(uservo);
 	}
 
 	@Override
