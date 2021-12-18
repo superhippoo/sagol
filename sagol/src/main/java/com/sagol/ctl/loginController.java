@@ -45,9 +45,14 @@ public class loginController {
     	if ("Login ok".equals(resultvo.getMessage())) {// 로그인 성공일 경우 세션에 userVO 값 생성 
 			request.getSession().setAttribute("userVO", resultvo);
 			logger.info("Login OK"+resultvo.getNickname()+"/"+resultvo.getUid());
+			if ("Y".equals(resultvo.getAuth_yn())) {
+				resultvo.setMessage(resultvo.getMessage()+";Pro");
+			}else {
+				resultvo.setMessage(resultvo.getMessage()+";Ama");
+			}
 	    	ms.setReturnmessage("Success");
 		}    	
-
+    	//login ok 일경우 에서 auth 여부를 판단해서 재분기 리턴
         return new ResponseEntity<message>(ms,HttpStatus.OK);
     }
     
